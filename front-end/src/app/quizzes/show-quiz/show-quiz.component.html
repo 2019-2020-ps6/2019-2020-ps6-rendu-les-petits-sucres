@@ -1,0 +1,7 @@
+<p>La question: {{quiz.questions[0].label}}</p>
+
+<div class="answers-list">
+  <div class="quiz" *ngFor="let answers of quiz.questions[0].answers">
+    <p>{{answers.value}}</p>
+  </div>
+</div>
