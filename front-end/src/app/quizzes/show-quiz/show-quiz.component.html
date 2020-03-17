@@ -3,14 +3,21 @@
 <ng-container *ngIf="quiz">
   <ng-container *ngIf="quiz.questions.length != 0">
     <h2>{{quiz.questions[quiz.questions.length - 1].label}}</h2>
-    <div class="answer-list" *ngFor="let answer of quiz.questions[quiz.questions.length - 1].answers">
-      <div *ngIf="answer.isCorrect">
-        <div class="answer" (click)="showNextQuestion()">{{answer.value}}</div>
+    <ng-container *ngIf="!showSummary">
+      <div class="answer-list" *ngFor="let answer of quiz.questions[quiz.questions.length - 1].answers">
+        <div *ngIf="answer.isCorrect">
+          <div class="answer" (click)="toggleQuestionSummary()">{{answer.value}}</div>
+        </div>
+        <div *ngIf="!answer.isCorrect">
+          <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
+        </div>
       </div>
-      <div *ngIf="!answer.isCorrect">
-        <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
+    </ng-container>
+    <ng-container *ngIf="showSummary">
+      <div class="answer-list" *ngFor="let answer of quiz.questions[quiz.questions.length - 1].answers">
+        <div *ngIf="answer.isCorrect">La bonne réponse était : {{answer.value}}</div>
       </div>
-    </div>
+    </ng-container>
   </ng-container>
 
   <ng-container *ngIf="quiz.questions.length == 0">

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
 import { QuizService } from '../../../services/quiz.service';
 import { ActivatedRoute } from '@angular/router';
-import { Answer } from "../../../models/question.model";
+import { Answer } from '../../../models/question.model';
 
 @Component({
   selector: 'app-show-quiz',
@@ -12,6 +12,7 @@ import { Answer } from "../../../models/question.model";
 export class ShowQuizComponent implements OnInit {
 
   public quiz: Quiz;
+  public showSummary: boolean;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
@@ -26,8 +27,17 @@ export class ShowQuizComponent implements OnInit {
     this.quiz.questions.pop();
   }
 
+  toggleQuestionSummary() {
+    this.showSummary = true;
+    setTimeout (() => {
+      this.showSummary = false;
+      this.showNextQuestion();
+    }, 5000);
+  }
+
   toggleWrongAnswer(answer: Answer) {
-    this.quiz.questions[this.quiz.questions.length - 1].answers = this.quiz.questions[this.quiz.questions.length - 1].answers.filter((obj => obj !== answer));
+    this.quiz.questions[this.quiz.questions.length - 1].answers = this.quiz.questions[this.quiz.questions.length - 1].answers
+      .filter((obj => obj !== answer));
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }
 
