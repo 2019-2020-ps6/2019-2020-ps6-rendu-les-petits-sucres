@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Question } from '../../../models/question.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Question} from '../../../models/question.model';
 
 @Component({
   selector: 'app-question',
@@ -14,6 +14,9 @@ export class QuestionComponent implements OnInit {
   @Output()
   deleteQuestion: EventEmitter<Question> = new EventEmitter<Question>();
 
+  @Output()
+  editQuestion: EventEmitter<Question> = new EventEmitter<Question>();
+
   constructor() { }
 
   ngOnInit() {
@@ -22,5 +25,4 @@ export class QuestionComponent implements OnInit {
   delete() {
     this.deleteQuestion.emit(this.question);
   }
-
 }

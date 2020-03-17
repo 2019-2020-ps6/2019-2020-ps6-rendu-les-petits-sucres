@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Quiz } from '../models/quiz.model';
-import { Question } from '../models/question.model';
-import { serverUrl, httpOptions } from '../configs/server.config';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {Quiz} from '../models/quiz.model';
+import {Question} from '../models/question.model';
+import {httpOptions, serverUrl} from '../configs/server.config';
 
 @Injectable({
   providedIn: 'root'

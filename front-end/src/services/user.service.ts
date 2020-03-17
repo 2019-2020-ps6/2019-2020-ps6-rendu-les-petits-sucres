@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
-import { BehaviorSubject } from 'rxjs';
-import { serverUrl, httpOptions } from '../configs/server.config';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {User} from '../models/user.model';
+import {BehaviorSubject} from 'rxjs';
+import {httpOptions, serverUrl} from '../configs/server.config';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

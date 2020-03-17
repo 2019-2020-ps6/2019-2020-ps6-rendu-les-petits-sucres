@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Quiz } from 'src/models/quiz.model';
-import { QuizService } from 'src/services/quiz.service';
-import { Question } from 'src/models/question.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {Quiz} from 'src/models/quiz.model';
+import {QuizService} from 'src/services/quiz.service';
+import {Question} from 'src/models/question.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-question-list',
@@ -9,9 +10,11 @@ import { Question } from 'src/models/question.model';
   styleUrls: ['./question-list.component.scss']
 })
 export class QuestionListComponent implements OnInit {
+
   @Input()
   quiz: Quiz;
-  constructor(private quizService: QuizService) { }
+
+  constructor(private quizService: QuizService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,4 +23,7 @@ export class QuestionListComponent implements OnInit {
     this.quizService.deleteQuestion(this.quiz, question);
   }
 
+  editQuestion(question: Question) {
+    this.router.navigate(['/edit-question/' + question.label]);
+  }
 }

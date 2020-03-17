@@ -15,7 +15,11 @@
             <input type="text" [formControlName]="'value'">
             <br>
             Correct
-            <input type="checkbox" [formControlName]="'isCorrect'">
+            <select class="input-custom" id="isCorrect" [formControlName]="'isCorrect'">
+              <option *ngFor="let value of trueOrFalse" [value]="value">
+                {{value}}
+              </option>
+            </select>
           </label>
         </div>
       </div>
@@ -23,6 +27,3 @@
     <button type="submit" class="button-card" (click)="addQuestion()">Create</button>
   </form>
 </div>
-
-<!-- Uncomment below to see your form structure and how it changes-->
-<!-- <br><br>{{quizForm.getRawValue() | json}} -->

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { QuizService } from '../../../services/quiz.service';
-import { Quiz } from '../../../models/quiz.model';
-import { themes } from '../../../configs/quiz.themes';
+import {QuizService} from '../../../services/quiz.service';
+import {Quiz} from '../../../models/quiz.model';
+import {themes} from '../../../configs/quiz.themes';
 
 @Component({
   selector: 'app-quiz-form',
@@ -20,7 +20,7 @@ export class QuizFormComponent implements OnInit {
    * More information about Reactive Forms: https://angular.io/guide/reactive-forms#step-1-creating-a-formgroup-instance
    */
   public quizForm: FormGroup;
-  themes: string[] = Object.values(themes);
+  public themes: string[] = Object.values(themes);
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.initializeQuizForm();
