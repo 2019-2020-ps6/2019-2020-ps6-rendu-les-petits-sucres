@@ -1,8 +1,8 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
-import {Quiz} from "../../../models/quiz.model";
-import {Question} from "../../../models/question.model";
-import {QuizService} from "../../../services/quiz.service";
-import {ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Quiz } from '../../../models/quiz.model';
+import { QuizService } from '../../../services/quiz.service';
+import { ActivatedRoute } from '@angular/router';
+import { Answer } from "../../../models/question.model";
 
 @Component({
   selector: 'app-show-quiz',
@@ -24,6 +24,11 @@ export class ShowQuizComponent implements OnInit {
 
   showNextQuestion() {
     this.quiz.questions.pop();
+  }
+
+  toggleWrongAnswer(answer: Answer) {
+    this.quiz.questions[this.quiz.questions.length - 1].answers = this.quiz.questions[this.quiz.questions.length - 1].answers.filter((obj => obj !== answer));
+    this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }
 
 }

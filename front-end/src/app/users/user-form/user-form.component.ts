@@ -12,6 +12,10 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup;
 
   constructor(public formBuilder: FormBuilder, public userService: UserService) {
+    this.initializeUserForm();
+  }
+
+  private initializeUserForm() {
     this.userForm = this.formBuilder.group( {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required]
@@ -20,14 +24,12 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit() {
   }
+
   addUser() {
-    const userToCreate: User = this.userForm.getRawValue() as User;
-
     if (this.userForm.valid) {
-      console.log('Adding user ..');
-
-      // Now, add your quiz in the list!
+      const userToCreate: User = this.userForm.getRawValue() as User;
       this.userService.addUser(userToCreate);
+      this.initializeUserForm();
     }
   }
 
