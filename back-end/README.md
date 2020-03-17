@@ -1,26 +1,38 @@
-# NodeJS Back-End Starter
+# Projet Semestre 6 - Back-End
+## Quiz (by _Les petits sucres_)
 
-## Install & Run
+### Les différents répertoires :
+* La partie __front-end__ : [_front-end_](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/tree/develop/front-end)
+* La partie __back-end__ : [_back-end_](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/tree/develop/back-end)
 
-1) Install [NodeJS Installer](https://nodejs.org/en/download/) (you should already have NodeJS since it was a dependency of the Front-End)
-2) Clone your repository `git clone https://github.com/PATH_TO_YOUR_BACK_END_REPOSITORY.git`
-3) install the dependencies `npm install`
-4) Run the application `npm start`
+-----------------
 
-## Development
-
-During the development process, you should use `npm run dev` to have livereload each time you modify a file in `app` folder.
-
-
-## Run the linter
-
+### Les commandes à exécuter pour lancer la partie back-end :
+* Tout d'abord, on clone le projet et on se rend dans le répertoire nouvellement crée :
+```bash
+git clone https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-polysson.git LesPetitsSucres
+cd LesPetitsSucres/back-end
 ```
-npm run lint
+Ensuite, on installe les dépendances :
+```bash
+npm install
 ```
-Note: The linter will be executed before each commit. If the linter fails then the commit will be canceled.
+Une fois que l'installation est finie, il suffit d'exécuter la commande suivante :
+```bash
+npm start
+```
+Pendant la phase de développement, on préfèrera utiliser la commande suivante pour avoir un rechargement en direct à chaque modification d'un fichier :
+```bash
+npm run dev
+```
+<br>
 
-## Dependencies
+_\* Si l'installation ne fonctionne pas, c'est que vous n'avez pas installé [NodeJS](https://nodejs.org/en/download/). Installez-le avant d'exécuter à nouveau les commandes précédentes._
 
-The following libraries are used in this Node starter, we encourage you to have a look :
-- Express (for building the http API) : https://www.npmjs.com/package/express
-- Joi (for Schema validation) : https://www.npmjs.com/package/joi
+-----------------
+
+## Auteurs
+- [Io Alfano](https://github.com/IoAlfano)
+- [Élise Chamberlin](https://github.com/Elise-Chamberlin)
+- [Loïc Rizzo](https://github.com/Loic-Rizzo)
+- [Lucas Rakotomalala](https://github.com/LucasRakotomalala)

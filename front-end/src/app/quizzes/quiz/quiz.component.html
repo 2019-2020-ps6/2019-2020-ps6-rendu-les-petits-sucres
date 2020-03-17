@@ -12,8 +12,7 @@
     Questions' number : {{quiz.questions.length}}
   </span>
   <br>
-
-  <button class="button-card" (click)="deleteQuiz()">Delete</button>
-  <button class="button-card" routerLink="/edit-quiz/{{quiz.id}}">Edit</button>
   <button class="button-card" routerLink="/show-quiz/{{quiz.id}}">Jouer au quiz</button>
+  <button class="button-card" routerLink="/edit-quiz/{{quiz.id}}">Edit</button>
+  <button class="button-card" (click)="deleteQuiz()">Delete</button>
 </div>

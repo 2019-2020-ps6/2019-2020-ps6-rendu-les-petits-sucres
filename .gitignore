@@ -1,5 +1,56 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+
+# Dependencies
+front-end/node_modules
+back-end/node_modules
+
+
+# Profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
 .DS_Store
-.idea/
-node_modules/
-mocks/*
-!mocks/.gitkeep
+Thumbs.db
+
+# Ignoring all json and xml files
+*.xml
+*.json
+*/*.xml
+*/*.json
+
+# Mocks from back-end
+back-end/mocks/*
+back-end/!mocks/.gitkeep

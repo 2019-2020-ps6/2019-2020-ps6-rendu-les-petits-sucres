@@ -12,24 +12,18 @@ import {ActivatedRoute} from "@angular/router";
 export class ShowQuizComponent implements OnInit {
 
   public quiz: Quiz;
-  public question: Question;
-
-  @Input()
-  public indexIn: number;
-
-  @Output()
-  public indexOut: number;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
-    this.question = this.quiz.questions[this.indexIn];
-
-
   }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
+  }
+
+  showNextQuestion() {
+    this.quiz.questions.pop();
   }
 
 }

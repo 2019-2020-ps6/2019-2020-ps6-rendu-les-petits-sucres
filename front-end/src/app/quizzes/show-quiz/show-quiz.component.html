@@ -1,7 +1,15 @@
-<p>La question: {{quiz.questions[0].label}}</p>
+<button class="button-card" routerLink="/quiz-list">Back</button>
 
-<div class="answers-list">
-  <div class="quiz" *ngFor="let answers of quiz.questions[0].answers">
-    <p>{{answers.value}}</p>
+<ng-container *ngIf="quiz.questions.length != 0">
+  <h2>{{quiz.questions[quiz.questions.length - 1].label}}</h2>
+  <div class="answers-list">
+    <div class="quiz" *ngFor="let answer of quiz.questions[quiz.questions.length - 1].answers">
+      <p>{{answer.value}} -> {{answer.isCorrect}}</p>
+    </div>
   </div>
-</div>
+  <button class="button-card center" (click)="showNextQuestion()">Question suivante</button>
+</ng-container>
+
+<ng-container *ngIf="quiz.questions.length == 0">
+  <button class="button-card center" routerLink="/quiz-list">Revenir au menu principal</button>
+</ng-container>
