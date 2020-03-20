@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
-import {Question} from 'src/models/question.model';
+import {Answer, Question} from 'src/models/question.model';
 
 @Component({
   selector: 'app-question-form',
@@ -32,6 +32,10 @@ export class QuestionFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.question) {
+
+      this.applyFormValues(this.questionForm, this.question);
+    }
   }
 
   get answers() {
@@ -47,6 +51,14 @@ export class QuestionFormComponent implements OnInit {
 
   addAnswer() {
     this.answers.push(this.createAnswer());
+  }
+
+  deletePostedAnswer(answer: Answer) {
+    //
+  }
+
+  deleteAnswer(index) {
+    this.answers.removeAt(index);
   }
 
   addQuestion() {
@@ -65,4 +77,18 @@ export class QuestionFormComponent implements OnInit {
     }
   }
 
+  private applyFormValues(questionForm: FormGroup, formValues: Question) {
+    Object.keys(formValues).forEach(key => {
+      if (key !== 'quizId' && key !== 'questionId' && key !== 'id') {
+        const formControl = questionForm.controls[key] as FormControl;
+        if (formControl instanceof FormGroup) {
+          console.log(formValues[key]);
+          this.applyFormValues(formControl, formValues[key]);
+        } else {
+          console.log(formValues[key]);
+          // formControl.patchValue(formValues[key]);
+        }
+      }
+    });
+  }
 }

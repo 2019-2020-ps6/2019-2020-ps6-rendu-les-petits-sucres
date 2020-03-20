@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
   try {
     // Check if quizId exists, if not it will throw a NotFoundError
     Quiz.getById(req.params.quizId)
+    getSpecificAnswer()
     res.status(200).json(filterQuestionsFromQuiz(req.params.quizId))
   } catch (err) {
     manageAllErrors(res, err)
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
 router.get('/:questionId', (req, res) => {
   try {
     const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
+    getSpecificAnswer()
     res.status(200).json(question)
   } catch (err) {
     manageAllErrors(res, err)
@@ -34,7 +36,7 @@ router.post('/', (req, res) => {
     let question = Question.create({ label: req.body.label, quizId })
     // If answers have been provided in the request, we create the answer and update the response to send.
     if (req.body.answers && req.body.answers.length > 0) {
-      const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }))
+      const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id, quizId: question.quizId }))
       question = {...question, answers}
     }
     res.status(201).json(question)
@@ -63,6 +65,12 @@ router.delete('/:questionId', (req, res) => {
     manageAllErrors(res, err)
   }
 })
+
+function getSpecificAnswer() {
+  let questions = Question.get()
+  questions.forEach((question) =>
+      question.answers = Answer.get().filter((answer) => answer.questionId === question.id))
+}
 
 router.use('/:questionId/answers', AnswersRouter)
 

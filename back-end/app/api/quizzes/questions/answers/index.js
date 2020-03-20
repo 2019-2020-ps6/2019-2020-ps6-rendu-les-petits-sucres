@@ -36,7 +36,7 @@ router.get('/:answerId', (req, res) => {
 router.post('/', (req, res) => {
   try {
     const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
-    const answer = Answer.create({ ...req.body, questionId: question.id })
+    const answer = Answer.create({ ...req.body, questionId: question.id, quizId: question.quizId })
     res.status(201).json(answer)
   } catch (err) {
     if (err.name === 'NotFoundError') {
