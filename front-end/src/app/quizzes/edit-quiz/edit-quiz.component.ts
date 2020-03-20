@@ -11,14 +11,13 @@ import {QuizService} from 'src/services/quiz.service';
 export class EditQuizComponent implements OnInit {
 
   public quiz: Quiz;
-  quizId: string;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }
 
   ngOnInit() {
-    this.quizId = this.route.snapshot.paramMap.get('quizId');
-    this.quizService.setSelectedQuiz(this.quizId);
+    const quizId = this.route.snapshot.paramMap.get('quizId');
+    this.quizService.setSelectedQuiz(quizId);
   }
 }

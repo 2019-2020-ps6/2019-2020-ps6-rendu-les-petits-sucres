@@ -1,5 +1,5 @@
-<button class="button-card" routerLink="/quiz-list">Back</button>
-
 <ng-container *ngIf="question">
-  <h2>{{question.label}}</h2>
+  <button class="button-card" routerLink="/edit-quiz/{{question.quizId}}">Back</button>
+
+  {{question.label}} || {{question.answers}}
 </ng-container>

@@ -9,18 +9,18 @@
 
 ### Les commandes à exécuter pour lancer la partie front-end :
 * Tout d'abord, on clone le projet et on se rend dans le répertoire nouvellement crée :
-```bash
-git clone https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-polysson.git LesPetitsSucres
-cd LesPetitsSucres/front-end
-```
-Ensuite, on installe les dépendances :
-```bash
-npm install
-```
-Une fois que l'installation est finie, il suffit d'exécuter la commande suivante :
-```bash
-npm start
-```
+    ```bash
+    git clone https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-polysson.git LesPetitsSucres
+    cd LesPetitsSucres/front-end
+    ```
+* Ensuite, on installe les dépendances :
+    ```bash
+    npm install
+    ```
+* Une fois que l'installation est finie, il suffit d'exécuter la commande suivante :
+    ```bash
+    npm start
+    ```
 <br>
 
 _\* Si l'installation ne fonctionne pas, c'est que vous n'avez pas installé [NodeJS](https://nodejs.org/en/download/). Installez-le avant d'exécuter à nouveau les commandes précédentes._
