@@ -14,17 +14,20 @@ export class QuestionFormComponent implements OnInit {
   @Input()
   quiz: Quiz;
 
+  @Input()
+  question: Question;
+
   public questionForm: FormGroup;
   public trueOrFalse: boolean[] = [true, false];
 
   constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
-    this.initializeQuestionForm();
+    this.initializeQuestionForm(null);
   }
 
-  private initializeQuestionForm() {
+  private initializeQuestionForm(question: Question) {
     this.questionForm = this.formBuilder.group({
-      label: ['', Validators.required],
-      answers: this.formBuilder.array([])
+      label: question ? question.label : ['', Validators.required],
+      answers: question ? question.answers : this.formBuilder.array([])
     });
   }
 
@@ -50,7 +53,16 @@ export class QuestionFormComponent implements OnInit {
     if (this.questionForm.valid) {
       const question = this.questionForm.getRawValue() as Question;
       this.quizService.addQuestion(this.quiz, question);
-      this.initializeQuestionForm();
+      this.initializeQuestionForm(null);
     }
   }
+
+  editQuestion(quizId: number, questionId: number) {
+    if (this.questionForm.valid) {
+      const question = this.questionForm.getRawValue() as Question;
+      this.quizService.editQuestion(String(quizId), String(questionId), question);
+      this.initializeQuestionForm(question);
+    }
+  }
+
 }

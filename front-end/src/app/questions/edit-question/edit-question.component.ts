@@ -19,7 +19,6 @@ export class EditQuestionComponent implements OnInit {
   ngOnInit() {
     const quizId = this.activatedRoute.snapshot.paramMap.get('quizId');
     const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
-
     this.quizService.setSelectedQuestion(quizId, questionId);
   }
 
