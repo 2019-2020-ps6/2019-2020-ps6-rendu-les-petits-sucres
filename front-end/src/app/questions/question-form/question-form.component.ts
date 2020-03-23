@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
@@ -20,7 +20,7 @@ export class QuestionFormComponent implements OnInit {
   public questionForm: FormGroup;
   public trueOrFalse: boolean[] = [true, false];
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private elementRef: ElementRef) {
     this.initializeQuestionForm(null);
   }
 
@@ -34,7 +34,7 @@ export class QuestionFormComponent implements OnInit {
   ngOnInit() {
     if (this.question) {
 
-      this.applyFormValues(this.questionForm, this.question);
+      // this.applyFormValues(this.questionForm, this.question);
     }
   }
 
@@ -46,6 +46,7 @@ export class QuestionFormComponent implements OnInit {
     return this.formBuilder.group({
       value: '',
       isCorrect: false,
+      image: '',
     });
   }
 
@@ -82,13 +83,23 @@ export class QuestionFormComponent implements OnInit {
       if (key !== 'quizId' && key !== 'questionId' && key !== 'id') {
         const formControl = questionForm.controls[key] as FormControl;
         if (formControl instanceof FormGroup) {
-          console.log(formValues[key]);
           this.applyFormValues(formControl, formValues[key]);
         } else {
-          console.log(formValues[key]);
-          // formControl.patchValue(formValues[key]);
+          formControl.patchValue(formValues[key]);
         }
       }
     });
+
+    // Another solution ??
+    const formData = new FormData();
+    for (const key of Object.keys(formValues)) {
+      const value = formValues[key];
+      formData.append(key, value);
+    }
+  }
+
+  upload() {
+    const inputEl: HTMLInputElement = this.elementRef.nativeElement.querySelector('#image');
+    this.quizService.upload(inputEl);
   }
 }

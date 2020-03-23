@@ -6,4 +6,10 @@ export const httpOptions = {
   })
 };
 
+export const httpOptionsUpload = {
+  headers: new HttpHeaders({
+    'Content-Type': 'image/png'
+  })
+};
+
 export const serverUrl = 'http://localhost:9428/api/';

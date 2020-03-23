@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {Quiz} from '../models/quiz.model';
 import {Question} from '../models/question.model';
-import {httpOptions, serverUrl} from '../configs/server.config';
+import {httpOptions, httpOptionsUpload, serverUrl} from '../configs/server.config';
 
 @Injectable({
   providedIn: 'root'
@@ -86,5 +86,23 @@ export class QuizService {
   deleteAnswer(answer: Question) {
     // const answerUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
     // this.http.delete<Question>(questionUrl, httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+  }
+
+  upload(inputEl: HTMLInputElement) {
+    // Get the total amount of files attached to the file input.
+    const fileCount: number = inputEl.files.length;
+    // Create a new FormData instance
+    const formData = new FormData();
+    // Check if the filecount is greater than zero, to be sure a file was selected.
+    if (fileCount > 0) { // A file was selected
+      // Append the key name 'image' with the first file in the element
+      formData.append('image', inputEl.files.item(0));
+      // Call the angular http method
+      this.http
+        // Post the form data to the url defined above and map the response.
+        // Then subscribe to initiate the post.
+        // If you don't subscribe, angular wont post.
+        .post(serverUrl + 'upload', formData, httpOptionsUpload).subscribe();
+    }
   }
 }

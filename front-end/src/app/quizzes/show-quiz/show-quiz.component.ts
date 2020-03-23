@@ -13,11 +13,11 @@ export class ShowQuizComponent implements OnInit {
 
   public quiz: Quiz;
   public showSummaryQuestion: boolean;
-  public curentQuestion: number;
+  public currentQuestion: number;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
-    this.curentQuestion = 0;
+    this.currentQuestion = 0;
   }
 
   ngOnInit() {
@@ -29,12 +29,12 @@ export class ShowQuizComponent implements OnInit {
     this.showSummaryQuestion = true;
     setTimeout (() => {
       this.showSummaryQuestion = false;
-      this.curentQuestion ++;
+      this.currentQuestion ++;
     }, 5000);
   }
 
   toggleWrongAnswer(answer: Answer) {
-    this.quiz.questions[this.quiz.questions.length - 1].answers = this.quiz.questions[this.quiz.questions.length - 1].answers
+    this.quiz.questions[this.currentQuestion].answers = this.quiz.questions[this.currentQuestion].answers
       .filter((obj => obj !== answer));
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }

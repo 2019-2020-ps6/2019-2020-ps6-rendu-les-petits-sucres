@@ -5,6 +5,7 @@ export interface Answer {
     id: number;
     questionId: number;
     quizId: number;
+    image: string;
 }
 
 export interface Question {
