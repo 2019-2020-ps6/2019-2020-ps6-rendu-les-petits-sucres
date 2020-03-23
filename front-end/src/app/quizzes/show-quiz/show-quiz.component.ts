@@ -13,9 +13,11 @@ export class ShowQuizComponent implements OnInit {
 
   public quiz: Quiz;
   public showSummaryQuestion: boolean;
+  public curentQuestion: number;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+    this.curentQuestion = 0;
   }
 
   ngOnInit() {
@@ -23,15 +25,11 @@ export class ShowQuizComponent implements OnInit {
     this.quizService.setSelectedQuiz(id);
   }
 
-  showNextQuestion() {
-    this.quiz.questions.pop();
-  }
-
   toggleQuestionSummary() {
     this.showSummaryQuestion = true;
     setTimeout (() => {
       this.showSummaryQuestion = false;
-      this.showNextQuestion();
+      this.curentQuestion ++;
     }, 5000);
   }
 
