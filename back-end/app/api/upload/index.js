@@ -19,11 +19,10 @@ router.post('/', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
       // An error occurred when uploading
-      console.log(err)
-      return res.status(422).send('An error occured')
+      res.status(422).end()
     }
     // No error occured.
-    return res.status(201).send('File uploaded')
+    res.status(201).end()
   })
 })
 

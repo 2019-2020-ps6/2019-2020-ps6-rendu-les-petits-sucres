@@ -98,11 +98,11 @@ export class QuizService {
       // Append the key name 'image' with the first file in the element
       formData.append('image', inputEl.files.item(0));
       // Call the angular http method
-      this.http
+      // this.http
         // Post the form data to the url defined above and map the response.
         // Then subscribe to initiate the post.
         // If you don't subscribe, angular wont post.
-        .post(serverUrl + 'upload', formData, httpOptionsUpload).subscribe();
+        // .post(serverUrl + 'upload', formData, httpOptionsUpload).subscribe();
     }
   }
 }
