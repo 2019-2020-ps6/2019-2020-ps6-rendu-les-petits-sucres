@@ -19,7 +19,7 @@ git clone https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-polysson.git L
 cd LesPetitsSucres
 ```
 
-* Pour la partie __front-end__<sup>[1]</sup> :
+* Pour la partie __front-end__ <sup>[1]</sup> :
     ```bash
     cd front-end
     npm install
@@ -30,7 +30,7 @@ cd LesPetitsSucres
     npm start
     ```
   
- * Pour la partie __back-end__<sup>[1]</sup> :
+ * Pour la partie __back-end__ <sup>[1]</sup> :
      ```bash
      cd back-end
      npm install
@@ -41,7 +41,7 @@ cd LesPetitsSucres
      ```
 <br>
 
-[1]: Si l'installation ne fonctionne pas, c'est que vous n'avez pas installé [NodeJS](https://nodejs.org/en/download/). Installez-le avant d'exécuter à nouveau les commandes précédentes.
+[1] : Si l'installation ne fonctionne pas, c'est que vous n'avez pas installé [NodeJS](https://nodejs.org/en/download/). Installez-le avant d'exécuter à nouveau les commandes précédentes.
 
 -----------------
 
