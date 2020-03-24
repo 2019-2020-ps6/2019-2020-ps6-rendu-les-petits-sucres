@@ -56,7 +56,7 @@ export class QuestionFormComponent implements OnInit {
   }
 
   deletePostedAnswer(answer: Answer) {
-    //
+    this.quizService.deleteAnswer(answer);
   }
 
   deleteAnswer(index) {

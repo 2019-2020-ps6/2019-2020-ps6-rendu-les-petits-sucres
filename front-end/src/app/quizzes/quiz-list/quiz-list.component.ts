@@ -21,15 +21,15 @@ export class QuizListComponent implements OnInit {
   ngOnInit() {
   }
 
-  quizSelected(selected: boolean) {
-    console.log('Event received from child:', selected);
-  }
-
   editQuiz(quiz: Quiz) {
-    this.router.navigate(['/edit-quiz/' + quiz.name]);
+    this.router.navigate(['/edit-quiz/' + quiz.id]);
   }
 
   deleteQuiz(quiz: Quiz) {
     this.quizService.deleteQuiz(quiz);
+  }
+
+  playQuiz(quiz: Quiz) {
+    this.router.navigate(['/show-quiz/' + quiz.id]);
   }
 }

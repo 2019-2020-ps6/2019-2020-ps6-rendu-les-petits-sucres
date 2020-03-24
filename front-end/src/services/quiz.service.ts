@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {Quiz} from '../models/quiz.model';
-import {Question} from '../models/question.model';
+import {Answer, Question} from '../models/question.model';
 import {httpOptions, serverUrl} from '../configs/server.config';
 
 @Injectable({
@@ -29,6 +29,8 @@ export class QuizService {
   public quizSelected$: Subject<Quiz> = new Subject();
 
   public questionSelected$: Subject<Question> = new Subject();
+
+  public quizPlayed$: Subject<Quiz> = new Subject();
 
   private quizUrl = serverUrl + 'quizzes';
   private questionsPath = 'questions';
@@ -83,8 +85,8 @@ export class QuizService {
     this.http.post<Question>(questionUrl, question, httpOptions).subscribe(() => this.setSelectedQuiz(quizId));
   }
 
-  deleteAnswer(answer: Question) {
-    // const answerUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
-    // this.http.delete<Question>(questionUrl, httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+  deleteAnswer(answer: Answer) {
+    const answerUrl = this.quizUrl + '/' + answer.quizId + '/' + this.questionsPath + '/' + answer.questionId + '/answers/' + answer.id;
+    this.http.delete<Answer>(answerUrl, httpOptions).subscribe();
   }
 }
