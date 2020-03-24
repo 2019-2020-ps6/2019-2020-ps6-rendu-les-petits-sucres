@@ -22,7 +22,7 @@ export class QuizListComponent implements OnInit {
   }
 
   quizSelected(selected: boolean) {
-    console.log('event received from child:', selected);
+    console.log('Event received from child:', selected);
   }
 
   editQuiz(quiz: Quiz) {

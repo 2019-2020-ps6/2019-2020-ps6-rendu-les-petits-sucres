@@ -2,5 +2,6 @@ export enum themes {
   Actor = 'Acteurs',
   Sport = 'Sports',
   Animals = 'Animaux',
-  Cinema = 'Cinema'
+  Cinema = 'Cinema',
+  Test = 'Test'
 }

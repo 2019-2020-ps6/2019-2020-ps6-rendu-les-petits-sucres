@@ -33,8 +33,7 @@ export class QuestionFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.question) {
-
-      // this.applyFormValues(this.questionForm, this.question);
+      this.applyFormValues(this.questionForm, this.question);
     }
   }
 
@@ -46,7 +45,7 @@ export class QuestionFormComponent implements OnInit {
     return this.formBuilder.group({
       value: '',
       isCorrect: false,
-      // image: '', // Image's link from upload service
+      image: '',
     });
   }
 
@@ -91,15 +90,10 @@ export class QuestionFormComponent implements OnInit {
     });
 
     // Another solution ??
-    const formData = new FormData();
+    /* const formData = new FormData();
     for (const key of Object.keys(formValues)) {
       const value = formValues[key];
       formData.append(key, value);
-    }
-  }
-
-  upload() {
-    const inputEl: HTMLInputElement = this.elementRef.nativeElement.querySelector('#image');
-    this.quizService.upload(inputEl);
+    } */
   }
 }

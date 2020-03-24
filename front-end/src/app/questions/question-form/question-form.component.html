@@ -20,14 +20,46 @@
                   {{value}}
                 </option>
               </select>
+              <input type="url" placeholder="http://lien_de_limage.com/" [formControlName]="'image'"/>
               <button type="button" class="button-card" (click)="deleteAnswer(i)">Delete Answer</button>
-              <!-- <input type="file" id="image" [formControlName]="'image'" accept=".png,.jpg"/>
-              <button type="button" class="button-card" (click)="upload()">Upload</button> -->
             </label>
           </div>
         </div>
       </div>
       <button type="submit" class="button-card" (click)="addQuestion()">Create</button>
+    </form>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!quiz && question">
+  <div class="card">
+    <h2>Edit question {{question.label}}</h2>
+    <form class="quiz-form" [formGroup]="questionForm">
+      <label>
+        Title <br>
+        <input class="input-custom" type="text" [formControlName]="'label'">
+      </label>
+      <br>
+      <button class="button-card" (click)="addAnswer()">Add Answer</button>
+      <div class="answer" formArrayName="answers">
+        <div *ngFor="let address of answers.controls; let i=index">
+          <div class="answer-form" [formGroupName]="i.toString()">
+            <label>
+              Answer
+              <input type="text" [formControlName]="'value'">
+              Correct
+              <select class="input-custom" [formControlName]="'isCorrect'">
+                <option *ngFor="let value of trueOrFalse" [value]="value">
+                  {{value}}
+                </option>
+              </select>
+              <input type="url" placeholder="http://lien_de_limage.com/" [formControlName]="'image'"/>
+              <button type="button" class="button-card" (click)="deleteAnswer(i)">Delete Answer</button>
+            </label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="button-card" (click)="editQuestion(question.quizId, question.id)">Create</button>
     </form>
   </div>
 </ng-container>
