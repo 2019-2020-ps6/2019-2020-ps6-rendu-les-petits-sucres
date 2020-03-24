@@ -14,8 +14,11 @@
       </div>
     </ng-container>
     <ng-container *ngIf="showSummaryQuestion">
+      <span>
+        Bravo vous avez sélectionné la bonne réponse !
+      </span>
       <ng-container *ngFor="let answer of quiz.questions[currentQuestion].answers">
-        <div class="answer-list" *ngIf="answer.isCorrect">La bonne réponse était : {{answer.value}}</div>
+        <div *ngIf="answer.isCorrect">La bonne réponse était : {{answer.value}}</div>
       </ng-container>
     </ng-container>
   </ng-container>

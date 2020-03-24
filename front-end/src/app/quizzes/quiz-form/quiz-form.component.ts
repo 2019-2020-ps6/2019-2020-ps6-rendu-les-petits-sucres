@@ -42,6 +42,7 @@ export class QuizFormComponent implements OnInit {
       const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
       this.quizService.addQuiz(quizToCreate);
       this.initializeQuizForm();
+      alert('Le quiz a bien été créé !\nVeuillez retourner en arrière pour y ajouter des questions !');
     }
   }
 }
