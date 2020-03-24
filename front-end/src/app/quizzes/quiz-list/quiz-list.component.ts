@@ -30,6 +30,6 @@ export class QuizListComponent implements OnInit {
   }
 
   playQuiz(quiz: Quiz) {
-    this.router.navigate(['/show-quiz/' + quiz.id]);
+    this.router.navigate(['/play-quiz/' + quiz.id]);
   }
 }

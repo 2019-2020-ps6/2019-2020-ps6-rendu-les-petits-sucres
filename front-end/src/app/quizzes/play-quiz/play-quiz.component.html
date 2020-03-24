@@ -6,13 +6,13 @@
     <ng-container *ngIf="!showSummaryQuestion">
       <div class="answer-list" *ngFor="let answer of quiz.questions[currentQuestion].answers">
         <div *ngIf="!answer.image">
-            <div *ngIf="answer.isCorrect">
-              <div class="answer" (click)="toggleQuestionSummary()">{{answer.value}}</div>
-            </div>
-            <div *ngIf="!answer.isCorrect">
-              <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
-            </div>
+          <div *ngIf="answer.isCorrect">
+            <div class="answer" (click)="toggleQuestionSummary()">{{answer.value}}</div>
           </div>
+          <div *ngIf="!answer.isCorrect">
+            <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
+          </div>
+        </div>
         <div *ngIf="answer.image">
           <div *ngIf="answer.isCorrect">
             <div (click)="toggleQuestionSummary()">
@@ -44,6 +44,7 @@
   </ng-container>
 
   <div *ngIf="currentQuestion == quiz.questions.length">
+    {{score}}
     <ul>
       <li *ngFor="let question of quiz.questions">
         {{question.label}}
@@ -53,6 +54,6 @@
         <hr>
       </li>
     </ul>
-    <button class="button-card center" routerLink="/quiz-list">Revenir au menu principal</button>
+    <button class="button-card center" (click)="goBack()">Revenir au menu principal</button>
   </div>
 </ng-container>

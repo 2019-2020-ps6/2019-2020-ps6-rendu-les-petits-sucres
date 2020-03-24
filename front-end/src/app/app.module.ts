@@ -17,9 +17,9 @@ import {UserListComponent} from './users/user-list/user-list.component';
 import {UserComponent} from './users/user/user.component';
 import {CreateUserComponent} from './users/create-user/create-user.component';
 import {UserFormComponent} from './users/user-form/user-form.component';
-import {ShowQuizComponent} from './quizzes/show-quiz/show-quiz.component';
 import {EditQuestionComponent} from './questions/edit-question/edit-question.component';
 import {CreateQuizComponent} from './quizzes/create-quiz/create-quiz.component';
+import {PlayQuizComponent} from './quizzes/play-quiz/play-quiz.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +36,9 @@ import {CreateQuizComponent} from './quizzes/create-quiz/create-quiz.component';
     UserComponent,
     UserFormComponent,
     CreateUserComponent,
-    ShowQuizComponent,
     EditQuestionComponent,
     CreateQuizComponent,
+    PlayQuizComponent,
   ],
   imports: [
     BrowserModule,
