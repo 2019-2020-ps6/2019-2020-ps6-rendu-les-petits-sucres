@@ -1,65 +1,67 @@
 <ng-container *ngIf="quiz && !question">
   <div class="card">
-    <h2>Create a new question</h2>
+    <h2>Création d'une nouvelle question</h2>
     <form class="quiz-form" [formGroup]="questionForm">
       <label>
-        Title <br>
+        Intitulé de la question: <br>
         <input class="input-custom" type="text" [formControlName]="'label'">
       </label>
       <br>
-      <button class="button-card" (click)="addAnswer()">Add Answer</button>
+      <button class="button-card" (click)="addAnswer()">Ajouter une réponse</button>
       <div class="answer" formArrayName="answers">
         <div *ngFor="let address of answers.controls; let i=index">
           <div class="answer-form" [formGroupName]="i.toString()">
             <label>
-              Answer
+              Réponse:
               <input type="text" [formControlName]="'value'">
-              Correct
+              Correcte
               <select class="input-custom" [formControlName]="'isCorrect'">
                 <option *ngFor="let value of trueOrFalse" [value]="value">
-                  {{value}}
+                  <ng-container *ngIf="value === true">Vrai</ng-container>
+                  <ng-container *ngIf="value === false">Faux</ng-container>
                 </option>
               </select>
-              <input type="url" placeholder="http://lien_de_limage.com/" [formControlName]="'image'"/>
-              <button type="button" class="button-card" (click)="deleteAnswer(i)">Delete Answer</button>
+              <input type="url" placeholder="https://exemple.com/"/>
+              <button type="button" class="button-card" (click)="deleteAnswer(i)">Supprimer la réponse</button>
             </label>
           </div>
         </div>
       </div>
-      <button type="submit" class="button-card" (click)="addQuestion()">Create</button>
+      <button type="submit" class="button-card" (click)="addQuestion()">Créer la question</button>
     </form>
   </div>
 </ng-container>
 
 <ng-container *ngIf="!quiz && question">
   <div class="card">
-    <h2>Edit question {{question.label}}</h2>
+    <h2>Édition de la question : <em>{{question.label}}</em></h2>
     <form class="quiz-form" [formGroup]="questionForm">
       <label>
-        Title <br>
+        Intitulé de la question: <br>
         <input class="input-custom" type="text" [formControlName]="'label'">
       </label>
       <br>
-      <button class="button-card" (click)="addAnswer()">Add Answer</button>
+      <button class="button-card" (click)="addAnswer()">Ajouter une réponse</button>
       <div class="answer" formArrayName="answers">
         <div *ngFor="let address of answers.controls; let i=index">
           <div class="answer-form" [formGroupName]="i.toString()">
             <label>
-              Answer
+              Réponse:
               <input type="text" [formControlName]="'value'">
-              Correct
+              Correcte
               <select class="input-custom" [formControlName]="'isCorrect'">
                 <option *ngFor="let value of trueOrFalse" [value]="value">
-                  {{value}}
+                  <ng-container *ngIf="value === true">Vrai</ng-container>
+                  <ng-container *ngIf="value === false">Faux</ng-container>
                 </option>
               </select>
-              <input type="url" placeholder="http://lien_de_limage.com/" [formControlName]="'image'"/>
-              <button type="button" class="button-card" (click)="deleteAnswer(i)">Delete Answer</button>
+              <input type="url" placeholder="https://exemple.com/"/>
+              <button type="button" class="button-card" (click)="deleteAnswer(i)">Supprimer la réponse</button>
             </label>
           </div>
         </div>
       </div>
-      <button type="submit" class="button-card" (click)="editQuestion(question.quizId, question.id)">Create</button>
+      <button type="submit" class="button-card" (click)="addQuestion()">Créer la question</button>
     </form>
   </div>
 </ng-container>

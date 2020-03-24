@@ -13,7 +13,7 @@
 git clone https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-polysson.git LesPetitsSucres
 cd LesPetitsSucres/back-end
 ```
-Ensuite, on installe les dépendances :
+Ensuite, on installe les dépendances[^1] :
 ```bash
 npm install
 ```
@@ -27,7 +27,7 @@ npm run dev
 ```
 <br>
 
-_\* Si l'installation ne fonctionne pas, c'est que vous n'avez pas installé [NodeJS](https://nodejs.org/en/download/). Installez-le avant d'exécuter à nouveau les commandes précédentes._
+[^1]: Si l'installation ne fonctionne pas, c'est que vous n'avez pas installé [NodeJS](https://nodejs.org/en/download/). Installez-le avant d'exécuter à nouveau les commandes précédentes.
 
 -----------------
 

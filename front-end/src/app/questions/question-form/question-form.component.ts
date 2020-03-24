@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
@@ -20,7 +20,7 @@ export class QuestionFormComponent implements OnInit {
   public questionForm: FormGroup;
   public trueOrFalse: boolean[] = [true, false];
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private elementRef: ElementRef) {
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
     this.initializeQuestionForm(null);
   }
 
@@ -33,7 +33,7 @@ export class QuestionFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.question) {
-      this.applyFormValues(this.questionForm, this.question);
+      // this.applyFormValues(this.questionForm, this.question);
     }
   }
 
@@ -50,7 +50,9 @@ export class QuestionFormComponent implements OnInit {
   }
 
   addAnswer() {
-    this.answers.push(this.createAnswer());
+    if (this.answers.length < 6) {
+      this.answers.push(this.createAnswer());
+    }
   }
 
   deletePostedAnswer(answer: Answer) {
@@ -62,10 +64,16 @@ export class QuestionFormComponent implements OnInit {
   }
 
   addQuestion() {
+    const question = this.questionForm.getRawValue() as Question;
+    const isCorrectAnswers = [];
+    for (const answer of question.answers) {
+      isCorrectAnswers.push(Boolean(answer.isCorrect));
+    }
     if (this.questionForm.valid) {
-      const question = this.questionForm.getRawValue() as Question;
-      this.quizService.addQuestion(this.quiz, question);
-      this.initializeQuestionForm(null);
+      if (isCorrectAnswers.some((element) => element === true) && isCorrectAnswers.length > 1) {
+        this.quizService.addQuestion(this.quiz, question);
+        this.initializeQuestionForm(null);
+      }
     }
   }
 
@@ -78,7 +86,7 @@ export class QuestionFormComponent implements OnInit {
   }
 
   private applyFormValues(questionForm: FormGroup, formValues: Question) {
-    Object.keys(formValues).forEach(key => {
+    /* Object.keys(formValues).forEach(key => {
       if (key !== 'quizId' && key !== 'questionId' && key !== 'id') {
         const formControl = questionForm.controls[key] as FormControl;
         if (formControl instanceof FormGroup) {
@@ -87,13 +95,21 @@ export class QuestionFormComponent implements OnInit {
           formControl.patchValue(formValues[key]);
         }
       }
-    });
+    }); */
 
     // Another solution ??
-    /* const formData = new FormData();
     for (const key of Object.keys(formValues)) {
-      const value = formValues[key];
-      formData.append(key, value);
-    } */
+      if (key !== 'quizId' && key !== 'questionId' && key !== 'id') {
+        const formControl = questionForm.controls[key] as FormControl;
+        if (formControl instanceof FormGroup) {
+          this.addAnswer();
+          this.applyFormValues(formControl, formValues[key]);
+        } else {
+          formControl.patchValue(formValues[key]);
+        }
+      }
+      // const value = formValues[key];
+      // formData.append(key, value);
+    }
   }
 }
