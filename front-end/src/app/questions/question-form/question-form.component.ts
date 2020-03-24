@@ -46,7 +46,7 @@ export class QuestionFormComponent implements OnInit {
     return this.formBuilder.group({
       value: '',
       isCorrect: false,
-      image: '',
+      // image: '', // Image's link from upload service
     });
   }
 
