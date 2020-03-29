@@ -46,11 +46,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Ignoring all json and xml files
+# Ignoring xml files
 *.xml
-!*.json
 */*.xml
-*/*.json
 
 # Mocks from back-end
 back-end/mocks/*
