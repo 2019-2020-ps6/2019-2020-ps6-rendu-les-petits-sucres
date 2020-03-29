@@ -10,7 +10,12 @@
             <div class="answer" (click)="toggleQuestionSummary()">{{answer.value}}</div>
           </div>
           <div *ngIf="!answer.isCorrect">
-            <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
+            <div *ngIf="isDesactivate(answer)">
+              <div class="answerDesactivate">{{answer.value}}</div>
+            </div>
+            <div *ngIf="!isDesactivate(answer)">
+              <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
+            </div>
           </div>
         </div>
         <div *ngIf="answer.image">

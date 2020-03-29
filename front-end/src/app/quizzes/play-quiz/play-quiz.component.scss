@@ -8,16 +8,29 @@
 
 .answer {
   cursor: pointer;
-}
-
-.answer-list {
-  display: inline-block;
-  margin: 0 10% 5% 10%;
   background-color: $white;
   border: solid 1px $blue;
   color: $blue;
   font-weight: bold;
   padding: 0.5em 1em;
+}
+
+.answer:hover
+{
+  background-color: aquamarine;
+}
+
+.answerDesactivate {
+  color: gray;
+  background-color: $white;
+  border: solid 1px gray;
+  font-weight: bold;
+  padding: 0.5em 1em;
+}
+
+.answer-list {
+  display: inline-block;
+  margin: 5% 5% 5% 5%;
 }
 
 figure {

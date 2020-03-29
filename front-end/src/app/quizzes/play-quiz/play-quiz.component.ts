@@ -15,6 +15,7 @@ export class PlayQuizComponent implements OnInit {
   public showSummaryQuestion: boolean;
   public currentQuestion: number;
   public score: number;
+  public desactivatesAnswers: Array<Answer> = [];
 
   constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
@@ -43,6 +44,7 @@ export class PlayQuizComponent implements OnInit {
   }
 
   toggleQuestionSummary() {
+    this.desactivatesAnswers = [];
     this.showSummaryQuestion = true;
     localStorage.setItem('currentQuestion', this.currentQuestion + '');
     localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
@@ -57,10 +59,19 @@ export class PlayQuizComponent implements OnInit {
 
   toggleWrongAnswer(answer: Answer) {
     const answers = this.quiz.questions[this.currentQuestion].answers;
+    this.desactivatesAnswers.push(answer);
     this.score -= 1 / answers.length; // Score calculation
     localStorage.setItem('score', this.score + '');
-    this.quiz.questions[this.currentQuestion].answers = answers.filter((obj => obj !== answer));
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+  }
+
+  isDesactivate(answerSelection: Answer) {
+    for (const answer of this.desactivatesAnswers) {
+      if ( answer === answerSelection) {
+        return true;
+      }
+    }
+    return false;
   }
 
   goBack() {
