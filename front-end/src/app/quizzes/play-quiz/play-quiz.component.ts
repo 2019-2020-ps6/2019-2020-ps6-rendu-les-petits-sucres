@@ -20,6 +20,16 @@ export class PlayQuizComponent implements OnInit {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     if (localStorage) {
       this.currentQuestion = +localStorage.getItem('currentQuestion');
+      this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
+      if (this.showSummaryQuestion === true) {
+        setTimeout (() => {
+          this.showSummaryQuestion = false;
+          this.currentQuestion ++;
+          console.log(this.currentQuestion);
+          localStorage.setItem('currentQuestion', this.currentQuestion + '');
+          localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
+        }, 5000);
+      }
       this.score = +localStorage.getItem('score');
     } else {
       this.currentQuestion = 0;
@@ -34,11 +44,14 @@ export class PlayQuizComponent implements OnInit {
 
   toggleQuestionSummary() {
     this.showSummaryQuestion = true;
+    localStorage.setItem('currentQuestion', this.currentQuestion + '');
+    localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
     setTimeout (() => {
       this.showSummaryQuestion = false;
       this.currentQuestion ++;
       console.log(this.currentQuestion);
       localStorage.setItem('currentQuestion', this.currentQuestion + '');
+      localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
     }, 5000);
   }
 
@@ -51,7 +64,7 @@ export class PlayQuizComponent implements OnInit {
   }
 
   goBack() {
-    localStorage.clear();
+    window.localStorage.clear();
     this.router.navigate(['/quiz-list/']);
   }
 }

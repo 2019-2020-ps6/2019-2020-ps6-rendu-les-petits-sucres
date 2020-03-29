@@ -44,7 +44,6 @@
   </ng-container>
 
   <div *ngIf="currentQuestion == quiz.questions.length">
-    {{score}}
     <ul>
       <li *ngFor="let question of quiz.questions">
         {{question.label}}
