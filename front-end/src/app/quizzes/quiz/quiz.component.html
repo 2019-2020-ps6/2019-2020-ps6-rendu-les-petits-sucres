@@ -12,7 +12,11 @@
     Nombre de questions : {{quiz.questions.length}}
   </span>
   <br>
+  <div *ngIf="!pageEditQuiz">
   <button class="button-card" (click)="playQuiz()">Jouer au quiz</button>
+  </div>
+    <div *ngIf="pageEditQuiz">
   <button class="button-card" (click)="editQuiz()">Éditer</button>
   <button class="button-card" (click)="deleteQuiz()">Supprimer</button>
+    </div>
 </div>

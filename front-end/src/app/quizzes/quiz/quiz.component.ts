@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
@@ -7,6 +8,7 @@ import {Quiz} from '../../../models/quiz.model';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
+  public pageEditQuiz: boolean;
 
   @Input()
   quiz: Quiz;
@@ -20,7 +22,14 @@ export class QuizComponent implements OnInit {
   @Output()
   quizPlayed: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor() {
+  constructor(private router: Router) {
+    if (this.router.url.endsWith('edit-quiz')) {
+      this.pageEditQuiz = true;
+    }
+    else {
+      this.pageEditQuiz = false;
+    }
+
   }
 
   ngOnInit() {
