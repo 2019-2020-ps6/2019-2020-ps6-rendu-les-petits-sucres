@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
-import {Answer, Question} from 'src/models/question.model';
+import {Question} from 'src/models/question.model';
 
 @Component({
   selector: 'app-question-form',
@@ -33,11 +33,11 @@ export class QuestionFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.question) {
-      // this.applyFormValues(this.questionForm, this.question);
+      this.applyFormValues(this.question);
     }
   }
 
-  get answers() {
+  get answers(): FormArray {
     return this.questionForm.get('answers') as FormArray;
   }
 
@@ -53,10 +53,6 @@ export class QuestionFormComponent implements OnInit {
     if (this.answers.length < 6) {
       this.answers.push(this.createAnswer());
     }
-  }
-
-  deletePostedAnswer(answer: Answer) {
-    this.quizService.deleteAnswer(answer);
   }
 
   deleteAnswer(index) {
@@ -77,39 +73,27 @@ export class QuestionFormComponent implements OnInit {
     }
   }
 
-  editQuestion(quizId: number, questionId: number) {
+  editQuestion(quizId: number) {
     if (this.questionForm.valid) {
       const question = this.questionForm.getRawValue() as Question;
-      this.quizService.editQuestion(String(quizId), String(questionId), question);
-      this.initializeQuestionForm(question);
+      this.quizService.editQuestion(String(quizId), question, this.question);
     }
   }
 
-  private applyFormValues(questionForm: FormGroup, formValues: Question) {
-    /* Object.keys(formValues).forEach(key => {
-      if (key !== 'quizId' && key !== 'questionId' && key !== 'id') {
-        const formControl = questionForm.controls[key] as FormControl;
-        if (formControl instanceof FormGroup) {
-          this.applyFormValues(formControl, formValues[key]);
-        } else {
-          formControl.patchValue(formValues[key]);
-        }
-      }
-    }); */
-
-    // Another solution ??
-    for (const key of Object.keys(formValues)) {
-      if (key !== 'quizId' && key !== 'questionId' && key !== 'id') {
-        const formControl = questionForm.controls[key] as FormControl;
-        if (formControl instanceof FormGroup) {
-          this.addAnswer();
-          this.applyFormValues(formControl, formValues[key]);
-        } else {
-          formControl.patchValue(formValues[key]);
-        }
-      }
-      // const value = formValues[key];
-      // formData.append(key, value);
-    }
+  private applyFormValues(question: Question) {
+    question.answers.forEach(answer => {
+      const answerToPush = this.createAnswer();
+      answerToPush.patchValue({
+        value: answer.value,
+        isCorrect: answer.isCorrect,
+        image: answer.image,
+        id: answer.id,
+      });
+      this.answers.push(answerToPush);
+    });
+    this.questionForm.patchValue({
+      label: question.label,
+      answers: question.answers,
+    });
   }
 }

@@ -61,7 +61,8 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="button-card" (click)="addQuestion()">Créer la question</button>
+      <button type="submit" class="button-card" (click)="editQuestion(question.quizId)">Modifier la question</button>
     </form>
   </div>
+<br><br>{{questionForm.getRawValue() | json}}
 </ng-container>
