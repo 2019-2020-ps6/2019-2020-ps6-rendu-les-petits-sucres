@@ -48,7 +48,7 @@ Thumbs.db
 
 # Ignoring all json and xml files
 *.xml
-*.json
+!*.json
 */*.xml
 */*.json
 
