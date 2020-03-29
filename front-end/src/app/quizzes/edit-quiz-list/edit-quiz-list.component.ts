@@ -5,15 +5,15 @@ import {Quiz} from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-quiz-list',
-  templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss']
+  templateUrl: './edit-quiz-list.component.html',
+  styleUrls: ['./edit-quiz-list.component.scss']
 })
-export class QuizListComponent implements OnInit {
+
+export class EditQuizListComponent implements OnInit {
 
   public quizList: Quiz[] = [];
 
   constructor(private router: Router, public quizService: QuizService) {
-    window.localStorage.clear();
     this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
@@ -28,9 +28,5 @@ export class QuizListComponent implements OnInit {
 
   deleteQuiz(quiz: Quiz) {
     this.quizService.deleteQuiz(quiz);
-  }
-
-  playQuiz(quiz: Quiz) {
-    this.router.navigate(['/play-quiz/' + quiz.id]);
   }
 }

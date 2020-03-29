@@ -6,6 +6,7 @@ import {CreateUserComponent} from './users/create-user/create-user.component';
 import {EditQuestionComponent} from './questions/edit-question/edit-question.component';
 import {CreateQuizComponent} from './quizzes/create-quiz/create-quiz.component';
 import {PlayQuizComponent} from './quizzes/play-quiz/play-quiz.component';
+import {EditQuizListComponent} from './quizzes/edit-quiz-list/edit-quiz-list.component';
 
 const routes: Routes = [
     { path: 'quiz-list', component: QuizListComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'edit-quiz/:quizId', component: EditQuizComponent },
     { path: 'edit-question/:quizId/:questionId', component: EditQuestionComponent },
     { path: 'create-quiz', component: CreateQuizComponent },
+    { path: 'edit-quiz', component: EditQuizListComponent },
 
 ];
 
