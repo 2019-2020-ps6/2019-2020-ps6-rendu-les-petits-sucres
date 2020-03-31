@@ -2,7 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
-import {Answer, Question} from 'src/models/question.model';
+import {Question} from 'src/models/question.model';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-question-form',
@@ -20,7 +21,7 @@ export class QuestionFormComponent implements OnInit {
   public questionForm: FormGroup;
   public trueOrFalse: boolean[] = [true, false]; // Vrai ou faux
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location) {
     this.initializeQuestionForm(null);
   }
 
@@ -65,7 +66,6 @@ export class QuestionFormComponent implements OnInit {
     question.answers.forEach(answer => {
       isCorrectAnswers.push(answer.isCorrect);
     });
-    console.log(isCorrectAnswers);
     if (this.questionForm.valid) {
       if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
         this.quizService.addQuestion(this.quiz, question);
@@ -77,8 +77,8 @@ export class QuestionFormComponent implements OnInit {
   editQuestion(quizId: number) {
     if (this.questionForm.valid) {
       const question = this.questionForm.getRawValue() as Question;
-      console.log(question);
       this.quizService.editQuestion(String(quizId), question, this.question);
+      this.location.back();
     }
   }
 

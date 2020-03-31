@@ -13,7 +13,7 @@ import {AppRoutingModule} from './app.routing.module';
 import {QuestionListComponent} from './questions/question-list/question-list.component';
 import {QuestionFormComponent} from './questions/question-form/question-form.component';
 import {QuestionComponent} from './questions/question/question.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UserListComponent} from './users/user-list/user-list.component';
 import {UserComponent} from './users/user/user.component';
 import {CreateUserComponent} from './users/create-user/create-user.component';
@@ -21,6 +21,9 @@ import {UserFormComponent} from './users/user-form/user-form.component';
 import {EditQuestionComponent} from './questions/edit-question/edit-question.component';
 import {CreateQuizComponent} from './quizzes/create-quiz/create-quiz.component';
 import {PlayQuizComponent} from './quizzes/play-quiz/play-quiz.component';
+import {LoginComponent} from './users/login/login.component';
+import {BasicAuthInterceptor} from '../helpers/basic-auth.interceptor';
+import {ErrorInterceptor} from '../helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import {PlayQuizComponent} from './quizzes/play-quiz/play-quiz.component';
     EditQuestionComponent,
     CreateQuizComponent,
     PlayQuizComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,10 @@ import {PlayQuizComponent} from './quizzes/play-quiz/play-quiz.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,4 +31,8 @@ export class UserService {
       this.users$.next(this.users);
     });
   }
+
+  getAll() {
+    return this.httpClient.get<User[]>(this.userUrl);
+  }
 }

@@ -18,7 +18,9 @@ export class UserFormComponent implements OnInit {
   private initializeUserForm() {
     this.userForm = this.formBuilder.group( {
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      lastName: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 

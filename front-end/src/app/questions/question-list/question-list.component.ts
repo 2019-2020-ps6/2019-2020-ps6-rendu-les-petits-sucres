@@ -25,6 +25,5 @@ export class QuestionListComponent implements OnInit {
 
   editQuestion(question: Question) {
     this.router.navigate(['/edit-question/' + this.quiz.id + '/' + question.id]);
-    console.log(question.answers);
   }
 }
