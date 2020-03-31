@@ -10,6 +10,9 @@ import {AuthenticationService} from '../../../services/authentication.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  hide = true;
+
   loginForm: FormGroup;
   loading = false;
   submitted = false;

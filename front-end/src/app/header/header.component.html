@@ -1,16 +1,12 @@
 <div class="header">
   <a routerLink="/">PolyQuiz</a>
-  <span>
-    <a routerLink="create-user">Créer un utilisateur</a>
-  </span>
-  <span>
-    <a routerLink="create-quiz">Créer un quiz</a>
-  </span>
-  <span>
-    <a routerLink="edit-quiz">Modifier quiz</a>
-  </span>
   <span *ngIf="currentUser">
     <a (click)="logout()">Se déconnecter</a>
+  </span>
+  <span *ngIf="currentUser && currentUser.isAdmin">
+    <a routerLink="create-user">Créer un utilisateur</a>
+    <a class="span" routerLink="create-quiz">Créer un quiz</a>
+    <a routerLink="edit-quiz">Modifier quiz</a>
   </span>
   <span *ngIf="!currentUser">
     <a routerLink="login">Se connecter</a>

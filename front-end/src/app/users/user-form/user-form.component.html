@@ -11,14 +11,21 @@
       <input type="text" class="input-custom" id="lastName" [formControlName]="'lastName'" required>
     </label>
     <br>
-    <label for="lastName">
+    <label for="username">
       Pseudonyme :<br>
-      <input type="text" class="input-custom" id="username" [formControlName]="'username'" required>
+      <input type="text" class="input-custom" id="username" [formControlName]="'username'" disabled [value]="(this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase()">
     </label>
     <br>
-    <label for="lastName">
+    <label for="password">
       Mot de passe :<br>
-      <input type="password" class="input-custom" id="password" [formControlName]="'password'" required>
+      <input [type]="hide ? 'password' : 'text'" class="input-custom" id="password" [formControlName]="'password'" required>
+      <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
+      <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
+    </label>
+    <br>
+    <label for="isAdmin">
+      Droits d'administrateurs
+      <input type="checkbox" class="input-custom" id="isAdmin" [formControlName]="'isAdmin'">
     </label>
     <br>
     <button type="submit" class="button-card" (click)="addUser()">Créer</button>

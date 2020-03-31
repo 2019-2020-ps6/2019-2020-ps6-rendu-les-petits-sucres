@@ -22,7 +22,12 @@ a {
 span {
   display: flex;
   float: right;
-  margin-left: 2%;
+  margin-left: 1em;
+}
+
+.span {
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 a:hover {
