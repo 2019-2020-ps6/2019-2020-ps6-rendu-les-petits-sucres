@@ -4,7 +4,7 @@
         {{question.label}}
     </h2>
     <div class="answer" *ngFor="let answer of question.answers; let i=index">
-        {{i}} - {{answer.value}} <ng-container *ngIf="answer.isCorrect"><i class="far fa-check-square"></i></ng-container>
+        {{i}} - {{answer.value}} <ng-container *ngIf="answer.isCorrect === 'true'"><i class="far fa-check-square"></i></ng-container>
       <br>
     </div>
     <button class="button-card" routerLink="/edit-question/{{question.quizId}}/{{question.id}}">Éditer</button>

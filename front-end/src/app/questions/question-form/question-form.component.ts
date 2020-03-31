@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
-import {Question} from 'src/models/question.model';
+import {Answer, Question} from 'src/models/question.model';
 
 @Component({
   selector: 'app-question-form',
@@ -18,7 +18,7 @@ export class QuestionFormComponent implements OnInit {
   question: Question;
 
   public questionForm: FormGroup;
-  public trueOrFalse: boolean[] = [true, false];
+  public trueOrFalse: boolean[] = [true, false]; // Vrai ou faux
 
   constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
     this.initializeQuestionForm(null);
@@ -44,7 +44,7 @@ export class QuestionFormComponent implements OnInit {
   private createAnswer() {
     return this.formBuilder.group({
       value: '',
-      isCorrect: false,
+      isCorrect: null,
       image: '',
     });
   }
@@ -61,13 +61,13 @@ export class QuestionFormComponent implements OnInit {
 
   addQuestion() {
     const question = this.questionForm.getRawValue() as Question;
-    console.log(question);
     const isCorrectAnswers = [];
-    for (const answer of question.answers) {
-      isCorrectAnswers.push(Boolean(answer.isCorrect));
-    }
+    question.answers.forEach(answer => {
+      isCorrectAnswers.push(answer.isCorrect);
+    });
+    console.log(isCorrectAnswers);
     if (this.questionForm.valid) {
-      if (isCorrectAnswers.some((element) => element === true) && isCorrectAnswers.length > 1) {
+      if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
         this.quizService.addQuestion(this.quiz, question);
         this.initializeQuestionForm(null);
       }
@@ -77,6 +77,7 @@ export class QuestionFormComponent implements OnInit {
   editQuestion(quizId: number) {
     if (this.questionForm.valid) {
       const question = this.questionForm.getRawValue() as Question;
+      console.log(question);
       this.quizService.editQuestion(String(quizId), question, this.question);
     }
   }

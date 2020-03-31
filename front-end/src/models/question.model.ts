@@ -1,7 +1,7 @@
 export interface Answer {
     type?: string;
     value: string;
-    isCorrect: boolean;
+    isCorrect: string;
     id: number;
     questionId: number;
     quizId: number;

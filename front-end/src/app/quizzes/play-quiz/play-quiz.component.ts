@@ -15,7 +15,7 @@ export class PlayQuizComponent implements OnInit {
   public showSummaryQuestion: boolean;
   public currentQuestion: number;
   public score: number;
-  public desactivatesAnswers: Array<Answer> = [];
+  public deactivatesAnswers: Array<Answer> = [];
 
   constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
@@ -23,13 +23,7 @@ export class PlayQuizComponent implements OnInit {
       this.currentQuestion = +localStorage.getItem('currentQuestion');
       this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
       if (this.showSummaryQuestion === true) {
-        setTimeout (() => {
-          this.showSummaryQuestion = false;
-          this.currentQuestion ++;
-          console.log(this.currentQuestion);
-          localStorage.setItem('currentQuestion', this.currentQuestion + '');
-          localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
-        }, 5000);
+        this.toggleNextQuestion();
       }
       this.score = +localStorage.getItem('score');
     } else {
@@ -44,34 +38,37 @@ export class PlayQuizComponent implements OnInit {
   }
 
   toggleQuestionSummary() {
-    this.desactivatesAnswers = [];
+    this.deactivatesAnswers = [];
     this.showSummaryQuestion = true;
     localStorage.setItem('currentQuestion', this.currentQuestion + '');
     localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
-    setTimeout (() => {
-      this.showSummaryQuestion = false;
-      this.currentQuestion ++;
-      console.log(this.currentQuestion);
-      localStorage.setItem('currentQuestion', this.currentQuestion + '');
-      localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
-    }, 5000);
+    this.toggleNextQuestion();
   }
 
   toggleWrongAnswer(answer: Answer) {
     const answers = this.quiz.questions[this.currentQuestion].answers;
-    this.desactivatesAnswers.push(answer);
+    this.deactivatesAnswers.push(answer);
     this.score -= 1 / answers.length; // Score calculation
     localStorage.setItem('score', this.score + '');
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }
 
-  isDesactivate(answerSelection: Answer) {
-    for (const answer of this.desactivatesAnswers) {
-      if ( answer === answerSelection) {
+  isDeactivate(answerSelection: Answer) {
+    for (const answer of this.deactivatesAnswers) {
+      if (answer === answerSelection) {
         return true;
       }
     }
     return false;
+  }
+
+  private toggleNextQuestion() {
+    setTimeout (() => {
+      this.showSummaryQuestion = false;
+      this.currentQuestion ++;
+      localStorage.setItem('currentQuestion', this.currentQuestion + '');
+      localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
+    }, 5000);
   }
 
   goBack() {

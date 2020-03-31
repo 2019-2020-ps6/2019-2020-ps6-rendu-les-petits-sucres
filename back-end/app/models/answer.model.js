@@ -4,7 +4,7 @@ const BaseModel = require('../utils/base-model.js')
 module.exports = new BaseModel('Answer', {
   type: Joi.string(),
   value: Joi.string().required(),
-  isCorrect: Joi.boolean().required(),
+  isCorrect: Joi.string().required(),
   questionId: Joi.number(),
   quizId: Joi.number(),
   image: Joi.string().allow(''),

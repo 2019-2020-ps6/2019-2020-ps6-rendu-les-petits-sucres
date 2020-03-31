@@ -6,20 +6,20 @@
     <ng-container *ngIf="!showSummaryQuestion">
       <div class="answer-list" *ngFor="let answer of quiz.questions[currentQuestion].answers">
         <div *ngIf="!answer.image">
-          <div *ngIf="answer.isCorrect">
+          <div *ngIf="answer.isCorrect  === 'true'">
             <div class="answer" (click)="toggleQuestionSummary()">{{answer.value}}</div>
           </div>
-          <div *ngIf="!answer.isCorrect">
-            <div *ngIf="isDesactivate(answer)">
+          <div *ngIf="answer.isCorrect  === 'false'">
+            <div *ngIf="isDeactivate(answer)">
               <div class="answerDesactivate">{{answer.value}}</div>
             </div>
-            <div *ngIf="!isDesactivate(answer)">
+            <div *ngIf="!isDeactivate(answer)">
               <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
             </div>
           </div>
         </div>
         <div *ngIf="answer.image">
-          <div *ngIf="answer.isCorrect">
+          <div *ngIf="answer.isCorrect === 'true'">
             <div (click)="toggleQuestionSummary()">
               <figure>
                 <img class="fit-picture" src="{{answer.image}}" alt="{{answer.image}}">
@@ -27,7 +27,7 @@
               </figure>
             </div>
           </div>
-          <div *ngIf="!answer.isCorrect">
+          <div *ngIf="answer.isCorrect === 'false'">
             <div (click)="toggleWrongAnswer(answer)">
               <figure>
                 <img class="fit-picture" src="{{answer.image}}" alt="{{answer.image}}">
@@ -43,7 +43,7 @@
         Bravo vous avez sélectionné la bonne réponse !
       </span>
       <ng-container *ngFor="let answer of quiz.questions[currentQuestion].answers">
-        <div *ngIf="answer.isCorrect">La bonne réponse était : {{answer.value}}</div>
+        <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : {{answer.value}}</div>
       </ng-container>
     </ng-container>
   </ng-container>
@@ -53,7 +53,7 @@
       <li *ngFor="let question of quiz.questions">
         {{question.label}}
         <div *ngFor="let answer of question.answers">
-          <div *ngIf="answer.isCorrect">La bonne réponse était : {{answer.value}}</div>
+          <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : {{answer.value}}</div>
         </div>
         <hr>
       </li>

@@ -16,7 +16,7 @@
               <input type="text" [formControlName]="'value'">
               Correcte
               <select class="input-custom" [formControlName]="'isCorrect'">
-                <option *ngFor="let value of trueOrFalse" [value]="value">
+                <option *ngFor="let value of trueOrFalse" [value]=value>
                   <ng-container *ngIf="value === true">Vrai</ng-container>
                   <ng-container *ngIf="value === false">Faux</ng-container>
                 </option>
@@ -50,7 +50,7 @@
               <input type="text" [formControlName]="'value'">
               Correcte
               <select class="input-custom" [formControlName]="'isCorrect'">
-                <option *ngFor="let value of trueOrFalse" [value]="value">
+                <option *ngFor="let value of trueOrFalse" [value]=value>
                   <ng-container *ngIf="value === true">Vrai</ng-container>
                   <ng-container *ngIf="value === false">Faux</ng-container>
                 </option>

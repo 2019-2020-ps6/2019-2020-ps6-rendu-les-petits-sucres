@@ -21,5 +21,4 @@ export class EditQuestionComponent implements OnInit {
     const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
     this.quizService.setSelectedQuestion(quizId, questionId);
   }
-
 }
