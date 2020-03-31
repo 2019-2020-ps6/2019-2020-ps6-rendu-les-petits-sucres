@@ -2,7 +2,6 @@ const { Router } = require('express')
 
 const { User } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
-const userService = require('./user.service');
 
 const router = new Router()
 
@@ -40,7 +39,6 @@ router.delete('/:userId', (req, res) => {
   }
 })
 
-router.post('/authenticate', authenticate)
 router.get('/', (req, res) => {
   try {
     res.status(200).json(User.get())
@@ -49,10 +47,18 @@ router.get('/', (req, res) => {
   }
 })
 
-module.exports = router
+router.post('/authenticate', (req, res) => {
+  try {
+    const users = User.get();
+    const user = users.find(u => u.username === req.body.username && u.password ===  req.body.password);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(400).json({ message: 'Identifiant ou mot de passe incorrect' })
+    }
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
 
-function authenticate(req, res, next) {
-  userService.authenticate(req.body)
-      .then(user => user ? res.json(user) : res.status(400).json({ message: 'Identifiant ou mot de passe incorrect' }))
-      .catch(err => next(err));
-}
+module.exports = router
