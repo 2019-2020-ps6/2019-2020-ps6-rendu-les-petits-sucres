@@ -21,7 +21,7 @@
                   <ng-container *ngIf="value === false">Faux</ng-container>
                 </option>
               </select>
-              <input type="url" placeholder="https://exemple.com/"/>
+              <input type="url" placeholder="https://exemple.com/" [formControlName]="'image'"/>
               <button type="button" class="button-card" (click)="deleteAnswer(i)">Supprimer la réponse</button>
             </label>
           </div>
@@ -55,7 +55,7 @@
                   <ng-container *ngIf="value === false">Faux</ng-container>
                 </option>
               </select>
-              <input type="url" placeholder="https://exemple.com/"/>
+              <input type="url" placeholder="https://exemple.com/" [formControlName]="'image'"/>
               <button type="button" class="button-card" (click)="deleteAnswer(i)">Supprimer la réponse</button>
             </label>
           </div>
@@ -64,5 +64,4 @@
       <button type="submit" class="button-card" (click)="editQuestion(question.quizId)">Modifier la question</button>
     </form>
   </div>
-<br><br>{{questionForm.getRawValue() | json}}
 </ng-container>

@@ -61,6 +61,7 @@ export class QuestionFormComponent implements OnInit {
 
   addQuestion() {
     const question = this.questionForm.getRawValue() as Question;
+    console.log(question);
     const isCorrectAnswers = [];
     for (const answer of question.answers) {
       isCorrectAnswers.push(Boolean(answer.isCorrect));
