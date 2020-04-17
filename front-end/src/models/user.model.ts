@@ -5,5 +5,5 @@ export interface User {
   firstName: string;
   lastName: string;
   isAdmin: boolean;
-  authdata?: string;
+  authData?: string;
 }

@@ -17,7 +17,7 @@ export class QuizListComponent implements OnInit {
   public pageSize = 6;
 
   constructor(private router: Router, public quizService: QuizService) {
-    window.localStorage.clear();
+    // window.localStorage.clear();
     this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
