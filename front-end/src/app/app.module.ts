@@ -24,6 +24,8 @@ import {PlayQuizComponent} from './quizzes/play-quiz/play-quiz.component';
 import {LoginComponent} from './users/login/login.component';
 import {BasicAuthInterceptor} from '../helpers/basic-auth.interceptor';
 import {ErrorInterceptor} from '../helpers/error.interceptor';
+import {SearchComponent} from './tools/search/search.component';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {ErrorInterceptor} from '../helpers/error.interceptor';
     EditQuestionComponent,
     CreateQuizComponent,
     PlayQuizComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

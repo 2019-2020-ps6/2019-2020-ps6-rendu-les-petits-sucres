@@ -1,5 +1,6 @@
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
+<app-search class="d-flex justify-content-center mt-2"></app-search>
+<div id="carouselExampleControls" class="carousel slide d-flex justify-content-center" data-ride="carousel">
+  <div class="carousel-inner mr-5 ml-5 pr-5 pl-5 w-75 ">
     <div class="carousel-item active mt-5">
       <div class="quiz-list d-flex flex-wrap justify-content-center">
         <div class="quiz" *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
@@ -9,12 +10,13 @@
 </div>
 </div>
 </div>
-<a class="carousel-control-prev mt-5 h1" (click)="backPage()" role="button" data-slide="prev">
+<div class="bg-info clearfix">
+<a *ngIf="backPageOk()" class="carousel-control-prev mt-5 h1 " (click)="backPage()" role="button" data-slide="prev">
   <span> <i class="fa fa-angle-left " aria-hidden="true"></i></span>
   <span class="sr-only">Précédent</span>
 </a>
-<a class="carousel-control-next mt-5  h1" (click)="nextPage()" role="button" data-slide="next">
+<a *ngIf="nextPageOk()" class="carousel-control-next mt-5 h1 " (click)="nextPage()" role="button" data-slide="next">
   <span> <i class="fa fa-angle-right" aria-hidden="true"></i></span>
   <span class="sr-only">Suivant</span>
 </a>
-
+</div>

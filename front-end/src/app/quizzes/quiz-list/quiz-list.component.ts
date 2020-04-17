@@ -1,4 +1,4 @@
-import {Component, NgModule, OnInit} from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
@@ -13,14 +13,18 @@ import {Quiz} from '../../../models/quiz.model';
 export class QuizListComponent implements OnInit {
 
   public quizList: Quiz[] = [];
-  public page = 1;
+  public page: number;
   public pageSize = 6;
 
   constructor(private router: Router, public quizService: QuizService) {
-    // window.localStorage.clear();
-    this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
-      this.quizList = quizzes;
-    });
+    if (localStorage.getItem('quizListSearch') !== null) {
+      this.quizList = localStorage.getItem('quizListSearch') && JSON.parse(localStorage.getItem('quizListSearch'));
+    } else {
+      this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
+        this.quizList = quizzes;
+      });
+    }
+    this.page = 1;
   }
 
   ngOnInit() {
@@ -39,14 +43,31 @@ export class QuizListComponent implements OnInit {
   }
 
   nextPage() {
-    if  (this.quizList.length / this.pageSize >= this.page) {
+    if  (this.page * this.pageSize <= this.quizList.length) {
       this.page = this.page + 1;
+      if  (this.page * this.pageSize <= this.quizList.length) {
+        return true;
+      }
+      return true;
+    }
+  }
+
+  nextPageOk() {
+    if  (this.page * this.pageSize <= this.quizList.length) {
+      return true;
     }
   }
 
   backPage() {
     if (this.page !== 1) {
       this.page = this.page - 1;
+      return true;
+    }
+  }
+
+  backPageOk() {
+    if (this.page !== 1) {
+      return true;
     }
   }
 }
