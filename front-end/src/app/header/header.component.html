@@ -1,14 +1,27 @@
-<div class="header">
-  <a routerLink="/">PolyQuiz</a>
-  <span *ngIf="currentUser">
-    <a (click)="logout()">Se déconnecter</a>
-  </span>
-  <span *ngIf="currentUser && currentUser.isAdmin">
-    <a routerLink="create-user">Créer un utilisateur</a>
-    <a class="span" routerLink="create-quiz">Créer un quiz</a>
-    <a routerLink="edit-quiz">Modifier quiz</a>
-  </span>
-  <span *ngIf="!currentUser">
-    <a routerLink="login">Se connecter</a>
-  </span>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <a class="navbar-brand" href="/">PolyQuiz</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="nav navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
+        <a class="nav-link" routerLink="create-user">Créer un utilisateur</a>
+      </li>
+      <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
+        <a class="nav-link" routerLink="create-quiz">Créer un quiz</a>
+      </li>
+      <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
+        <a class="nav-link" routerLink="edit-quiz">Modifier quiz</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item" *ngIf="!currentUser">
+        <a class="nav-link" routerLink="login">Se connecter</a>
+      </li>
+      <li class="nav-item" *ngIf="currentUser">
+        <a class="nav-link" (click)="logout()">Se déconnecter</a>
+      </li>
+    </ul>
+  </div>
+</nav>
