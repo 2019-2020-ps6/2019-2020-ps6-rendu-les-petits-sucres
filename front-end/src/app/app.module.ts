@@ -26,6 +26,7 @@ import {BasicAuthInterceptor} from '../helpers/basic-auth.interceptor';
 import {ErrorInterceptor} from '../helpers/error.interceptor';
 import {SearchComponent} from './tools/search/search.component';
 import {EditUserComponent} from './users/edit-user/edit-user.component';
+import {LoginPatientsComponent} from './users/login-patients/login-patients.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {EditUserComponent} from './users/edit-user/edit-user.component';
     CreateQuizComponent,
     PlayQuizComponent,
     LoginComponent,
+    LoginPatientsComponent,
     SearchComponent,
     EditUserComponent,
   ],
