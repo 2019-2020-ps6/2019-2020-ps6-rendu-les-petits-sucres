@@ -17,7 +17,8 @@ export class UserComponent implements OnInit {
   @Output()
   userDeleted: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

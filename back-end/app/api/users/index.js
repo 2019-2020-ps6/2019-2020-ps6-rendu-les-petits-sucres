@@ -51,11 +51,24 @@ router.post('/authenticate', (req, res) => {
   try {
     const users = User.get();
     const user = users.find(u => u.username === req.body.username && u.password ===  req.body.password);
-    if (user) {
-      res.json(user);
+    const userIsAdmin = users.find(u => u.username === req.body.username && u.password ===  req.body.password && u.isAdmin);
+    if (userIsAdmin) {
+      res.json(userIsAdmin);
+    } else if (user && !userIsAdmin) {
+      res.status(400).json({ message: 'Vous n\'êtes pas un administrateur !' })
     } else {
       res.status(400).json({ message: 'Identifiant ou mot de passe incorrect' })
     }
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
+router.post('/patient/authenticate', (req, res) => {
+  try {
+    const users = User.get();
+    const user = users.find(u => u.username === req.body.username );
+    res.json(user);
   } catch (err) {
     manageAllErrors(res, err)
   }

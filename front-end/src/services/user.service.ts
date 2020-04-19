@@ -9,8 +9,10 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UserService {
   private users: User[] = [];
+  private patients: User[] = [];
 
   public users$: BehaviorSubject<User[]> = new BehaviorSubject(this.users);
+  public patients$: BehaviorSubject<User[]> = new BehaviorSubject(this.patients);
 
   public userSelected$: Subject<User> = new Subject();
 
@@ -34,8 +36,12 @@ export class UserService {
     });
   }
 
-  getAll() {
-    return this.httpClient.get<User[]>(this.userUrl);
+  setPatientsFromUrl() {
+    this.httpClient.get<User[]>(this.userUrl).subscribe((users) => {
+      this.patients = users.filter(user => !user.isAdmin);
+      this.patients$.next(this.patients);
+      return this.patients;
+    });
   }
 
   editUser(id: string, user: User) {
