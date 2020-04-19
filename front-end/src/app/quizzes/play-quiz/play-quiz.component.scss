@@ -37,6 +37,18 @@
   padding: 0.5em 1em;
 }
 
+.answerDesactivate:hover {
+  color: gray;
+  background-color: $white;
+  border: solid 1px gray;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  cursor: default;
+}
+
+.answerDesactivateImage:hover{
+  cursor: default;
+}
 .answer-list {
   display: inline-block;
   margin: 5% 5% 5% 5%;

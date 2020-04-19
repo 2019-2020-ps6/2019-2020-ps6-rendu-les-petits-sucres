@@ -29,11 +29,21 @@
             </div>
           </div>
           <div *ngIf="answer.isCorrect === 'false'">
-            <div (click)="toggleWrongAnswer(answer)">
+            <div *ngIf="isDeactivate(answer)">
+              <div (click)="toggleWrongAnswer(answer)">
+              <figure class="answerDesactivateImage disabled">
+                <img class="fit-picture answerDesactivate btn btn-outline-info disabled p-2" src="{{answer.image}}" alt="{{answer.image}}">
+                <figcaption>{{answer.value}}</figcaption>
+              </figure>
+            </div>
+            </div>
+            <div *ngIf="!isDeactivate(answer)">
+              <div (click)="toggleWrongAnswer(answer)">
               <figure>
                 <img class="fit-picture answer btn btn-outline-info p-2" src="{{answer.image}}" alt="{{answer.image}}">
                 <figcaption>{{answer.value}}</figcaption>
               </figure>
+            </div>
             </div>
           </div>
         </div>
@@ -46,7 +56,17 @@
       </div>
       <h2 class="text-center mt-4">{{quiz.questions[currentQuestion].label}}</h2>
       <ng-container *ngFor="let answer of quiz.questions[currentQuestion].answers">
-        <div class="text-center mt-4" *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div>
+        <div *ngIf="answer.image;else elseBlock">
+          <div *ngIf="answer.isCorrect === 'true'">
+            <div class="text-center mt-4">La bonne réponse était :</div>
+              <figure class="answerDesactivateImage">
+                <img class=" p-2" src="{{answer.image}}" alt="{{answer.image}}">
+                <figcaption>{{answer.value}}</figcaption>
+              </figure>
+            </div>
+          </div>
+        <ng-template #elseBlock>
+          <div class="text-center mt-4" *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div></ng-template>
       </ng-container>
       <button type="button" class="btn btn-outline-info center mt-2 back" (click)="skipSummary();">Passer à la question suivante</button>
       <div class="text-center">Vous passerez à la question suivante dans {{displayTimer}} secondes </div>
@@ -61,7 +81,19 @@
       <li *ngFor="let question of quiz.questions" class="list-group-item">
         <h5>{{question.label}}</h5>
         <div *ngFor="let answer of question.answers">
-          <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div>
+          <div *ngIf="answer.image;else elseBlock2">
+            <div *ngIf="answer.isCorrect === 'true'">
+              <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span>
+              <figure class="answerDesactivateImage">
+                <img src="{{answer.image}}" alt="{{answer.image}}">
+                <figcaption>{{answer.value}}</figcaption>
+              </figure>
+              </span>
+            </div>
+          </div>
+          </div>
+          <ng-template #elseBlock2>
+            <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div></ng-template>
         </div>
       </li>
     </ul>
