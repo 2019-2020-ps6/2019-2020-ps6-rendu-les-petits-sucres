@@ -51,8 +51,8 @@
               Correcte
               <select class="input-custom" [formControlName]="'isCorrect'">
                 <option *ngFor="let value of trueOrFalse" [value]=value>
-                  <ng-container *ngIf="value === true">Vrai</ng-container>
-                  <ng-container *ngIf="value === false">Faux</ng-container>
+                  <ng-container *ngIf="value">Vrai</ng-container>
+                  <ng-container *ngIf="!value">Faux</ng-container>
                 </option>
               </select>
               <input type="url" placeholder="https://exemple.com/" [formControlName]="'image'"/>

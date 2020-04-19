@@ -8,11 +8,13 @@ import {CreateQuizComponent} from './quizzes/create-quiz/create-quiz.component';
 import {PlayQuizComponent} from './quizzes/play-quiz/play-quiz.component';
 import {EditQuizListComponent} from './quizzes/edit-quiz-list/edit-quiz-list.component';
 import {LoginComponent} from './users/login/login.component';
+import {EditUserComponent} from './users/edit-user/edit-user.component';
 
 const routes: Routes = [
     { path: 'quiz-list', component: QuizListComponent },
     { path: '', redirectTo: '/quiz-list', pathMatch: 'full'},
     { path: 'create-user', component: CreateUserComponent },
+    { path: 'edit-user/:userId', component: EditUserComponent },
     { path: 'play-quiz/:quizId', component: PlayQuizComponent },
     { path: 'edit-quiz/:quizId', component: EditQuizComponent },
     { path: 'edit-question/:quizId/:questionId', component: EditQuestionComponent },

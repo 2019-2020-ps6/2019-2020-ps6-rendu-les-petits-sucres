@@ -1,33 +1,71 @@
-<div class="card">
-  <h2>Créer un nouvel utilisateur</h2>
-  <form class="quiz-form" [formGroup]="userForm">
-    <label for="firstName">
-      Prénom :<br>
-      <input type="text" class="input-custom" id="firstName" [formControlName]="'firstName'" required>
-    </label>
-    <br>
-    <label for="lastName">
-      Nom :<br>
-      <input type="text" class="input-custom" id="lastName" [formControlName]="'lastName'" required>
-    </label>
-    <br>
-    <label for="username">
-      Pseudonyme :<br>
-      <input type="text" class="input-custom" id="username" [formControlName]="'username'" disabled [value]="(this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase()">
-    </label>
-    <br>
-    <label for="password">
-      Mot de passe :<br>
-      <input [type]="hide ? 'password' : 'text'" class="input-custom" id="password" [formControlName]="'password'" required>
-      <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
-      <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
-    </label>
-    <br>
-    <label for="isAdmin">
-      Droits d'administrateurs
-      <input type="checkbox" class="input-custom" id="isAdmin" [formControlName]="'isAdmin'">
-    </label>
-    <br>
-    <button type="submit" class="button-card" (click)="addUser()">Créer</button>
-  </form>
-</div>
+<ng-container *ngIf="!user">
+  <div class="card">
+    <h2>Créer un nouvel utilisateur</h2>
+    <form class="quiz-form" [formGroup]="userForm">
+      <label>
+        Prénom :<br>
+        <input type="text" class="input-custom" [formControlName]="'firstName'" required>
+      </label>
+      <br>
+      <label>
+        Nom :<br>
+        <input type="text" class="input-custom" [formControlName]="'lastName'" required>
+      </label>
+      <br>
+      <label>
+        Pseudonyme :<br>
+        <input type="text" class="input-custom" [formControlName]="'username'" disabled [value]="(this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase()">
+      </label>
+      <br>
+      <label>
+        Mot de passe :<br>
+        <input [type]="hide ? 'password' : 'text'" class="input-custom" [formControlName]="'password'" required>
+        <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
+        <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
+      </label>
+      <br>
+      <label>
+        Droits d'administrateurs
+        <input type="checkbox" class="input-custom" [formControlName]="'isAdmin'">
+      </label>
+      <br>
+      <button type="submit" class="button-card" (click)="addUser()">Créer</button>
+    </form>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="user">
+  <div class="card">
+    <h2>Modifier le compte de <em>{{user.firstName}} {{user.lastName}}</em></h2>
+    <form class="quiz-form" [formGroup]="userForm">
+      <label>
+        Prénom :<br>
+        <input type="text" class="input-custom" [formControlName]="'firstName'" required>
+      </label>
+      <br>
+      <label>
+        Nom :<br>
+        <input type="text" class="input-custom" [formControlName]="'lastName'" required>
+      </label>
+      <br>
+      <label>
+        Pseudonyme :<br>
+        <input type="text" class="input-custom" [formControlName]="'username'" disabled [value]="(this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase()">
+      </label>
+      <br>
+      <label>
+        Mot de passe :<br>
+        <input [type]="hide ? 'password' : 'text'" class="input-custom" [formControlName]="'password'" required>
+        <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
+        <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
+      </label>
+      <br>
+      <label>
+        Droits d'administrateurs
+        <input type="checkbox" class="input-custom" [formControlName]="'isAdmin'">
+      </label>
+      <br>
+      <button type="submit" class="button-card" (click)="editUser(user.id)">Modifier</button>
+    </form>
+  </div>
+</ng-container>

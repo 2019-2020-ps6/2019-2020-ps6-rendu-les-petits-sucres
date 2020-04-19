@@ -25,7 +25,7 @@ import {LoginComponent} from './users/login/login.component';
 import {BasicAuthInterceptor} from '../helpers/basic-auth.interceptor';
 import {ErrorInterceptor} from '../helpers/error.interceptor';
 import {SearchComponent} from './tools/search/search.component';
-
+import {EditUserComponent} from './users/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import {SearchComponent} from './tools/search/search.component';
     CreateQuizComponent,
     PlayQuizComponent,
     LoginComponent,
-    SearchComponent
+    SearchComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -53,6 +53,8 @@ export class QuestionFormComponent implements OnInit {
   addAnswer() {
     if (this.answers.length < 6) {
       this.answers.push(this.createAnswer());
+    } else {
+      alert('Vous ne pouvez créer que 6 réponses par question !');
     }
   }
 
