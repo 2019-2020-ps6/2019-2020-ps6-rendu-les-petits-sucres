@@ -39,6 +39,7 @@ export class SearchComponent implements OnInit {
   }
 
   applySearch() {
+    localStorage.removeItem('requestSearch');
     localStorage.removeItem('quizListSearch');
     if (this.searchForm.valid) {
       for (const quiz of this.quizList) {
@@ -46,9 +47,9 @@ export class SearchComponent implements OnInit {
           this.newQuizList.push(quiz);
         }
       }
+      localStorage.setItem('quizListSearch', JSON.stringify(this.newQuizList));
+      localStorage.setItem('requestSearch', this.valueSearch.toString());
     }
-    localStorage.setItem('quizListSearch', JSON.stringify(this.newQuizList));
-    localStorage.setItem('requestSearch', this.valueSearch.toString());
     document.location.reload();
   }
 

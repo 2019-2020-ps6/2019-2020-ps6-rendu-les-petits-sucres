@@ -1,28 +1,29 @@
-<button class="button-card" routerLink="/quiz-list">Retour</button>
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/quiz-list"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
 
 <ng-container *ngIf="quiz">
   <ng-container *ngIf="currentQuestion != quiz.questions.length">
-    <h2>{{quiz.questions[currentQuestion].label}}</h2>
+    <h2 *ngIf="!showSummaryQuestion" class="text-center">{{quiz.questions[currentQuestion].label}}</h2>
     <ng-container *ngIf="!showSummaryQuestion">
+      <div class="d-flex flex-wrap justify-content-center">
       <div class="answer-list" *ngFor="let answer of quiz.questions[currentQuestion].answers">
         <div *ngIf="!answer.image">
           <div *ngIf="answer.isCorrect  === 'true'">
-            <div class="answer" (click)="toggleQuestionSummary()">{{answer.value}}</div>
+            <div class="answer btn btn-outline-info p-2" (click)="toggleQuestionSummary();">{{answer.value}}</div>
           </div>
           <div *ngIf="answer.isCorrect  === 'false'">
             <div *ngIf="isDeactivate(answer)">
-              <div class="answerDesactivate">{{answer.value}}</div>
+              <div class="answerDesactivate btn btn-outline-secondary disabled p-2">{{answer.value}}</div>
             </div>
             <div *ngIf="!isDeactivate(answer)">
-              <div class="answer" (click)="toggleWrongAnswer(answer)">{{answer.value}}</div>
+              <div class="answer btn btn-outline-info p-2" (click)="toggleWrongAnswer(answer)" >{{answer.value}}</div>
             </div>
           </div>
         </div>
         <div *ngIf="answer.image">
           <div *ngIf="answer.isCorrect === 'true'">
-            <div (click)="toggleQuestionSummary()">
+            <div (click)="toggleQuestionSummary();">
               <figure>
-                <img class="fit-picture" src="{{answer.image}}" alt="{{answer.image}}">
+                <img class="fit-picture answer btn btn-outline-info p-2" src="{{answer.image}}" alt="{{answer.image}}">
                 <figcaption>{{answer.value}}</figcaption>
               </figure>
             </div>
@@ -30,34 +31,42 @@
           <div *ngIf="answer.isCorrect === 'false'">
             <div (click)="toggleWrongAnswer(answer)">
               <figure>
-                <img class="fit-picture" src="{{answer.image}}" alt="{{answer.image}}">
+                <img class="fit-picture answer btn btn-outline-info p-2" src="{{answer.image}}" alt="{{answer.image}}">
                 <figcaption>{{answer.value}}</figcaption>
               </figure>
             </div>
           </div>
         </div>
       </div>
+      </div>
     </ng-container>
-    <ng-container *ngIf="showSummaryQuestion">
-      <span>
-        Bravo vous avez sélectionné la bonne réponse !
-      </span>
+    <ng-container class="justify-content-center" *ngIf="showSummaryQuestion">
+      <div class="text-info text-center mb-3 mt-3">
+        <h3>Bravo vous avez sélectionné la bonne réponse ! </h3>
+      </div>
+      <h2 class="text-center mt-4">{{quiz.questions[currentQuestion].label}}</h2>
       <ng-container *ngFor="let answer of quiz.questions[currentQuestion].answers">
-        <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : {{answer.value}}</div>
+        <div class="text-center mt-4" *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div>
       </ng-container>
+      <button type="button" class="btn btn-outline-info center mt-2 back" (click)="skipSummary();">Passer à la question suivante</button>
+      <div class="text-center">Vous passerez à la question suivante dans {{displayTimer}} secondes </div>
     </ng-container>
   </ng-container>
 
-  <div *ngIf="currentQuestion == quiz.questions.length">
-    <ul>
-      <li *ngFor="let question of quiz.questions">
-        {{question.label}}
+  <div *ngIf="showEnd()" >
+    <div class="text-info text-center mb-3 mt-3">
+      <h3>Vous avez terminé le quiz !</h3>
+    </div>
+    <ul class="list-group ml-5 mr-5">
+      <li *ngFor="let question of quiz.questions" class="list-group-item">
+        <h5>{{question.label}}</h5>
         <div *ngFor="let answer of question.answers">
-          <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : {{answer.value}}</div>
+          <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div>
         </div>
-        <hr>
       </li>
     </ul>
-    <button class="button-card center" (click)="goBack()">Revenir au menu principal</button>
+    <button class="back btn btn-outline-info center mt-3" (click)="goBack()">Revenir au menu principal</button>
+    <div class="text-center">Le quiz se relance dans {{displayTimerEnd}} secondes </div>
   </div>
+
 </ng-container>
