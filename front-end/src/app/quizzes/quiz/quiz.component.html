@@ -1,5 +1,6 @@
 <div class="card text-center" style="width: 14rem; height: 14rem">
-   <div class="image" style="background-image:url(https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg)"></div>
+  <div *ngIf="quiz.image" class="image mt-1" [ngStyle]="{ 'background-image': 'url(' + getUrl() + ')'}"></div>
+   <div *ngIf="!quiz.image" class="image mt-1" style="background-image:url('https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg')"></div>
   <p class="card-text"><span class="font-weight-bold">{{quiz.name}}</span></p>
     <div class="textQuiz">Thème : {{quiz.theme}}</div>
     <div class="textQuiz">Nombre de questions : {{quiz.questions.length}}</div>

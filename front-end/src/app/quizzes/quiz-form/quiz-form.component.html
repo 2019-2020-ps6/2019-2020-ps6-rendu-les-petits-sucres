@@ -14,6 +14,10 @@
         </option>
       </select>
     </label>
+    <label for="image">
+      Image :<br>
+    <input type="url" id="image" placeholder="https://exemple.com/" [formControlName]="'image'"/>
+    </label>
     <br>
     <button type="submit" class="button-card" (click)="addQuiz()">Créer le quiz</button>
   </form>

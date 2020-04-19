@@ -28,13 +28,27 @@ export class PlayQuizComponent implements OnInit {
   constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     if (localStorage) {
-      this.currentQuestion = +localStorage.getItem('currentQuestion');
-      this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
-      if (this.showSummaryQuestion === true) {
-        this.toggleNextQuestion();
+      if (localStorage.getItem('quiz') === this.route.snapshot.paramMap.get('quizId')) {
+        console.log('cou');
+        this.currentQuestion = +localStorage.getItem('currentQuestion');
+        this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
+        if (this.showSummaryQuestion === true) {
+          this.toggleNextQuestion();
+        }
+        this.score = +localStorage.getItem('score');
+      } else {
+        console.log('cou');
+        localStorage.removeItem('currentQuestion');
+        localStorage.removeItem('summaryQuestion');
+        localStorage.removeItem('quiz');
+        this.currentQuestion = 0;
+        this.score = 20;
       }
-      this.score = +localStorage.getItem('score');
     } else {
+      console.log('cou');
+      localStorage.removeItem('currentQuestion');
+      localStorage.removeItem('summaryQuestion');
+      localStorage.removeItem('quiz');
       this.currentQuestion = 0;
       this.score = 20;
     }
@@ -46,11 +60,13 @@ export class PlayQuizComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('quizId');
     this.quizService.setSelectedQuiz(id);
+    localStorage.setItem('currentQuiz', id + '');
   }
 
   toggleQuestionSummary() {
     this.deactivatesAnswers = [];
     this.showSummaryQuestion = true;
+    localStorage.setItem('currentQuiz', this.quiz.id + '');
     localStorage.setItem('currentQuestion', this.currentQuestion + '');
     localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
     this.toggleNextQuestion();

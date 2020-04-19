@@ -27,6 +27,7 @@ export class QuizFormComponent implements OnInit {
     this.quizForm = this.formBuilder.group({
       name: ['', Validators.required],
       theme: ['', Validators.required],
+      image: '',
       questions: this.formBuilder.array([])
     });
   }
@@ -35,8 +36,9 @@ export class QuizFormComponent implements OnInit {
   }
 
   addQuiz() {
+    console.log(this.quizForm.value);
     if (this.quizForm.valid) {
-      const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
+      const quizToCreate: Quiz = this.quizForm.value as Quiz;
       this.quizService.addQuiz(quizToCreate);
       this.initializeQuizForm();
       alert('Le quiz a bien été créé !\nVeuillez retourner en arrière pour y ajouter des questions !');
