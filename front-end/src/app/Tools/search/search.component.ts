@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   get valueSearch(): FormArray {
@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit {
     localStorage.removeItem('quizListSearch');
     if (this.searchForm.valid) {
       for (const quiz of this.quizList) {
-        if ( quiz.name.includes(this.valueSearch.toString())) {
+        if (quiz.name.toLowerCase().includes(this.valueSearch.toString())) {
           this.newQuizList.push(quiz);
         }
       }

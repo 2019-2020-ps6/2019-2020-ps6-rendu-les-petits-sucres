@@ -42,7 +42,7 @@ export class QuizComponent implements OnInit {
     this.quizPlayed.emit(this.quiz);
   }
 
-  getUrl(){
+  getUrl(): string {
     return this.quiz.image;
   }
 }

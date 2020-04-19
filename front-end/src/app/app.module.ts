@@ -27,6 +27,7 @@ import {ErrorInterceptor} from '../helpers/error.interceptor';
 import {SearchComponent} from './tools/search/search.component';
 import {EditUserComponent} from './users/edit-user/edit-user.component';
 import {LoginPatientsComponent} from './users/login-patients/login-patients.component';
+import {UserAccountComponent} from './users/user-account/user-account.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {LoginPatientsComponent} from './users/login-patients/login-patients.comp
     LoginPatientsComponent,
     SearchComponent,
     EditUserComponent,
+    UserAccountComponent,
   ],
   imports: [
     BrowserModule,

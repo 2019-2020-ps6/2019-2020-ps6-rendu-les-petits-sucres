@@ -1,6 +1,6 @@
 <div class="d-flex flex-column">
   <div class="p-2"><form class="form-inline my-2 my-lg-0 justify-content-center" [formGroup]="searchForm">
-    <input class="form-control mr-sm-2 input-custom" [formControlName]="'search'" type="text" placeholder="Rechercher un quiz" aria-label="Search">
+    <input class="form-control mr-sm-2 input-custom" [formControlName]="'search'" type="text" oninput="this.value = this.value.toLowerCase()" placeholder="Rechercher un quiz" aria-label="Recherche">
     <button class="btn btn-outline-info my-2 my-sm-0" type="submit" (click)="applySearch()">Rechercher</button>
   </form></div>
   <div class="p-2"><div *ngIf="localStorage()" class="alert alert-warning alert-dismissible fade show" role="alert">
