@@ -113,7 +113,6 @@ export class PlayQuizComponent implements OnInit {
         userId: JSON.parse(localStorage.getItem('currentUser')).id,
         id: Date.now()
       };
-      console.log(this.playedQuiz);
       this.playedQuizService.addPlayedQuiz(this.playedQuiz);
     }
     this.setTimeEnd();

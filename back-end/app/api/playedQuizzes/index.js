@@ -1,7 +1,8 @@
 const { Router } = require('express')
 
 const manageAllErrors = require('../../utils/routes/error-management')
-const {PlayedQuiz} = require("../../models");
+const {PlayedQuiz} = require('../../models')
+
 const { buildPlayedQuizzes, buildPlayedQuiz, buildPlayedQuizzesFromUserId } = require("./manager");
 
 const router = new Router()
