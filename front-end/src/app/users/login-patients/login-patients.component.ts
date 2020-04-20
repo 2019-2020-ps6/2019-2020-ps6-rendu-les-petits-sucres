@@ -19,6 +19,7 @@ export class LoginPatientsComponent implements OnInit {
 
   loading = false;
   returnUrl: string;
+  error = '';
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
               private route: ActivatedRoute, private router: Router,
@@ -41,8 +42,14 @@ export class LoginPatientsComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-
   onSubmit() {
+
+    if (this.loginForm.invalid) {
+      this.error = 'Veuillez sélectionner un patient parmi la liste';
+      this.loading = false;
+      return;
+    }
+
     this.loading = true;
     this.authenticationService.loginPatient(this.formFields.username.value)
       .pipe(first())

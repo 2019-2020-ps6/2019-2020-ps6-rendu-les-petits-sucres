@@ -9,28 +9,13 @@ import {httpOptions, serverUrl} from '../configs/server.config';
   providedIn: 'root'
 })
 export class QuizService {
-  /**
-   * Services Documentation:
-   * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
-   */
 
-  /**
-   * The list of quiz.
-   * The list is retrieved from the mock.
-   */
   private quizzes: Quiz[] = [];
-
-  /**
-   * Observable which contains the list of the quiz.
-   * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
-   */
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
 
   public quizSelected$: Subject<Quiz> = new Subject();
 
   public questionSelected$: Subject<Question> = new Subject();
-
-  public quizPlayed$: Subject<Quiz> = new Subject();
 
   private quizUrl = serverUrl + 'quizzes';
   private questionsPath = 'questions';

@@ -10,6 +10,7 @@ import {EditQuizListComponent} from './quizzes/edit-quiz-list/edit-quiz-list.com
 import {LoginComponent} from './users/login/login.component';
 import {EditUserComponent} from './users/edit-user/edit-user.component';
 import {LoginPatientsComponent} from './users/login-patients/login-patients.component';
+import {UserAccountComponent} from './users/user-account/user-account.component';
 
 const routes: Routes = [
     { path: 'quiz-list', component: QuizListComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
     { path: 'create-quiz', component: CreateQuizComponent },
     { path: 'edit-quiz', component: EditQuizListComponent },
     { path: 'admin/login', component: LoginComponent },
-    { path: 'login', component: LoginPatientsComponent }
+    { path: 'login', component: LoginPatientsComponent },
+    { path: 'my-account', component: UserAccountComponent}
 
 ];
 

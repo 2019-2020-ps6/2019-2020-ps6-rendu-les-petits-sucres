@@ -3,6 +3,8 @@ import {Quiz} from '../../../models/quiz.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
 import {Answer} from '../../../models/question.model';
+import {PlayedQuiz} from '../../../models/playedQuiz.model';
+import {PlayedQuizService} from '../../../services/playedQuiz.service';
 
 @Component({
   selector: 'app-play-quiz',
@@ -22,14 +24,16 @@ export class PlayQuizComponent implements OnInit {
   public timer2: any;
   public timer3: any;
   public timerEndQuiz: any;
-  public displayTimer = 10 ;
-  public displayTimerEnd = 20 ;
+  public displayTimer = 10;
+  public displayTimerEnd = 20;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) {
+  public playedQuiz: PlayedQuiz;
+
+  constructor(private route: ActivatedRoute, private quizService: QuizService,
+              private router: Router, private playedQuizService: PlayedQuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     if (localStorage) {
       if (localStorage.getItem('quiz') === this.route.snapshot.paramMap.get('quizId')) {
-        console.log('cou');
         this.currentQuestion = +localStorage.getItem('currentQuestion');
         this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
         if (this.showSummaryQuestion === true) {
@@ -37,7 +41,6 @@ export class PlayQuizComponent implements OnInit {
         }
         this.score = +localStorage.getItem('score');
       } else {
-        console.log('cou');
         localStorage.removeItem('currentQuestion');
         localStorage.removeItem('summaryQuestion');
         localStorage.removeItem('quiz');
@@ -45,14 +48,13 @@ export class PlayQuizComponent implements OnInit {
         this.score = 20;
       }
     } else {
-      console.log('cou');
       localStorage.removeItem('currentQuestion');
       localStorage.removeItem('summaryQuestion');
       localStorage.removeItem('quiz');
       this.currentQuestion = 0;
       this.score = 20;
     }
-    if ( localStorage.getItem('quizEnd') === 'true') {
+    if (localStorage.getItem('quizEnd') === 'true') {
       this.toggleEndQuiz();
     }
   }
@@ -103,21 +105,32 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private toggleEndQuiz() {
-      this.setTimeEnd();
-      this.timerEndQuiz = setTimeout(() => {
-        this.currentQuestion = 0;
-        this.showSummaryQuestion = false;
-        localStorage.setItem('currentQuestion', this.currentQuestion + '');
-        localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
-        this.quizEnd = false;
-        localStorage.removeItem('quizEnd');
+    if (localStorage.getItem('currentUser')) {
+      this.playedQuiz = {
+        name: this.quiz.name,
+        quizId: +this.quiz.id,
+        score: this.score,
+        userId: JSON.parse(localStorage.getItem('currentUser')).id,
+        id: Date.now()
+      };
+      console.log(this.playedQuiz);
+      this.playedQuizService.addPlayedQuiz(this.playedQuiz);
+    }
+    this.setTimeEnd();
+    this.timerEndQuiz = setTimeout(() => {
+      this.currentQuestion = 0;
+      this.showSummaryQuestion = false;
+      localStorage.setItem('currentQuestion', this.currentQuestion + '');
+      localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
+      this.quizEnd = false;
+      localStorage.removeItem('quizEnd');
       }, 20000);
   }
 
   private nextQuestion() {
     this.showSummaryQuestion = false;
     this.currentQuestion ++;
-    if ( this.currentQuestion === this.quiz.questions.length) {
+    if (this.currentQuestion === this.quiz.questions.length) {
       this.toggleEndQuiz();
       this.quizEnd = true;
       localStorage.setItem('quizEnd', this.quizEnd + '');
@@ -164,13 +177,14 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private showEnd() {
-    if ( this.currentQuestion === this.quiz.questions.length) {
-      return true;
-    }
-    return false;
+    return this.currentQuestion === this.quiz.questions.length;
   }
+
   goBack() {
-    window.localStorage.clear();
+    localStorage.removeItem('currentQuestion');
+    localStorage.removeItem('summaryQuestion');
+    localStorage.removeItem('quiz');
+    localStorage.removeItem('quizEnd');
     this.router.navigate(['/quiz-list/']);
   }
 }

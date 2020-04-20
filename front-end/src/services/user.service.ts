@@ -18,26 +18,26 @@ export class UserService {
 
   private userUrl = serverUrl + 'users/';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   deleteUser(user: User) {
-    return this.httpClient.delete(this.userUrl + user.id, httpOptions).subscribe(() => this.setUsersFromUrl());
+    return this.http.delete(this.userUrl + user.id, httpOptions).subscribe(() => this.setUsersFromUrl());
   }
 
   addUser(user: User) {
-    this.httpClient.post<User>(this.userUrl, user, httpOptions).subscribe(() => this.setUsersFromUrl());
+    this.http.post<User>(this.userUrl, user, httpOptions).subscribe(() => this.setUsersFromUrl());
   }
 
   setUsersFromUrl() {
-    this.httpClient.get<User[]>(this.userUrl).subscribe((users) => {
+    this.http.get<User[]>(this.userUrl).subscribe((users) => {
       this.users = users;
       this.users$.next(this.users);
     });
   }
 
   setPatientsFromUrl() {
-    this.httpClient.get<User[]>(this.userUrl).subscribe((users) => {
+    this.http.get<User[]>(this.userUrl).subscribe((users) => {
       this.patients = users.filter(user => !user.isAdmin);
       this.patients$.next(this.patients);
       return this.patients;
@@ -46,12 +46,12 @@ export class UserService {
 
   editUser(id: string, user: User) {
     const userUrl = this.userUrl + '/' + id;
-    return this.httpClient.put(userUrl, user, httpOptions).subscribe();
+    return this.http.put(userUrl, user, httpOptions).subscribe();
   }
 
   setSelectedUser(userId: string) {
     const urlWithId = this.userUrl + '/' + userId;
-    this.httpClient.get<User>(urlWithId).subscribe((user) => {
+    this.http.get<User>(urlWithId).subscribe((user) => {
       this.userSelected$.next(user);
     });
   }
