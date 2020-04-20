@@ -11,9 +11,14 @@ import {LoginComponent} from './users/login/login.component';
 import {EditUserComponent} from './users/edit-user/edit-user.component';
 import {LoginPatientsComponent} from './users/login-patients/login-patients.component';
 import {UserAccountComponent} from './users/user-account/user-account.component';
+import {CreateThemeComponent} from './themes/create-theme/create-theme.component';
+import {ThemeListComponent} from './themes/theme-list/theme-list.component';
+import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
+
 
 const routes: Routes = [
     { path: 'quiz-list', component: QuizListComponent },
+    { path: 'theme-list', component: ThemeListComponent },
     { path: '', redirectTo: '/quiz-list', pathMatch: 'full'},
     { path: 'create-user', component: CreateUserComponent },
     { path: 'edit-user/:userId', component: EditUserComponent },
@@ -21,7 +26,9 @@ const routes: Routes = [
     { path: 'edit-quiz/:quizId', component: EditQuizComponent },
     { path: 'edit-question/:quizId/:questionId', component: EditQuestionComponent },
     { path: 'create-quiz', component: CreateQuizComponent },
+    { path: 'create-theme', component: CreateThemeComponent },
     { path: 'edit-quiz', component: EditQuizListComponent },
+    { path: 'edit-theme/:themeId', component: EditThemeComponent },
     { path: 'admin/login', component: LoginComponent },
     { path: 'login', component: LoginPatientsComponent },
     { path: 'my-account', component: UserAccountComponent}
