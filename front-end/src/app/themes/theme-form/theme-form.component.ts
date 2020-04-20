@@ -5,7 +5,6 @@ import {QuizService} from '../../../services/quiz.service';
 import {Theme} from '../../../models/theme.model';
 import {Location} from '@angular/common';
 
-
 @Component({
   selector: 'app-theme-form',
   templateUrl: './theme-form.component.html',
@@ -16,12 +15,12 @@ export class ThemeFormComponent implements OnInit {
   @Input()
   theme: Theme;
 
-
   public themeForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location) {
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
     this.initializeThemeForm(null);
   }
+
   private initializeThemeForm(theme: Theme) {
     this.themeForm = this.formBuilder.group({
       name: ['', Validators.required]
@@ -36,7 +35,7 @@ export class ThemeFormComponent implements OnInit {
 
   addTheme() {
     const theme = this.themeForm.value as Theme;
-    if (this.themeForm.valid ) {
+    if (this.themeForm.valid) {
       this.quizService.addTheme(theme);
       this.initializeThemeForm(null);
     }
@@ -47,5 +46,4 @@ export class ThemeFormComponent implements OnInit {
       name: theme.name,
     });
   }
-
 }
