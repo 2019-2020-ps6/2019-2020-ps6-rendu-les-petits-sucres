@@ -19,6 +19,7 @@ export class ThemeListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.router.navigate(['theme-list']);
   }
 
 

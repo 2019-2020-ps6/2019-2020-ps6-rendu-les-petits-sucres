@@ -30,12 +30,10 @@
           </div>
           <div *ngIf="answer.isCorrect === 'false'">
             <div *ngIf="isDeactivate(answer)">
-              <div (click)="toggleWrongAnswer(answer)">
               <figure class="answerDesactivateImage disabled">
                 <img class="fit-picture answerDesactivate btn btn-outline-info disabled p-2" src="{{answer.image}}" alt="{{answer.image}}">
                 <figcaption>{{answer.value}}</figcaption>
               </figure>
-            </div>
             </div>
             <div *ngIf="!isDeactivate(answer)">
               <div (click)="toggleWrongAnswer(answer)">

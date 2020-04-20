@@ -77,7 +77,7 @@ export class PlayQuizComponent implements OnInit {
   toggleWrongAnswer(answer: Answer) {
     const answers = this.quiz.questions[this.currentQuestion].answers;
     this.deactivatesAnswers.push(answer);
-    this.score -= 1 / answers.length; // Score calculation
+    this.score -= (20 / this.quiz.questions.length) / (answers.length - 1); // Score calculation
     localStorage.setItem('score', this.score + '');
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }

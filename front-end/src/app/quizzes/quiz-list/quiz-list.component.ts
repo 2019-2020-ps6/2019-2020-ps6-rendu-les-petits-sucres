@@ -30,14 +30,6 @@ export class QuizListComponent implements OnInit {
   ngOnInit() {
   }
 
-  editQuiz(quiz: Quiz) {
-    this.router.navigate(['/edit-quiz/' + quiz.id]);
-  }
-
-  deleteQuiz(quiz: Quiz) {
-    this.quizService.deleteQuiz(quiz);
-  }
-
   playQuiz(quiz: Quiz) {
     this.router.navigate(['/play-quiz/' + quiz.id]);
   }

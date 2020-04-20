@@ -26,7 +26,7 @@ const routes: Routes = [
     { path: 'edit-quiz/:quizId', component: EditQuizComponent },
     { path: 'edit-question/:quizId/:questionId', component: EditQuestionComponent },
     { path: 'create-quiz', component: CreateQuizComponent },
-    { path: 'create-theme', component: CreateThemeComponent },
+    { path: 'create-theme/', component: CreateThemeComponent },
     { path: 'edit-quiz', component: EditQuizListComponent },
     { path: 'edit-theme/:themeId', component: EditThemeComponent },
     { path: 'admin/login', component: LoginComponent },

@@ -5,7 +5,7 @@ const manageAllErrors = require('../../utils/routes/error-management')
 const QuestionsRouter = require('./questions')
 const { buildQuiz, buildQuizzes } = require('./manager')
 
-const router = new Router()
+const router = new Router({ mergeParams: true })
 
 router.use('/:quizId/questions', QuestionsRouter)
 

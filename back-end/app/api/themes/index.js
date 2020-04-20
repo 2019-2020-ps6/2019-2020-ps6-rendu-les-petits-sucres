@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 router.get('/:themeId', (req, res) => {
   try {
-    const theme = buildTheme(req.params.id)
+    const theme = buildTheme(req.params.themeId);
     res.status(200).json(theme)
   } catch (err) {
     manageAllErrors(res, err)
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
 
 router.put('/:themeId', (req, res) => {
   try {
-    res.status(200).json(Theme.update(req.params.id, req.body))
+    res.status(200).json(Theme.update(req.params.themeId, req.body))
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -46,7 +46,7 @@ router.put('/:themeId', (req, res) => {
 
 router.delete('/:themeId', (req, res) => {
   try {
-    Theme.delete(req.params.id)
+    Theme.delete(req.params.themeId)
     res.status(204).end()
   } catch (err) {
     manageAllErrors(res, err)
