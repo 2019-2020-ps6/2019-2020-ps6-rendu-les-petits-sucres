@@ -25,11 +25,13 @@ export class UserService {
   }
 
   deleteUser(user: User) {
-    return this.http.delete(this.userUrl + user.id, httpOptions).subscribe(() => this.setUsersFromUrl());
+    this.http.delete(this.userUrl + user.id, httpOptions).subscribe(() => this.setUsersFromUrl());
+    this.setUsersFromUrl();
   }
 
   addUser(user: User) {
     this.http.post<User>(this.userUrl, user, httpOptions).subscribe(() => this.setUsersFromUrl());
+    this.setUsersFromUrl();
   }
 
   setUsersFromUrl() {
@@ -43,13 +45,13 @@ export class UserService {
     this.http.get<User[]>(this.userUrl).subscribe((users) => {
       this.patients = users.filter(user => !user.isAdmin);
       this.patients$.next(this.patients);
-      return this.patients;
     });
   }
 
   editUser(id: string, user: User) {
     const userUrl = this.userUrl + '/' + id;
-    return this.http.put(userUrl, user, httpOptions).subscribe();
+    this.http.put(userUrl, user, httpOptions).subscribe(() => this.setSelectedUser(id));
+    this.setUsersFromUrl();
   }
 
   setSelectedUser(userId: string) {

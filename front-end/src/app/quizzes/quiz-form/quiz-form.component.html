@@ -1,22 +1,23 @@
 <div class="card">
   <h2>Créer un nouveau quiz</h2>
   <form class="quiz-form" [formGroup]="quizForm">
-    <label for="name">
+    <label>
       Titre :<br>
-      <input class="input-custom" type="text" id="name" [formControlName]="'name'">
+      <input class="input-custom" type="text" [formControlName]="'name'">
     </label>
     <br>
-    <label for="theme">
+    <label>
       Thème :<br>
-      <select class="input-custom" id="theme" [formControlName]="'theme'">
+      <select class="input-custom" [formControlName]="'theme'">
         <option *ngFor="let currentTheme of themes" [value]="currentTheme.name">
           {{currentTheme.name}}
         </option>
       </select>
     </label>
-    <label for="image">
+    <br>
+    <label>
       Image :<br>
-    <input type="url" id="image" placeholder="https://exemple.com/" [formControlName]="'image'"/>
+    <input type="url" placeholder="https://exemple.com/" [formControlName]="'image'"/>
     </label>
     <br>
     <button type="submit" class="button-card" (click)="addQuiz()">Créer le quiz</button>

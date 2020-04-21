@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Location} from '@angular/common';
+
 
 import {QuizService} from '../../../services/quiz.service';
 import {Theme} from '../../../models/theme.model';
@@ -16,7 +18,7 @@ export class ThemeFormComponent implements OnInit {
 
   public themeForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location) {
     this.initializeThemeForm(null);
   }
 
@@ -37,6 +39,15 @@ export class ThemeFormComponent implements OnInit {
     if (this.themeForm.valid) {
       this.quizService.addTheme(theme);
       this.initializeThemeForm(null);
+      this.location.back();
+    }
+  }
+
+  editTheme(id: number) {
+    if (this.themeForm.valid) {
+      const themeToEdit = this.themeForm.getRawValue() as Theme;
+      this.quizService.editTheme(String(id), themeToEdit);
+      this.location.back();
     }
   }
 

@@ -1,0 +1,32 @@
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/edit-quiz"><i class="fas fa-arrow-left"></i>
+  Retourner à la gestion des quiz
+</button>
+
+<app-search-theme class="d-flex justify-content-center mt-2"></app-search-theme>
+<div class="text-right mr-5">
+  <div class="btn btn-info mb-2 mr-5" routerLink="/create-theme"><i class="fas fa-plus"></i> Créer un thème</div>
+</div>
+<ul class="list-group ml-5 mr-5 mb-3">
+  <div *ngFor="let theme of themeList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <li class="list-group-item ml-5 mr-5">
+      <div class="d-flex flex-row">
+        <div class="p-2">
+          <div><span class="font-weight-bold">{{theme.name}}</span></div>
+        </div>
+        <div class="p-2 ml-auto">
+          <div class="btn btn-outline-info mr-2" (click)="editTheme(theme)"><i class="fas fa-pen"></i></div>
+          <div class="btn btn-outline-danger" (click)="deleteTheme(theme)"><i class="fas fa-trash-alt"></i></div>
+        </div>
+      </div>
+    </li>
+  </div>
+</ul>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" (click)="backPage()">Précédent</a></li>
+    <div *ngFor="let currentPage of counter(nbPageTotal); let i = index">
+      <li class="page-item"><a class="page-link" (click)="showPage(i)">{{i + 1}}</a></li>
+    </div>
+    <li class="page-item"><a class="page-link" (click)="nextPage()">Suivant</a></li>
+  </ul>
+</nav>

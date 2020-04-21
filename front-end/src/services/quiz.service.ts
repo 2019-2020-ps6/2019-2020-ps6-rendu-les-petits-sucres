@@ -41,6 +41,7 @@ export class QuizService {
 
   addQuiz(quiz: Quiz) {
     this.http.post<Quiz>(this.quizUrl, quiz, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.setQuizzesFromUrl();
   }
 
   setSelectedQuiz(quizId: string) {
@@ -60,6 +61,7 @@ export class QuizService {
   deleteQuiz(quiz: Quiz) {
     const urlWithId = this.quizUrl + '/' + quiz.id;
     this.http.delete<Quiz>(urlWithId, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.setQuizzesFromUrl();
   }
 
   addQuestion(quiz: Quiz, question: Question) {
@@ -70,6 +72,7 @@ export class QuizService {
   deleteQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
     this.http.delete<Question>(questionUrl, httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+    this.setQuizzesFromUrl();
   }
 
   editQuestion(quizId: string, questionToAdd: Question, questionToDelete: Question) {
@@ -85,6 +88,7 @@ export class QuizService {
 
   addTheme(theme: Theme) {
     this.http.post<Theme>(this.themeUrl, theme, httpOptions).subscribe(() => this.setThemesFromUrl());
+    this.setThemesFromUrl();
   }
 
   setThemesFromUrl() {
@@ -103,12 +107,13 @@ export class QuizService {
 
   deleteTheme(theme: Theme) {
     const urlWithId = this.themeUrl + '/' + theme.id;
-    this.http.delete<Theme>(urlWithId, httpOptions).subscribe(() => this.setThemesFromUrl());
+    this.http.delete(urlWithId, httpOptions).subscribe(() => this.setThemesFromUrl());
+    this.setThemesFromUrl();
   }
 
   editTheme(themeId: string, theme: Theme) {
     const themeUrl = this.themeUrl + '/' + themeId;
-    this.http.put<Theme>(themeUrl, theme, httpOptions).subscribe(() => this.setSelectedTheme(themeId));
+    this.http.put(themeUrl, theme, httpOptions).subscribe(() => this.setSelectedTheme(themeId));
+    this.setThemesFromUrl();
   }
-
 }

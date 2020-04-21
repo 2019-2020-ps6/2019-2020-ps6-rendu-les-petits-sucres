@@ -63,5 +63,4 @@ export class SearchComponent implements OnInit {
     localStorage.removeItem('quizListSearch');
     document.location.reload();
   }
-
 }

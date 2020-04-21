@@ -39,6 +39,11 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(user: User) {
+    if (localStorage.getItem('userListSearch') !== null) {
+      localStorage.setItem('userListSearch', JSON.stringify(JSON.parse(localStorage.getItem('userListSearch'))
+        .filter((storedUser) => storedUser.id !== user.id)));
+      this.userList = localStorage.getItem('userListSearch') && JSON.parse(localStorage.getItem('userListSearch'));
+    }
     this.userService.deleteUser(user);
   }
 

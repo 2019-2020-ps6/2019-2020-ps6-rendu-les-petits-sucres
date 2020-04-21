@@ -1,11 +1,27 @@
-<div class="card">
-  <h2>Création d'un thème</h2>
-  <form class="quiz-form" [formGroup]="themeForm">
-    <label>
-      Nom du thème: <br>
-      <input class="input-custom" type="text" [formControlName]="'name'">
-    </label>
-    <br>
-    <button class="button-card" (click)="addTheme()">Ajouter le thème</button>
-  </form>
-</div>
+<ng-container *ngIf="!theme">
+  <div class="card">
+    <h2>Création d'un thème</h2>
+    <form class="theme-form" [formGroup]="themeForm">
+      <label>
+        Nom du thème: <br>
+        <input class="input-custom" type="text" [formControlName]="'name'">
+      </label>
+      <br>
+      <button class="button-card" (click)="addTheme()">Ajouter le thème</button>
+    </form>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="theme">
+  <div class="card">
+    <h2>Modifer le thème : <em>{{theme.name}}</em></h2>
+    <form class="theme-fotm" [formGroup]="themeForm">
+      <label>
+        Nom du thème: <br>
+        <input class="input-custom" type="text" [formControlName]="'name'">
+      </label>
+      <br>
+      <button class="button-card" (click)="editTheme(theme.id)">Éditer le thème</button>
+    </form>
+  </div>
+</ng-container>

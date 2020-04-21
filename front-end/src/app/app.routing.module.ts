@@ -12,14 +12,13 @@ import {EditUserComponent} from './users/edit-user/edit-user.component';
 import {LoginPatientsComponent} from './users/login-patients/login-patients.component';
 import {UserAccountComponent} from './users/user-account/user-account.component';
 import {CreateThemeComponent} from './themes/create-theme/create-theme.component';
-import {ThemeListComponent} from './themes/theme-list/theme-list.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
 import {UserManagementComponent} from './users/user-management/user-management.component';
+import {EditThemeListComponent} from './themes/edit-theme-list/edit-theme-list.component';
 
 
 const routes: Routes = [
   {path: 'quiz-list', component: QuizListComponent},
-  {path: 'theme-list', component: ThemeListComponent},
   {path: '', redirectTo: '/quiz-list', pathMatch: 'full'},
   {path: 'create-user', component: CreateUserComponent},
   {path: 'edit-user/:userId', component: EditUserComponent},
@@ -33,7 +32,8 @@ const routes: Routes = [
   {path: 'admin/login', component: LoginComponent},
   {path: 'login', component: LoginPatientsComponent},
   {path: 'my-account', component: UserAccountComponent},
-  {path: 'edit-user', component: UserManagementComponent}
+  {path: 'edit-user', component: UserManagementComponent},
+  {path: 'edit-theme', component: EditThemeListComponent}
 
 ];
 

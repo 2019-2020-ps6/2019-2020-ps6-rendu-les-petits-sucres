@@ -41,9 +41,11 @@ export class SearchUserComponent implements OnInit {
       for (const user of this.userList) {
         const userName = user.firstName + ' ' + user.lastName;
         if (userName.toLowerCase().includes(this.valueSearch.toString())) {
+          console.log('Vrai');
           this.newUserList.push(user);
         }
       }
+      console.log((this.newUserList));
       localStorage.setItem('userListSearch', JSON.stringify(this.newUserList));
       localStorage.setItem('requestUserSearch', this.valueSearch.toString());
     }

@@ -30,10 +30,11 @@ import {UserAccountComponent} from './users/user-account/user-account.component'
 import {ThemeFormComponent} from './themes/theme-form/theme-form.component';
 import {CreateThemeComponent} from './themes/create-theme/create-theme.component';
 import {ThemeComponent} from './themes/theme/theme.component';
-import {ThemeListComponent} from './themes/theme-list/theme-list.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
 import {UserManagementComponent} from './users/user-management/user-management.component';
 import {SearchUserComponent} from './tools/search-user/search-user.component';
+import {EditThemeListComponent} from './themes/edit-theme-list/edit-theme-list.component';
+import {SearchThemeComponent} from './tools/search-theme/search-theme.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import {SearchUserComponent} from './tools/search-user/search-user.component';
     EditQuizListComponent,
     EditThemeComponent,
     QuestionListComponent,
-    ThemeListComponent,
     QuestionFormComponent,
     QuestionComponent,
     UserComponent,
@@ -65,6 +65,8 @@ import {SearchUserComponent} from './tools/search-user/search-user.component';
     UserAccountComponent,
     UserManagementComponent,
     SearchUserComponent,
+    EditThemeListComponent,
+    SearchThemeComponent,
   ],
   imports: [
     BrowserModule,
