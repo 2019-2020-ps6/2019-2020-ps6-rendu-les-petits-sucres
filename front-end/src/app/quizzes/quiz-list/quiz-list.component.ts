@@ -1,4 +1,4 @@
-import {Component, Input, NgModule, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
@@ -30,22 +30,14 @@ export class QuizListComponent implements OnInit {
   ngOnInit() {
   }
 
-  editQuiz(quiz: Quiz) {
-    this.router.navigate(['/edit-quiz/' + quiz.id]);
-  }
-
-  deleteQuiz(quiz: Quiz) {
-    this.quizService.deleteQuiz(quiz);
-  }
-
   playQuiz(quiz: Quiz) {
     this.router.navigate(['/play-quiz/' + quiz.id]);
   }
 
   nextPage() {
-    if  (this.page * this.pageSize <= this.quizList.length) {
+    if  (this.page * this.pageSize < this.quizList.length) {
       this.page = this.page + 1;
-      if  (this.page * this.pageSize <= this.quizList.length) {
+      if  (this.page * this.pageSize < this.quizList.length) {
         return true;
       }
       return true;
@@ -53,7 +45,7 @@ export class QuizListComponent implements OnInit {
   }
 
   nextPageOk() {
-    if  (this.page * this.pageSize <= this.quizList.length) {
+    if  (this.page * this.pageSize < this.quizList.length) {
       return true;
     }
   }

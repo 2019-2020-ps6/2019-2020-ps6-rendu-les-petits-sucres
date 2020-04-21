@@ -7,14 +7,24 @@ import {User} from '../../../models/user.model';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+
   @Input()
   user: User;
+
+  @Output()
+  userEdited: EventEmitter<User> = new EventEmitter<User>();
+
   @Output()
   userDeleted: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  editUser() {
+    this.userEdited.emit(this.user);
   }
 
   deleteUser() {

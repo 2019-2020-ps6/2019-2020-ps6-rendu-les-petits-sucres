@@ -3,26 +3,21 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
-import {themes} from '../../../configs/quiz.themes';
+import {Theme} from '../../../models/theme.model';
 
 @Component({
   selector: 'app-quiz-form',
   templateUrl: './quiz-form.component.html',
   styleUrls: ['./quiz-form.component.scss']
 })
+
 export class QuizFormComponent implements OnInit {
 
-  // Note: We are using here ReactiveForms to create our form. Be careful when you look for some documentation to
-  // avoid TemplateDrivenForm (another type of form)
-
-  /**
-   * QuizForm: Object which manages the form in our component.
-   * More information about Reactive Forms: https://angular.io/guide/reactive-forms#step-1-creating-a-formgroup-instance
-   */
   public quizForm: FormGroup;
-  public themes: string[] = Object.values(themes);
+  public themes: Theme[];
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
+    this.quizService.themes$.subscribe((themes) => this.themes = themes);
     this.initializeQuizForm();
   }
 
@@ -30,6 +25,7 @@ export class QuizFormComponent implements OnInit {
     this.quizForm = this.formBuilder.group({
       name: ['', Validators.required],
       theme: ['', Validators.required],
+      image: '',
       questions: this.formBuilder.array([])
     });
   }
@@ -39,7 +35,7 @@ export class QuizFormComponent implements OnInit {
 
   addQuiz() {
     if (this.quizForm.valid) {
-      const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
+      const quizToCreate = this.quizForm.value as Quiz;
       this.quizService.addQuiz(quizToCreate);
       this.initializeQuizForm();
       alert('Le quiz a bien été créé !\nVeuillez retourner en arrière pour y ajouter des questions !');

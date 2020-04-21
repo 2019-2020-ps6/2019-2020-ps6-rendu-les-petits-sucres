@@ -3,7 +3,7 @@ const { filterQuestionsFromQuiz } = require('./questions/manager')
 const { filterAnswersFromQuestion } = require('./questions/answers/manager')
 
 /**
- * Function buildQuizz.
+ * Function buildQuiz.
  * This function aggregates the questions and answers from the database to build a quizz with all the data needed by the clients.
  * @param quizId
  */

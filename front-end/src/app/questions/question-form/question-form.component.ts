@@ -53,6 +53,8 @@ export class QuestionFormComponent implements OnInit {
   addAnswer() {
     if (this.answers.length < 6) {
       this.answers.push(this.createAnswer());
+    } else {
+      alert('Vous ne pouvez créer que 6 réponses par question !');
     }
   }
 
@@ -61,12 +63,17 @@ export class QuestionFormComponent implements OnInit {
   }
 
   addQuestion() {
-    const question = this.questionForm.getRawValue() as Question;
+    for (const answer of this.questionForm.value.answers) {
+      if (answer.image !== '' && answer.value === '') {
+        answer.value = ' ';
+      }
+    }
+    const question = this.questionForm.value as Question;
     const isCorrectAnswers = [];
     question.answers.forEach(answer => {
       isCorrectAnswers.push(answer.isCorrect);
     });
-    if (this.questionForm.valid) {
+    if (this.questionForm.valid ) {
       if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
         this.quizService.addQuestion(this.quiz, question);
         this.initializeQuestionForm(null);
@@ -75,8 +82,13 @@ export class QuestionFormComponent implements OnInit {
   }
 
   editQuestion(quizId: number) {
+    for (const answer of this.questionForm.value.answers) {
+      if (answer.image !== '' && answer.value === '') {
+        answer.value = ' ';
+      }
+    }
     if (this.questionForm.valid) {
-      const question = this.questionForm.getRawValue() as Question;
+      const question = this.questionForm.value as Question;
       this.quizService.editQuestion(String(quizId), question, this.question);
       this.location.back();
     }

@@ -1,8 +1,8 @@
-import {Component, NgModule, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   get valueSearch(): FormArray {
@@ -39,34 +39,32 @@ export class SearchComponent implements OnInit {
   }
 
   applySearch() {
+    localStorage.removeItem('requestSearch');
     localStorage.removeItem('quizListSearch');
     if (this.searchForm.valid) {
       for (const quiz of this.quizList) {
-        if ( quiz.name.includes(this.valueSearch.toString())) {
+        if (quiz.name.toLowerCase().includes(this.valueSearch.toString())) {
           this.newQuizList.push(quiz);
         }
       }
+      localStorage.setItem('quizListSearch', JSON.stringify(this.newQuizList));
+      localStorage.setItem('requestSearch', this.valueSearch.toString());
     }
-    localStorage.setItem('quizListSearch', JSON.stringify(this.newQuizList));
-    localStorage.setItem('requestSearch', this.valueSearch.toString());
     document.location.reload();
   }
 
   localStorage() {
-    if (localStorage.getItem('quizListSearch') !== null) {
-      return true;
-    } else {
-      return false;
-    }
+    return localStorage.getItem('quizListSearch') !== null;
   }
 
   getResearch() {
     return localStorage.getItem('requestSearch');
   }
 
-  deleteSearch(){
+  deleteSearch() {
     localStorage.removeItem('requestSearch');
     localStorage.removeItem('quizListSearch');
     document.location.reload();
   }
+
 }

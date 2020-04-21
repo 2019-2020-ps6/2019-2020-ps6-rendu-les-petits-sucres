@@ -4,39 +4,38 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {Quiz} from '../models/quiz.model';
 import {Question} from '../models/question.model';
 import {httpOptions, serverUrl} from '../configs/server.config';
+import {Theme} from '../models/theme.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
-  /**
-   * Services Documentation:
-   * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
-   */
 
-  /**
-   * The list of quiz.
-   * The list is retrieved from the mock.
-   */
   private quizzes: Quiz[] = [];
+
+  private themes: Theme[] = [];
 
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
+
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
+  public themes$: BehaviorSubject<Theme[]> = new BehaviorSubject(this.themes);
 
   public quizSelected$: Subject<Quiz> = new Subject();
 
+  public themeSelected$: Subject<Theme> = new Subject();
+
   public questionSelected$: Subject<Question> = new Subject();
 
-  public quizPlayed$: Subject<Quiz> = new Subject();
-
   private quizUrl = serverUrl + 'quizzes';
+  private themeUrl = serverUrl + 'themes';
   private questionsPath = 'questions';
 
   constructor(private http: HttpClient) {
     this.setQuizzesFromUrl();
+    this.setThemesFromUrl();
   }
 
   setQuizzesFromUrl() {
@@ -89,4 +88,34 @@ export class QuizService {
     const questionUrl = this.quizUrl + '/' + quizId + '/' + this.questionsPath + '/' + question.id;
     this.http.delete<Question>(questionUrl, httpOptions).subscribe(() => this.setSelectedQuiz(quizId));
   }
+
+  addTheme(theme: Theme) {
+    this.http.post<Theme>(this.themeUrl, theme, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+  }
+
+  setThemesFromUrl() {
+    this.http.get<Theme[]>(this.themeUrl).subscribe((themeList) => {
+      this.themes = themeList;
+      this.themes$.next(this.themes);
+    });
+  }
+
+  setSelectedTheme(themeId: string) {
+    const urlWithId = this.themeUrl + '/' + themeId;
+    this.http.get<Theme>(urlWithId).subscribe((theme) => {
+      this.themeSelected$.next(theme);
+    });
+  }
+
+  deleteTheme(theme: Theme) {
+    const urlWithId = this.themeUrl + '/' + theme.id;
+    this.http.delete<Theme>(urlWithId, httpOptions).subscribe(() => this.setThemesFromUrl());
+  }
+
+  editTheme(themeId: string, theme: Theme) {
+    console.log(themeId);
+    const themeUrl = this.themeUrl + '/' + themeId;
+    this.http.put<Theme>(themeUrl, theme, httpOptions).subscribe(() => this.setSelectedQuiz(themeId));
+  }
+
 }

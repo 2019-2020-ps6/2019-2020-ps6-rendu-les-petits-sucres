@@ -1,22 +1,15 @@
-<div class="card">
-  <h2>
-    <i *ngIf="quiz.theme == 'Actor'" class="fab fa-leanpub"></i>
-    <i *ngIf="quiz.theme == 'Sport'" class="fas fa-futbol"></i>
-    {{quiz.name}}
-  </h2>
-  <span>
-    Thème : {{quiz.theme}}
-  </span>
-  <br>
-  <span>
-    Nombre de questions : {{quiz.questions.length}}
-  </span>
-  <br>
-  <div *ngIf="!pageEditQuiz">
-  <button class="button-card" (click)="playQuiz()">Jouer au quiz</button>
-  </div>
-    <div *ngIf="pageEditQuiz">
-  <button class="button-card" (click)="editQuiz()">Éditer</button>
-  <button class="button-card" (click)="deleteQuiz()">Supprimer</button>
+<div class="card text-center" style="width: 14rem; height: 14rem">
+  <div *ngIf="quiz.image" class="image mt-1" [ngStyle]="{ 'background-image': 'url(' + getUrl() + ')'}"></div>
+   <div *ngIf="!quiz.image" class="image mt-1" style="background-image:url('https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg')"></div>
+  <p class="card-text"><span class="font-weight-bold">{{quiz.name}}</span></p>
+    <div class="textQuiz">Thème : {{quiz.theme}}</div>
+    <div class="textQuiz">Nombre de questions : {{quiz.questions.length}}</div>
+    <div *ngIf="!pageEditQuiz" class="text-center">
+      <button class="btn btn-outline-info center mt-2" (click)="playQuiz()"><span class="font-weight-bold">Jouer au quiz</span></button>
     </div>
-</div>
+    <div *ngIf="pageEditQuiz" class="text-center">
+      <button class="btn btn-outline-info center" (click)="editQuiz()">Éditer</button>
+      <button class="btn btn-outline-info center" (click)="deleteQuiz()">Supprimer</button>
+    </div>
+  </div>
+

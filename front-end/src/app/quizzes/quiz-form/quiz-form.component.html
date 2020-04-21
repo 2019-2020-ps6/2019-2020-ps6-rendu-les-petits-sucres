@@ -9,10 +9,14 @@
     <label for="theme">
       Thème :<br>
       <select class="input-custom" id="theme" [formControlName]="'theme'">
-        <option *ngFor="let currentTheme of themes" [value]="currentTheme">
-          {{currentTheme}}
+        <option *ngFor="let currentTheme of themes" [value]="currentTheme.name">
+          {{currentTheme.name}}
         </option>
       </select>
+    </label>
+    <label for="image">
+      Image :<br>
+    <input type="url" id="image" placeholder="https://exemple.com/" [formControlName]="'image'"/>
     </label>
     <br>
     <button type="submit" class="button-card" (click)="addQuiz()">Créer le quiz</button>

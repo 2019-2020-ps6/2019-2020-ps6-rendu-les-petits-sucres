@@ -1,0 +1,9 @@
+Bonjour {{user.firstName}} {{user.lastName}}
+
+<ul>
+  <li *ngFor="let playedQuiz of playedQuizzes">
+    Nom: {{playedQuiz.name}}
+    <br>
+    .Score: {{playedQuiz.score}}
+  </li>
+</ul>
