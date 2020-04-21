@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuizService} from 'src/services/quiz.service';
 import {Router} from '@angular/router';
 import {Theme} from '../../../models/theme.model';

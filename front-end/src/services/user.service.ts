@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
+
   private users: User[] = [];
   private patients: User[] = [];
 
@@ -19,6 +20,8 @@ export class UserService {
   private userUrl = serverUrl + 'users/';
 
   constructor(private http: HttpClient) {
+    this.setPatientsFromUrl();
+    this.setUsersFromUrl();
   }
 
   deleteUser(user: User) {

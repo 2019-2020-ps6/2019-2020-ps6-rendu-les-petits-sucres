@@ -1,9 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Theme} from '../../../models/theme.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-edit-theme',

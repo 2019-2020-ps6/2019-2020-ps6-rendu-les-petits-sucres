@@ -14,7 +14,6 @@ import {QuestionListComponent} from './questions/question-list/question-list.com
 import {QuestionFormComponent} from './questions/question-form/question-form.component';
 import {QuestionComponent} from './questions/question/question.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {UserListComponent} from './users/user-list/user-list.component';
 import {UserComponent} from './users/user/user.component';
 import {CreateUserComponent} from './users/create-user/create-user.component';
 import {UserFormComponent} from './users/user-form/user-form.component';
@@ -34,6 +33,7 @@ import {ThemeComponent} from './themes/theme/theme.component';
 import {ThemeListComponent} from './themes/theme-list/theme-list.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
 import {UserManagementComponent} from './users/user-management/user-management.component';
+import {SearchUserComponent} from './tools/search-user/search-user.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,6 @@ import {UserManagementComponent} from './users/user-management/user-management.c
     ThemeListComponent,
     QuestionFormComponent,
     QuestionComponent,
-    UserListComponent,
     UserComponent,
     UserFormComponent,
     CreateUserComponent,
@@ -65,6 +64,7 @@ import {UserManagementComponent} from './users/user-management/user-management.c
     EditUserComponent,
     UserAccountComponent,
     UserManagementComponent,
+    SearchUserComponent,
   ],
   imports: [
     BrowserModule,

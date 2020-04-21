@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {QuizService} from '../../../services/quiz.service';
 import {Theme} from '../../../models/theme.model';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-theme-form',

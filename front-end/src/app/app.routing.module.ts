@@ -14,7 +14,7 @@ import {UserAccountComponent} from './users/user-account/user-account.component'
 import {CreateThemeComponent} from './themes/create-theme/create-theme.component';
 import {ThemeListComponent} from './themes/theme-list/theme-list.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
-import {UserManagementComponent} from "./users/user-management/user-management.component";
+import {UserManagementComponent} from './users/user-management/user-management.component';
 
 
 const routes: Routes = [

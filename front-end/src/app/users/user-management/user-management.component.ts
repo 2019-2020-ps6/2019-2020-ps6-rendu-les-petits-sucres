@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {UserService} from "../../../services/user.service";
-import {User} from "../../../models/user.model";
+import {Router} from '@angular/router';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../models/user.model';
 
 @Component({
   selector: 'app-user-management',
@@ -17,12 +17,17 @@ export class UserManagementComponent implements OnInit {
   public userLength: number;
 
   constructor(private router: Router, public userService: UserService) {
-    this.userService.setUsersFromUrl();
-    this.userService.users$.subscribe((users) => {
-      this.userList = users;
-      this.userLength = users.length;
+    if (localStorage.getItem('userListSearch') !== null) {
+      this.userList = localStorage.getItem('userListSearch') && JSON.parse(localStorage.getItem('userListSearch'));
+      this.userLength = this.userList.length;
       this.nbPageTotal = (this.userLength / this.pageSize) - ((this.userLength % this.pageSize) / this.pageSize) + 1;
-    });
+    } else {
+      this.userService.users$.subscribe((users: User[]) => {
+        this.userList = users;
+        this.userLength = users.length;
+        this.nbPageTotal = (this.userLength / this.pageSize) - ((this.userLength % this.pageSize) / this.pageSize) + 1;
+      });
+    }
     this.page = 1;
   }
 
@@ -36,7 +41,6 @@ export class UserManagementComponent implements OnInit {
   deleteUser(user: User) {
     this.userService.deleteUser(user);
   }
-
 
   nextPage() {
     if (this.page * this.pageSize < this.userList.length) {
@@ -55,12 +59,11 @@ export class UserManagementComponent implements OnInit {
     }
   }
 
-  afficherPage(i: number) {
+  showPage(i: number) {
     this.page = i + 1;
   }
 
   counter(i: number) {
     return new Array(i);
   }
-
 }

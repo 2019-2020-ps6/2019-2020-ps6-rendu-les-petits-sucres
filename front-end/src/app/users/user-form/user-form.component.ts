@@ -26,7 +26,7 @@ export class UserFormComponent implements OnInit {
       firstName: user ? user.firstName : ['', Validators.required],
       lastName: user ? user.lastName : ['', Validators.required],
       username: user ? user.username : [''],
-      password: user ? user.password : ['', Validators.required],
+      password: user ? user.password : [''],
       isAdmin: user ? user.isAdmin : false,
     });
   }
@@ -39,17 +39,16 @@ export class UserFormComponent implements OnInit {
 
   addUser() {
     if (this.userForm.valid) {
-      const userToCreate: User = this.userForm.getRawValue() as User;
-      userToCreate.username = (this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase();
+      const userToCreate = this.constructUserFromForm();
       this.userService.addUser(userToCreate);
       this.initializeUserForm(null);
+      alert('L\'utilisateur a bien été créé !');
     }
   }
 
   editUser(id: number) {
     if (this.userForm.valid) {
-      const userToEdit: User = this.userForm.getRawValue() as User;
-      userToEdit.username = (this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase();
+      const userToEdit = this.constructUserFromForm();
       this.userService.editUser(String(id), userToEdit);
       this.location.back();
     }
@@ -63,5 +62,16 @@ export class UserFormComponent implements OnInit {
       password: user.password,
       isAdmin: user.isAdmin
     });
+  }
+
+  get formFields() {
+    return this.userForm.controls;
+  }
+
+  private constructUserFromForm(): User {
+    const user: User = this.userForm.getRawValue() as User;
+    user.username = (this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase();
+    user.password = user.isAdmin ? user.password : '';
+    return user;
   }
 }

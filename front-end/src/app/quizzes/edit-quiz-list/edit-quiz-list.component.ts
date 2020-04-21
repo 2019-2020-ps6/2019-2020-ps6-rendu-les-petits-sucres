@@ -64,7 +64,7 @@ export class EditQuizListComponent implements OnInit {
     }
   }
 
-  afficherPage(i: number) {
+  showPage(i: number) {
     this.page = i + 1 ;
   }
 

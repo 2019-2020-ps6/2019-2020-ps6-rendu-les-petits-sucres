@@ -3,7 +3,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav mr-auto">
       <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
-        <a class="nav-link" routerLink="create-user">Créer un utilisateur</a>
+        <a class="nav-link" routerLink="edit-user">Gérer les utilisateurs</a>
       </li>
       <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
         <a class="nav-link" routerLink="edit-quiz">Gérer les quiz</a>

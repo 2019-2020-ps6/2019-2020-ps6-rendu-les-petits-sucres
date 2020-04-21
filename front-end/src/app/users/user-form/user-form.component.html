@@ -18,17 +18,19 @@
       </label>
       <br>
       <label>
-        Mot de passe :<br>
-        <input [type]="hide ? 'password' : 'text'" class="input-custom" [formControlName]="'password'" required>
-        <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
-        <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
-      </label>
-      <br>
-      <label>
         Droits d'administrateurs
         <input type="checkbox" class="input-custom" [formControlName]="'isAdmin'">
       </label>
       <br>
+      <ng-container *ngIf="formFields.isAdmin.value">
+        <label>
+          Mot de passe :<br>
+          <input [type]="hide ? 'password' : 'text'" class="input-custom" [formControlName]="'password'" required>
+          <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
+          <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
+        </label>
+        <br>
+      </ng-container>
       <button type="submit" class="button-card" (click)="addUser()">Créer</button>
     </form>
   </div>
@@ -54,17 +56,19 @@
       </label>
       <br>
       <label>
-        Mot de passe :<br>
-        <input [type]="hide ? 'password' : 'text'" class="input-custom" [formControlName]="'password'" required>
-        <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
-        <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
-      </label>
-      <br>
-      <label>
         Droits d'administrateurs
         <input type="checkbox" class="input-custom" [formControlName]="'isAdmin'">
       </label>
       <br>
+      <ng-container *ngIf="formFields.isAdmin.value">
+        <label>
+          Mot de passe :<br>
+          <input [type]="hide ? 'password' : 'text'" class="input-custom" [formControlName]="'password'" required>
+          <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
+          <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
+        </label>
+        <br>
+      </ng-container>
       <button type="submit" class="button-card" (click)="editUser(user.id)">Modifier</button>
     </form>
   </div>

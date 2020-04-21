@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
@@ -10,17 +9,15 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-
-
 export class SearchComponent implements OnInit {
 
   private quizList: Quiz[] = [];
   private newQuizList: Quiz[] = [];
   private searchForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.initializeSearchForm();
-    this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
+    this.quizService.quizzes$.subscribe((quizzes) => {
       this.quizList = quizzes;
     });
   }
@@ -39,7 +36,7 @@ export class SearchComponent implements OnInit {
   }
 
   applySearch() {
-    localStorage.removeItem('requestSearch');
+    localStorage.removeItem('requestQuizSearch');
     localStorage.removeItem('quizListSearch');
     if (this.searchForm.valid) {
       for (const quiz of this.quizList) {
@@ -48,7 +45,7 @@ export class SearchComponent implements OnInit {
         }
       }
       localStorage.setItem('quizListSearch', JSON.stringify(this.newQuizList));
-      localStorage.setItem('requestSearch', this.valueSearch.toString());
+      localStorage.setItem('requestQuizSearch', this.valueSearch.toString());
     }
     document.location.reload();
   }
@@ -58,11 +55,11 @@ export class SearchComponent implements OnInit {
   }
 
   getResearch() {
-    return localStorage.getItem('requestSearch');
+    return localStorage.getItem('requestQuizSearch');
   }
 
   deleteSearch() {
-    localStorage.removeItem('requestSearch');
+    localStorage.removeItem('requestQuizSearch');
     localStorage.removeItem('quizListSearch');
     document.location.reload();
   }

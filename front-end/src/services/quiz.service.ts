@@ -12,13 +12,7 @@ import {Theme} from '../models/theme.model';
 export class QuizService {
 
   private quizzes: Quiz[] = [];
-
   private themes: Theme[] = [];
-
-  /**
-   * Observable which contains the list of the quiz.
-   * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
-   */
 
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   public themes$: BehaviorSubject<Theme[]> = new BehaviorSubject(this.themes);
@@ -90,7 +84,7 @@ export class QuizService {
   }
 
   addTheme(theme: Theme) {
-    this.http.post<Theme>(this.themeUrl, theme, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.http.post<Theme>(this.themeUrl, theme, httpOptions).subscribe(() => this.setThemesFromUrl());
   }
 
   setThemesFromUrl() {
@@ -113,9 +107,8 @@ export class QuizService {
   }
 
   editTheme(themeId: string, theme: Theme) {
-    console.log(themeId);
     const themeUrl = this.themeUrl + '/' + themeId;
-    this.http.put<Theme>(themeUrl, theme, httpOptions).subscribe(() => this.setSelectedQuiz(themeId));
+    this.http.put<Theme>(themeUrl, theme, httpOptions).subscribe(() => this.setSelectedTheme(themeId));
   }
 
 }

@@ -24,7 +24,6 @@ export class QuizComponent implements OnInit {
 
   constructor(private router: Router) {
     this.pageEditQuiz = this.router.url.endsWith('edit-quiz');
-
   }
 
   ngOnInit() {

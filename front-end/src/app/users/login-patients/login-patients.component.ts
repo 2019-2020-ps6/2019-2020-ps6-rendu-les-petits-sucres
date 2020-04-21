@@ -24,7 +24,6 @@ export class LoginPatientsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private userService: UserService,
               private route: ActivatedRoute, private router: Router,
               private authenticationService: AuthenticationService) {
-    this.userService.setPatientsFromUrl();
     this.userService.patients$.subscribe((patients) => this.patients = patients);
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
