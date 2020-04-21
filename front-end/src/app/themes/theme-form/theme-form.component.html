@@ -2,12 +2,12 @@
   <h2>Créer un thème</h2>
 </div>
 <div *ngIf="theme" class="text-center">
-  <h2>Modifier le thème</h2>
+  <h2>Modifier le thème : <span class="font-weight-bold">{{theme.name}}</span></h2>
 </div>
 <form [formGroup]="themeForm" class=" mx-auto" style="width: 70%;">
   <div class="bg-light pb-3">
     <div class="form-group mx-auto" style="width: 90%;">
-      <label for="intituleQuestion" class="mt-3">Nom du thème:</label>
+      <label for="intituleQuestion" class="mt-3">Nom du thème :</label>
       <input type="text" class="form-control" id="intituleQuestion" [formControlName]="'name'">
     </div>
   </div>

@@ -31,7 +31,6 @@ const routes: Routes = [
   {path: 'edit-theme/:themeId', component: EditThemeComponent},
   {path: 'admin/login', component: LoginComponent},
   {path: 'login', component: LoginPatientsComponent},
-  {path: 'my-account', component: UserAccountComponent},
   {path: 'user-account/:userId', component: UserAccountComponent},
   {path: 'edit-user', component: UserManagementComponent},
   {path: 'edit-theme', component: EditThemeListComponent},

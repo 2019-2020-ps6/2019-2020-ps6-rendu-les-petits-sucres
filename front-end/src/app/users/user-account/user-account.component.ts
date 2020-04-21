@@ -14,7 +14,6 @@ export class UserAccountComponent implements OnInit {
   currentUser: User;
   playedQuizzes: PlayedQuiz[];
 
-  seeStats = false;
   averageScore: number;
   public page: number;
   public pageSize = 10;
@@ -24,12 +23,7 @@ export class UserAccountComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (this.router.url.includes('user-account')) {
       const idFromUrl = this.router.parseUrl(this.router.url).root.children.primary.segments[1].path;
-      if (+idFromUrl === this.currentUser.id) {
-        this.router.navigate(['my-account']);
-      } else {
-        this.seeStats = true;
-        this.playedQuizService.getPlayedQuizzesFromUser(idFromUrl);
-      }
+      this.playedQuizService.getPlayedQuizzesFromUser(idFromUrl);
     } else {
       this.playedQuizService.getPlayedQuizzesFromUser(this.currentUser.id + '');
     }
@@ -71,9 +65,7 @@ export class UserAccountComponent implements OnInit {
 
   private calculateAverageScore() {
     let score = 0;
-    if (this.playedQuizzes.length === 0) {
-      return;
-    } else {
+    if (this.playedQuizzes.length !== 0) {
       this.playedQuizzes.forEach((playedQuiz) => (score += playedQuiz.score));
       score /= this.playedQuizzes.length;
     }

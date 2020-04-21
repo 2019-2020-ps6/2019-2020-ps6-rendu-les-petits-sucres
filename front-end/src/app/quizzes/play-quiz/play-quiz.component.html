@@ -1,4 +1,4 @@
-<button type="button" class="back btn btn-outline-info mt-2" routerLink="/quiz-list"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
+<button type="button" class="back btn btn-outline-info mt-2" (click)="returnToQuizList()"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
 
 <ng-container *ngIf="quiz">
   <ng-container *ngIf="currentQuestion != quiz.questions.length">

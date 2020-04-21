@@ -33,7 +33,7 @@ export class PlayQuizComponent implements OnInit {
               private router: Router, private playedQuizService: PlayedQuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     if (localStorage) {
-      if (localStorage.getItem('Quiz') === this.route.snapshot.paramMap.get('quizId')) {
+      if (localStorage.getItem('currentQuiz') === this.route.snapshot.paramMap.get('quizId')) {
         this.currentQuestion = +localStorage.getItem('currentQuestion');
         this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
         if (this.showSummaryQuestion === true) {
@@ -41,22 +41,22 @@ export class PlayQuizComponent implements OnInit {
         }
         this.score = +localStorage.getItem('score');
       } else {
-        localStorage.removeItem('currentQuestion');
-        localStorage.removeItem('summaryQuestion');
-        localStorage.removeItem('quiz');
-        this.currentQuestion = 0;
-        this.score = 20;
+        this.resetQuizLocalStorage();
       }
     } else {
-      localStorage.removeItem('currentQuestion');
-      localStorage.removeItem('summaryQuestion');
-      localStorage.removeItem('quiz');
-      this.currentQuestion = 0;
-      this.score = 20;
+      this.resetQuizLocalStorage();
     }
-    if (localStorage.getItem('quizEnd') === 'true') {
+    if (localStorage.getItem('quizEnd')) {
       this.toggleEndQuiz();
     }
+  }
+
+  resetQuizLocalStorage() {
+    localStorage.removeItem('currentQuestion');
+    localStorage.removeItem('summaryQuestion');
+    localStorage.removeItem('currentQuiz');
+    this.currentQuestion = 0;
+    this.score = 20;
   }
 
   ngOnInit() {
@@ -180,9 +180,16 @@ export class PlayQuizComponent implements OnInit {
   }
 
   goBack() {
+    localStorage.removeItem('currentQuiz');
     localStorage.removeItem('currentQuestion');
     localStorage.removeItem('summaryQuestion');
     localStorage.removeItem('quiz');
+    localStorage.removeItem('quizEnd');
+    localStorage.removeItem('score');
+    this.router.navigate(['/quiz-list/']);
+  }
+
+  returnToQuizList() {
     localStorage.removeItem('quizEnd');
     this.router.navigate(['/quiz-list/']);
   }

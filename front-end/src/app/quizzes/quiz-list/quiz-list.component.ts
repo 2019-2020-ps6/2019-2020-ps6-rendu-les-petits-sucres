@@ -37,7 +37,7 @@ export class QuizListComponent implements OnInit {
   nextPage() {
     if (this.page * this.pageSize < this.quizList.length) {
       this.page = this.page + 1;
-      if  (this.page * this.pageSize < this.quizList.length) {
+      if (this.page * this.pageSize < this.quizList.length) {
         return true;
       }
       return true;
@@ -45,7 +45,7 @@ export class QuizListComponent implements OnInit {
   }
 
   nextPageOk() {
-    if  (this.page * this.pageSize < this.quizList.length) {
+    if (this.page * this.pageSize < this.quizList.length) {
       return true;
     }
   }

@@ -11,9 +11,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class CreateQuestionComponent implements OnInit {
 
   public quiz: Quiz;
+  quizId: number;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
-    this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+    this.quizService.quizSelected$.subscribe((quiz) => {
+      this.quiz = quiz;
+      this.quizId = +quiz.id;
+    });
   }
 
   ngOnInit() {

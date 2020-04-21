@@ -13,10 +13,14 @@ export class EditQuestionComponent implements OnInit {
 
   public question: Question;
   public quiz: Quiz;
+  quizId: number;
 
   constructor(private quizService: QuizService, private activatedRoute: ActivatedRoute) {
     this.quizService.questionSelected$.subscribe((question) => this.question = question);
-    this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+    this.quizService.quizSelected$.subscribe((quiz) => {
+      this.quiz = quiz;
+      this.quizId = +quiz.id;
+    });
   }
 
   ngOnInit() {
