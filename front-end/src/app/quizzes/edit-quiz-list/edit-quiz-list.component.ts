@@ -12,11 +12,24 @@ import {Quiz} from '../../../models/quiz.model';
 export class EditQuizListComponent implements OnInit {
 
   public quizList: Quiz[] = [];
+  public page: number;
+  public pageSize = 10;
+  public nbPageTotal: number;
+  public quizLenght: number;
 
   constructor(private router: Router, public quizService: QuizService) {
-    this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
-      this.quizList = quizzes;
-    });
+    if (localStorage.getItem('quizListSearch') !== null) {
+      this.quizList = localStorage.getItem('quizListSearch') && JSON.parse(localStorage.getItem('quizListSearch'));
+      this.quizLenght = this.quizList.length;
+      this.nbPageTotal = (this.quizLenght / this.pageSize) - (( this.quizLenght % this.pageSize ) / this.pageSize ) + 1;
+    } else {
+      this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
+        this.quizList = quizzes;
+        this.quizLenght = quizzes.length;
+        this.nbPageTotal = (this.quizLenght / this.pageSize) - (( this.quizLenght % this.pageSize ) / this.pageSize ) + 1 ;
+      });
+    }
+    this.page = 1;
   }
 
   ngOnInit() {
@@ -28,5 +41,34 @@ export class EditQuizListComponent implements OnInit {
 
   deleteQuiz(quiz: Quiz) {
     this.quizService.deleteQuiz(quiz);
+  }
+
+  getUrl(quiz: Quiz): string {
+    return quiz.image;
+  }
+
+  nextPage() {
+    if  (this.page * this.pageSize < this.quizList.length) {
+      this.page = this.page + 1;
+      if  (this.page * this.pageSize < this.quizList.length) {
+        return true;
+      }
+      return true;
+    }
+  }
+
+  backPage() {
+    if (this.page !== 1) {
+      this.page = this.page - 1;
+      return true;
+    }
+  }
+
+  afficherPage(i: number) {
+    this.page = i + 1 ;
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 }

@@ -1,6 +1,8 @@
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/quiz-list"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
+
 <div class="col-md-6 offset-md-3 mt-5">
   <div class="card">
-    <h4 class="card-header">Se connecter</h4>
+    <h4 class="card-header text-center">Connexion administrateur</h4>
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -19,10 +21,12 @@
             <div *ngIf="formFields.password.errors.required">Le mot de passe est requis</div>
           </div>
         </div>
-        <button [disabled]="loading" class="btn btn-primary">
+        <div class="text-center">
+        <button [disabled]="loading" class="btn btn-info">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Se connecter
         </button>
+        </div>
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
       </form>
     </div>

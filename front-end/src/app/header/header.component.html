@@ -6,14 +6,11 @@
         <a class="nav-link" routerLink="create-user">Créer un utilisateur</a>
       </li>
       <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
-        <a class="nav-link" routerLink="create-quiz">Créer un quiz</a>
-      </li>
-      <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
-        <a class="nav-link" routerLink="edit-quiz">Modifier quiz</a>
+        <a class="nav-link" routerLink="edit-quiz">Gérer les quiz</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item" *ngIf="!currentUser">
+      <li class="nav-item" *ngIf="!currentUser && currentPathConnexion()">
         <a class="nav-link" routerLink="login"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
       </li>
       <li class="nav-item mr-2" *ngIf="currentUser">

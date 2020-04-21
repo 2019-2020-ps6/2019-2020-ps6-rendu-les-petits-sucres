@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
+    console.log(window.location.pathname)
   }
 
   ngOnInit() {
@@ -24,4 +25,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  currentPathConnexion() {
+    return !(window.location.pathname === '/admin/login' || window.location.pathname === '/login');
+
+  }
 }
