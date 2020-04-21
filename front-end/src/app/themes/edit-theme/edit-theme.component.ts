@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Theme} from '../../../models/theme.model';
 import {QuizService} from '../../../services/quiz.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-edit-theme',

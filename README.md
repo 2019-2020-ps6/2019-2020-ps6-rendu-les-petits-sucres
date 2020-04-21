@@ -2,7 +2,7 @@
 ## Quiz (by _Les petits sucres_)
 
 ### État du projet :
-* [Ajout des statistiques](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/milestone/5)
+* [Ajout de filtres et amélioration du design](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/milestone/7)
 
 -----------------
 

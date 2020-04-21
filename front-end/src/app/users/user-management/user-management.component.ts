@@ -71,4 +71,8 @@ export class UserManagementComponent implements OnInit {
   counter(i: number) {
     return new Array(i);
   }
+
+  seeUserStats(user: User) {
+    this.router.navigate(['/user-account/' + user.id]);
+  }
 }

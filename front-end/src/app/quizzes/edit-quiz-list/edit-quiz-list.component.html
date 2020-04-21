@@ -8,7 +8,7 @@
   <div class="btn btn-info mb-2 mr-5" routerLink="/create-quiz"><i class="fas fa-plus"></i> Créer un nouveau quiz</div>
 </div>
 <ul class="list-group ml-5 mr-5 mb-3">
-  <div *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+  <ng-container *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
     <li class="list-group-item ml-5 mr-5">
       <div class="d-flex flex-row">
         <div class="p-2">
@@ -28,14 +28,15 @@
         </div>
       </div>
     </li>
-  </div>
+  </ng-container>
 </ul>
-<nav aria-label="Page navigation example">
+
+<nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
     <li class="page-item"><a class="page-link" (click)="backPage()">Précédent</a></li>
-    <div *ngFor="let currentPage of counter(nbPageTotal); let i = index">
+    <ng-container *ngFor="let currentPage of counter(nbPageTotal); let i = index">
       <li class="page-item"><a class="page-link" (click)="showPage(i)">{{i + 1}}</a></li>
-    </div>
+    </ng-container>
     <li class="page-item"><a class="page-link" (click)="nextPage()">Suivant</a></li>
   </ul>
 </nav>
