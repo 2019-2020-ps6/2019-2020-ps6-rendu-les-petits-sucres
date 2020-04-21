@@ -1,7 +1,10 @@
 <ng-container *ngIf="(quiz && !question) || (!quiz && question)">
-    <div class="text-center">
+  <div *ngIf="quiz && !question" class="text-center">
     <h2>Ajout d'une question pour le quiz: <span class="font-weight-bold">{{quiz.name}}</span></h2>
-    </div>
+  </div>
+  <div *ngIf="!quiz && question" class="text-center">
+    <h2>Edition de la question : <span class="font-weight-bold">{{question.label}}</span></h2>
+  </div>
   <form [formGroup]="questionForm" class=" mx-auto" style="width: 70%;">
     <div class="bg-light">
     <div class="form-group mx-auto" style="width: 90%;">

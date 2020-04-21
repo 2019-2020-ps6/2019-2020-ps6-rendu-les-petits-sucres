@@ -1,27 +1,20 @@
-<ng-container *ngIf="!theme">
-  <div class="card">
-    <h2>Création d'un thème</h2>
-    <form class="theme-form" [formGroup]="themeForm">
-      <label>
-        Nom du thème: <br>
-        <input class="input-custom" type="text" [formControlName]="'name'">
-      </label>
-      <br>
-      <button class="button-card" (click)="addTheme()">Ajouter le thème</button>
-    </form>
+<div *ngIf="!theme" class="text-center">
+  <h2>Créer un thème</h2>
+</div>
+<div *ngIf="theme" class="text-center">
+  <h2>Modifier le thème</h2>
+</div>
+<form [formGroup]="themeForm" class=" mx-auto" style="width: 70%;">
+  <div class="bg-light pb-3">
+    <div class="form-group mx-auto" style="width: 90%;">
+      <label for="intituleQuestion" class="mt-3">Nom du thème:</label>
+      <input type="text" class="form-control" id="intituleQuestion" [formControlName]="'name'">
+    </div>
   </div>
-</ng-container>
-
-<ng-container *ngIf="theme">
-  <div class="card">
-    <h2>Modifer le thème : <em>{{theme.name}}</em></h2>
-    <form class="theme-fotm" [formGroup]="themeForm">
-      <label>
-        Nom du thème: <br>
-        <input class="input-custom" type="text" [formControlName]="'name'">
-      </label>
-      <br>
-      <button class="button-card" (click)="editTheme(theme.id)">Éditer le thème</button>
-    </form>
+  <div *ngIf="theme" class="text-center">
+    <div class="btn btn-info mb-2 mt-3"(click)="editTheme(theme.id)">Éditer le thème</div>
   </div>
-</ng-container>
+  <div *ngIf="!theme" class="text-center">
+    <div class="btn btn-info mb-2 mt-3" (click)="addTheme()">Ajouter le thème</div>
+  </div>
+</form>

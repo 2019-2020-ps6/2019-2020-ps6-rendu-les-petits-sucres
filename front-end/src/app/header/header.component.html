@@ -21,9 +21,6 @@
           Vous êtes connecté {{currentUser.firstName}} {{currentUser.lastName}}
   </div>
       <li class="nav-item" *ngIf="currentUser">
-        <a class="nav-link" routerLink="my-account">Mon compte</a>
-    </li>
-      <li class="nav-item" *ngIf="currentUser">
         <a class="nav-link" (click)="logout()">Se déconnecter <i class="fas fa-sign-out-alt"></i> </a>
       </li>
     </ul>
