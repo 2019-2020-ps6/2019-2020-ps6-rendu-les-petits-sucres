@@ -36,7 +36,7 @@ export class EditQuizListComponent implements OnInit {
   }
 
   editQuiz(quiz: Quiz) {
-    this.router.navigate(['/edit-quiz/' + quiz.id]);
+    this.router.navigate(['/question-list/' + quiz.id]);
   }
 
   deleteQuiz(quiz: Quiz) {

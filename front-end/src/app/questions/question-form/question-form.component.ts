@@ -87,10 +87,17 @@ export class QuestionFormComponent implements OnInit {
         answer.value = ' ';
       }
     }
+    const question = this.questionForm.value as Question;
+    const isCorrectAnswers = [];
+    question.answers.forEach(answer => {
+      isCorrectAnswers.push(answer.isCorrect);
+    });
     if (this.questionForm.valid) {
-      const question = this.questionForm.value as Question;
-      this.quizService.editQuestion(String(quizId), question, this.question);
-      this.location.back();
+      if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
+        const question = this.questionForm.value as Question;
+        this.quizService.editQuestion(String(quizId), question, this.question);
+        this.location.back();
+      }
     }
   }
 

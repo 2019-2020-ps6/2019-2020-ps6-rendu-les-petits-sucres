@@ -1,5 +1,13 @@
-<div class="question-list">
-    <div class="question" *ngFor="let question of quiz.questions">
-        <app-question [question]="question" (deleteQuestion)="deleteQuestion($event)" (editQuestion)="editQuestion($event)"></app-question>
+<div *ngFor="let question of quiz.questions">
+  <li class="list-group-item ml-5 mr-5">
+    <div class="d-flex flex-row">
+      <div class="p-2">
+        <div class="infoQuiz">{{question.label}}</div>
+      </div>
+      <div class="p-2 ml-auto">
+        <div class="btn btn-outline-info mr-2" (click)="editQuestion(question)"><i class="fas fa-pen"></i></div>
+        <div class="btn btn-outline-danger" (click)="deleteQuestion(question)"><i class="fas fa-trash-alt"></i></div>
+      </div>
     </div>
+  </li>
 </div>

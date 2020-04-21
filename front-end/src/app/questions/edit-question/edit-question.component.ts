@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Question} from '../../../models/question.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
+import {Quiz} from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-edit-question',
@@ -11,14 +12,17 @@ import {ActivatedRoute} from '@angular/router';
 export class EditQuestionComponent implements OnInit {
 
   public question: Question;
+  public quiz: Quiz;
 
   constructor(private quizService: QuizService, private activatedRoute: ActivatedRoute) {
     this.quizService.questionSelected$.subscribe((question) => this.question = question);
+    this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }
 
   ngOnInit() {
     const quizId = this.activatedRoute.snapshot.paramMap.get('quizId');
     const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
     this.quizService.setSelectedQuestion(quizId, questionId);
+    this.quizService.setSelectedQuiz(quizId);
   }
 }

@@ -6,7 +6,10 @@
         <a class="nav-link" routerLink="edit-user">Gérer les utilisateurs</a>
       </li>
       <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
-        <a class="nav-link" routerLink="edit-quiz">Gérer les quiz</a>
+        <a class="nav-link" routerLink="edit-quiz-list">Gérer les quiz</a>
+      </li>
+      <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
+        <a class="nav-link" routerLink="edit-theme">Gérer les thèmes</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

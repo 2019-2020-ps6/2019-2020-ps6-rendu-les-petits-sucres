@@ -32,6 +32,7 @@ import {CreateThemeComponent} from './themes/create-theme/create-theme.component
 import {ThemeComponent} from './themes/theme/theme.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
 import {UserManagementComponent} from './users/user-management/user-management.component';
+import {CreateQuestionComponent} from './questions/create-question/create-question.component';
 import {SearchUserComponent} from './tools/search-user/search-user.component';
 import {EditThemeListComponent} from './themes/edit-theme-list/edit-theme-list.component';
 import {SearchThemeComponent} from './tools/search-theme/search-theme.component';
@@ -64,6 +65,7 @@ import {SearchThemeComponent} from './tools/search-theme/search-theme.component'
     EditUserComponent,
     UserAccountComponent,
     UserManagementComponent,
+    CreateQuestionComponent,
     SearchUserComponent,
     EditThemeListComponent,
     SearchThemeComponent,

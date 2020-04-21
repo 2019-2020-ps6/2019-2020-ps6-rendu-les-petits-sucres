@@ -8,7 +8,7 @@
         <div class="form-group">
           <label>
             Choisir un joueur dans la liste :
-            <select formControlName="username" class="custom-select">
+            <select formControlName="username" class="form-control">
               <option *ngFor="let patient of patients" [value]=patient.username>
                 {{patient.firstName}} {{patient.lastName}}
               </option>

@@ -13,9 +13,9 @@ import {LoginPatientsComponent} from './users/login-patients/login-patients.comp
 import {UserAccountComponent} from './users/user-account/user-account.component';
 import {CreateThemeComponent} from './themes/create-theme/create-theme.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
-import {UserManagementComponent} from './users/user-management/user-management.component';
 import {EditThemeListComponent} from './themes/edit-theme-list/edit-theme-list.component';
-
+import {UserManagementComponent} from './users/user-management/user-management.component';
+import {CreateQuestionComponent} from './questions/create-question/create-question.component';
 
 const routes: Routes = [
   {path: 'quiz-list', component: QuizListComponent},
@@ -23,19 +23,19 @@ const routes: Routes = [
   {path: 'create-user', component: CreateUserComponent},
   {path: 'edit-user/:userId', component: EditUserComponent},
   {path: 'play-quiz/:quizId', component: PlayQuizComponent},
-  {path: 'edit-quiz/:quizId', component: EditQuizComponent},
+  {path: 'question-list/:quizId', component: EditQuizComponent},
   {path: 'edit-question/:quizId/:questionId', component: EditQuestionComponent},
   {path: 'create-quiz', component: CreateQuizComponent},
   {path: 'create-theme', component: CreateThemeComponent},
-  {path: 'edit-quiz', component: EditQuizListComponent},
+  {path: 'edit-quiz-list', component: EditQuizListComponent},
   {path: 'edit-theme/:themeId', component: EditThemeComponent},
   {path: 'admin/login', component: LoginComponent},
   {path: 'login', component: LoginPatientsComponent},
   {path: 'my-account', component: UserAccountComponent},
   {path: 'user-account/:userId', component: UserAccountComponent},
   {path: 'edit-user', component: UserManagementComponent},
-  {path: 'edit-theme', component: EditThemeListComponent}
-
+  {path: 'edit-theme', component: EditThemeListComponent},
+  {path: 'create-question/:quizId', component: CreateQuestionComponent}
 ];
 
 @NgModule({

@@ -33,7 +33,7 @@ export class PlayQuizComponent implements OnInit {
               private router: Router, private playedQuizService: PlayedQuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     if (localStorage) {
-      if (localStorage.getItem('quiz') === this.route.snapshot.paramMap.get('quizId')) {
+      if (localStorage.getItem('Quiz') === this.route.snapshot.paramMap.get('quizId')) {
         this.currentQuestion = +localStorage.getItem('currentQuestion');
         this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
         if (this.showSummaryQuestion === true) {
