@@ -14,30 +14,32 @@ import {UserAccountComponent} from './users/user-account/user-account.component'
 import {CreateThemeComponent} from './themes/create-theme/create-theme.component';
 import {ThemeListComponent} from './themes/theme-list/theme-list.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
+import {UserManagementComponent} from "./users/user-management/user-management.component";
 
 
 const routes: Routes = [
-    { path: 'quiz-list', component: QuizListComponent },
-    { path: 'theme-list', component: ThemeListComponent },
-    { path: '', redirectTo: '/quiz-list', pathMatch: 'full'},
-    { path: 'create-user', component: CreateUserComponent },
-    { path: 'edit-user/:userId', component: EditUserComponent },
-    { path: 'play-quiz/:quizId', component: PlayQuizComponent },
-    { path: 'edit-quiz/:quizId', component: EditQuizComponent },
-    { path: 'edit-question/:quizId/:questionId', component: EditQuestionComponent },
-    { path: 'create-quiz', component: CreateQuizComponent },
-    { path: 'create-theme', component: CreateThemeComponent },
-    { path: 'edit-quiz', component: EditQuizListComponent },
-    { path: 'edit-theme/:themeId', component: EditThemeComponent },
-    { path: 'admin/login', component: LoginComponent },
-    { path: 'login', component: LoginPatientsComponent },
-    { path: 'my-account', component: UserAccountComponent}
+  {path: 'quiz-list', component: QuizListComponent},
+  {path: 'theme-list', component: ThemeListComponent},
+  {path: '', redirectTo: '/quiz-list', pathMatch: 'full'},
+  {path: 'create-user', component: CreateUserComponent},
+  {path: 'edit-user/:userId', component: EditUserComponent},
+  {path: 'play-quiz/:quizId', component: PlayQuizComponent},
+  {path: 'edit-quiz/:quizId', component: EditQuizComponent},
+  {path: 'edit-question/:quizId/:questionId', component: EditQuestionComponent},
+  {path: 'create-quiz', component: CreateQuizComponent},
+  {path: 'create-theme', component: CreateThemeComponent},
+  {path: 'edit-quiz', component: EditQuizListComponent},
+  {path: 'edit-theme/:themeId', component: EditThemeComponent},
+  {path: 'admin/login', component: LoginComponent},
+  {path: 'login', component: LoginPatientsComponent},
+  {path: 'my-account', component: UserAccountComponent},
+  {path: 'edit-user', component: UserManagementComponent}
 
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 

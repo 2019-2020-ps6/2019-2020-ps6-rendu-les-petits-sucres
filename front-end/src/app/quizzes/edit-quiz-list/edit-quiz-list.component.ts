@@ -15,18 +15,18 @@ export class EditQuizListComponent implements OnInit {
   public page: number;
   public pageSize = 10;
   public nbPageTotal: number;
-  public quizLenght: number;
+  public quizLength: number;
 
   constructor(private router: Router, public quizService: QuizService) {
     if (localStorage.getItem('quizListSearch') !== null) {
       this.quizList = localStorage.getItem('quizListSearch') && JSON.parse(localStorage.getItem('quizListSearch'));
-      this.quizLenght = this.quizList.length;
-      this.nbPageTotal = (this.quizLenght / this.pageSize) - (( this.quizLenght % this.pageSize ) / this.pageSize ) + 1;
+      this.quizLength = this.quizList.length;
+      this.nbPageTotal = (this.quizLength / this.pageSize) - (( this.quizLength % this.pageSize ) / this.pageSize ) + 1;
     } else {
       this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
         this.quizList = quizzes;
-        this.quizLenght = quizzes.length;
-        this.nbPageTotal = (this.quizLenght / this.pageSize) - (( this.quizLenght % this.pageSize ) / this.pageSize ) + 1 ;
+        this.quizLength = quizzes.length;
+        this.nbPageTotal = (this.quizLength / this.pageSize) - (( this.quizLength % this.pageSize ) / this.pageSize ) + 1 ;
       });
     }
     this.page = 1;

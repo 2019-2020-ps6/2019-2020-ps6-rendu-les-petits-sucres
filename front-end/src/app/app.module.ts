@@ -33,6 +33,7 @@ import {CreateThemeComponent} from './themes/create-theme/create-theme.component
 import {ThemeComponent} from './themes/theme/theme.component';
 import {ThemeListComponent} from './themes/theme-list/theme-list.component';
 import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
+import {UserManagementComponent} from './users/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {EditThemeComponent} from './themes/edit-theme/edit-theme.component';
     SearchComponent,
     EditUserComponent,
     UserAccountComponent,
+    UserManagementComponent,
   ],
   imports: [
     BrowserModule,
