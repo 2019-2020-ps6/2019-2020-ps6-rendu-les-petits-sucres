@@ -6,10 +6,10 @@
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="username">Pseudonyme :</label>
+          <label for="username">Identifiant :</label>
           <input id="username" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.username.errors }" />
           <div *ngIf="submitted && formFields.username.errors" class="invalid-feedback">
-            <div *ngIf="formFields.username.errors.required">Le pseudonyme est requis</div>
+            <div *ngIf="formFields.username.errors.required">L'identifiant est requis</div>
           </div>
           <label for="password" class="mt-3">Mot de passe :</label>
           <div class="input-group mb-2 mr-sm-2">
