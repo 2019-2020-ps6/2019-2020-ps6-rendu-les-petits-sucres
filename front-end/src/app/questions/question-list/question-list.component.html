@@ -2,7 +2,8 @@
   <li class="list-group-item ml-5 mr-5">
     <div class="d-flex flex-row">
       <div class="p-2">
-        <div class="infoQuiz">{{question.label}}</div>
+        <div class="font-weight-bold">{{question.label}}</div>
+        <div class="infoQuestion">{{quiz.questions.length > 1 ? 'Nombre de réponses : ' + question.answers.length : 'Nombre de réponse : ' + question.answers.length}}</div>
       </div>
       <div class="p-2 ml-auto">
         <div class="btn btn-outline-info mr-2" (click)="editQuestion(question)"><i class="fas fa-pen"></i></div>

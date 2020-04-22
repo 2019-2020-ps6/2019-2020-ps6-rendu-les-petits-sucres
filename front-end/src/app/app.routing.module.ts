@@ -34,7 +34,8 @@ const routes: Routes = [
   {path: 'user-account/:userId', component: UserAccountComponent},
   {path: 'edit-user', component: UserManagementComponent},
   {path: 'edit-theme', component: EditThemeListComponent},
-  {path: 'create-question/:quizId', component: CreateQuestionComponent}
+  {path: 'create-question/:quizId', component: CreateQuestionComponent},
+  { path: '**', redirectTo: '/quiz-list'}
 ];
 
 @NgModule({

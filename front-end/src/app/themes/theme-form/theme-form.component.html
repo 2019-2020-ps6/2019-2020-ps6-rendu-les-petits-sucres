@@ -7,12 +7,12 @@
 <form [formGroup]="themeForm" class=" mx-auto" style="width: 70%;">
   <div class="bg-light pb-3">
     <div class="form-group mx-auto" style="width: 90%;">
-      <label for="intituleQuestion" class="mt-3">Nom du thème :</label>
-      <input type="text" class="form-control" id="intituleQuestion" [formControlName]="'name'">
+      <label for="intituleTheme" class="mt-3">Nom du thème :</label>
+      <input type="text" class="form-control" id="intituleTheme" [formControlName]="'name'">
     </div>
   </div>
   <div *ngIf="theme" class="text-center">
-    <div class="btn btn-info mb-2 mt-3"(click)="editTheme(theme.id)">Éditer le thème</div>
+    <div class="btn btn-info mb-2 mt-3" (click)="editTheme(theme.id)">Éditer le thème</div>
   </div>
   <div *ngIf="!theme" class="text-center">
     <div class="btn btn-info mb-2 mt-3" (click)="addTheme()">Ajouter le thème</div>

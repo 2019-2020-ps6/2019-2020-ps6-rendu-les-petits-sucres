@@ -36,10 +36,10 @@ export class PlayQuizComponent implements OnInit {
       if (localStorage.getItem('currentQuiz') === this.route.snapshot.paramMap.get('quizId')) {
         this.currentQuestion = +localStorage.getItem('currentQuestion');
         this.showSummaryQuestion = JSON.parse(localStorage.getItem('summaryQuestion'));
-        if (this.showSummaryQuestion === true) {
+        this.score = +localStorage.getItem('score');
+        if (this.showSummaryQuestion) {
           this.toggleNextQuestion();
         }
-        this.score = +localStorage.getItem('score');
       } else {
         this.resetQuizLocalStorage();
       }
@@ -71,6 +71,7 @@ export class PlayQuizComponent implements OnInit {
     localStorage.setItem('currentQuiz', this.quiz.id + '');
     localStorage.setItem('currentQuestion', this.currentQuestion + '');
     localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
+    localStorage.setItem('score', this.score + '');
     this.toggleNextQuestion();
   }
 
@@ -104,23 +105,29 @@ export class PlayQuizComponent implements OnInit {
     }
   }
 
+  private uploadResults() {
+    this.playedQuiz = {
+      name: this.quiz.name,
+      quizId: +this.quiz.id,
+      score: this.score,
+      userId: JSON.parse(localStorage.getItem('currentUser')).id,
+      id: Date.now()
+    };
+    this.playedQuizService.addPlayedQuiz(this.playedQuiz);
+  }
+
   private toggleEndQuiz() {
     if (localStorage.getItem('currentUser')) {
-      this.playedQuiz = {
-        name: this.quiz.name,
-        quizId: +this.quiz.id,
-        score: this.score,
-        userId: JSON.parse(localStorage.getItem('currentUser')).id,
-        id: Date.now()
-      };
-      this.playedQuizService.addPlayedQuiz(this.playedQuiz);
+      this.uploadResults();
     }
     this.setTimeEnd();
     this.timerEndQuiz = setTimeout(() => {
+      this.score = 20;
       this.currentQuestion = 0;
       this.showSummaryQuestion = false;
       localStorage.setItem('currentQuestion', this.currentQuestion + '');
       localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
+      localStorage.setItem('score', this.score + '');
       this.quizEnd = false;
       localStorage.removeItem('quizEnd');
       }, 20000);
@@ -190,7 +197,12 @@ export class PlayQuizComponent implements OnInit {
   }
 
   returnToQuizList() {
-    localStorage.removeItem('quizEnd');
-    this.router.navigate(['/quiz-list/']);
+    if (localStorage.getItem('quizEnd')) {
+      this.uploadResults();
+      this.goBack();
+    } else {
+      localStorage.removeItem('quizEnd');
+      this.router.navigate(['/quiz-list/']);
+    }
   }
 }

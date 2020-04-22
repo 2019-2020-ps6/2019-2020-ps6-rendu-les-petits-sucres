@@ -6,17 +6,21 @@
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label>Pseudonyme</label>
-          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.username.errors }" />
+          <label for="username">Pseudonyme :</label>
+          <input id="username" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.username.errors }" />
           <div *ngIf="submitted && formFields.username.errors" class="invalid-feedback">
             <div *ngIf="formFields.username.errors.required">Le pseudonyme est requis</div>
           </div>
-        </div>
-        <div class="form-group">
-          <label>Mot de passe</label>
-          <input [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.password.errors }"/>
-          <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
-          <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
+          <label for="password" class="mt-3">Mot de passe :</label>
+          <div class="input-group mb-2 mr-sm-2">
+            <input id="password" [type]="hide ? 'password' : 'text'" class="form-control" [formControlName]="'password'" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <i *ngIf="hide" class="fas fa-eye" (click)="hide = !hide"></i>
+                <i *ngIf="!hide" class="fas fa-eye-slash" (click)="hide = !hide"></i>
+              </div>
+            </div>
+          </div>
           <div *ngIf="submitted && formFields.password.errors" class="invalid-feedback">
             <div *ngIf="formFields.password.errors.required">Le mot de passe est requis</div>
           </div>
