@@ -39,13 +39,11 @@ export class SearchUserComponent implements OnInit {
     localStorage.removeItem('userListSearch');
     if (this.searchForm.valid) {
       for (const user of this.userList) {
-        const userName = user.firstName + ' ' + user.lastName;
+        const userName = (user.firstName + ' ' + user.lastName).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         if (userName.toLowerCase().includes(this.valueSearch.toString())) {
-          console.log('Vrai');
           this.newUserList.push(user);
         }
       }
-      console.log((this.newUserList));
       localStorage.setItem('userListSearch', JSON.stringify(this.newUserList));
       localStorage.setItem('requestUserSearch', this.valueSearch.toString());
     }

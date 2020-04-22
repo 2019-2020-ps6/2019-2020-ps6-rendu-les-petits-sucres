@@ -71,7 +71,8 @@ export class UserFormComponent implements OnInit {
   private constructUserFromForm(): User {
     const user: User = this.userForm.getRawValue() as User;
     user.username = (this.userForm.get('firstName').value.split(' ').join('_') + '.'
-      + this.userForm.get('lastName').value.split('\'').join('-').split(' ').join('_')).toLowerCase();
+      + this.userForm.get('lastName').value.split('\'').join('-').split(' ').join('_'))
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     user.password = user.isAdmin ? user.password : '';
     return user;
   }

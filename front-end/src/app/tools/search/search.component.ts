@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit {
     localStorage.removeItem('quizListSearch');
     if (this.searchForm.valid) {
       for (const quiz of this.quizList) {
-        if (quiz.name.toLowerCase().includes(this.valueSearch.toString())) {
+        if (quiz.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(this.valueSearch.toString())) {
           this.newQuizList.push(quiz);
         }
       }

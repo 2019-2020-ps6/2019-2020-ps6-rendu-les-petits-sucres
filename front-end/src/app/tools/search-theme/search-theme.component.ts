@@ -39,7 +39,7 @@ export class SearchThemeComponent implements OnInit {
     localStorage.removeItem('themeListSearch');
     if (this.searchForm.valid) {
       for (const theme of this.themeList) {
-        if (theme.name.toLowerCase().includes(this.valueSearch.toString())) {
+        if (theme.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(this.valueSearch.toString())) {
           this.newThemeList.push(theme);
         }
       }

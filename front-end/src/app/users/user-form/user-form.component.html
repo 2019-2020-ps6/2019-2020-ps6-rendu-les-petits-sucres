@@ -15,7 +15,7 @@
       <label for="username" class="mt-3">Pseudonyme :</label>
       <input id="username" type="text" class="form-control" [formControlName]="'username'" [value]="(this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase()" readonly>
       -->
-      <div class="custom-control custom-checkbox mr-sm-2 mt-3">
+      <div class="custom-control-right custom-switch mt-3">
         <input type="checkbox" class="custom-control-input" id="isAdmin" [formControlName]="'isAdmin'">
         <label class="custom-control-label" for="isAdmin">Droits d'administrateurs</label>
       </div>
