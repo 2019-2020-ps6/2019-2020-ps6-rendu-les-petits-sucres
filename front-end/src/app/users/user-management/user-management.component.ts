@@ -24,6 +24,7 @@ export class UserManagementComponent implements OnInit {
     } else {
       this.userService.users$.subscribe((users: User[]) => {
         this.userList = users;
+        this.userList.reverse();
         this.userLength = users.length;
         this.nbPageTotal = (this.userLength / this.pageSize) - ((this.userLength % this.pageSize) / this.pageSize) + 1;
       });

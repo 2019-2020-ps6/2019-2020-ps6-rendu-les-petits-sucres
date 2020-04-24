@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
 import {Theme} from '../../../models/theme.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-quiz-form',
@@ -16,7 +17,7 @@ export class QuizFormComponent implements OnInit {
   public quizForm: FormGroup;
   public themes: Theme[];
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router) {
     this.quizService.themes$.subscribe((themes) => this.themes = themes);
     this.initializeQuizForm();
   }
@@ -38,7 +39,7 @@ export class QuizFormComponent implements OnInit {
       const quizToCreate = this.quizForm.value as Quiz;
       this.quizService.addQuiz(quizToCreate);
       this.initializeQuizForm();
-      alert('Le quiz a bien été créé !\nVeuillez retourner en arrière pour y ajouter des questions !');
+      this.router.navigate(['/edit-quiz-list/']);
     }
   }
 }

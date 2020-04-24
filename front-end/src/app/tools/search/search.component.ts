@@ -12,13 +12,19 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 export class SearchComponent implements OnInit {
 
   private quizList: Quiz[] = [];
+  private quizListSearch: Quiz[] = [];
+  private quizListThemeSort: Quiz[] = [];
   private newQuizList: Quiz[] = [];
   private searchForm: FormGroup;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.initializeSearchForm();
-    this.quizService.quizzes$.subscribe((quizzes) => {
+    if (localStorage.getItem('quizListThemeSort') !== null) {
+      this.quizListThemeSort = localStorage.getItem('quizListThemeSort') && JSON.parse(localStorage.getItem('quizListThemeSort'));
+    }
+    this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
+      this.quizList.reverse();
     });
   }
 
@@ -37,21 +43,35 @@ export class SearchComponent implements OnInit {
 
   applySearch() {
     localStorage.removeItem('requestQuizSearch');
+    localStorage.removeItem('newQuizList');
     localStorage.removeItem('quizListSearch');
     if (this.searchForm.valid) {
       for (const quiz of this.quizList) {
         if (quiz.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(this.valueSearch.toString())) {
-          this.newQuizList.push(quiz);
+          this.quizListSearch.push(quiz);
         }
       }
-      localStorage.setItem('quizListSearch', JSON.stringify(this.newQuizList));
+      localStorage.setItem('quizListSearch', JSON.stringify(this.quizListSearch));
       localStorage.setItem('requestQuizSearch', this.valueSearch.toString());
-    }
+      if (localStorage.getItem('quizListThemeSort')) {
+        if (this.searchForm.valid) {
+          for (const quiz of this.quizListThemeSort) {
+            if (quiz.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+              .includes(localStorage.getItem('requestQuizSearch'))) {
+              this.newQuizList.push(quiz);
+            }
+          }
+        }
+      } else {
+          this.newQuizList = this.quizListSearch;
+        }
+      localStorage.setItem('newQuizList', JSON.stringify(this.newQuizList));
+      }
     document.location.reload();
   }
 
   localStorage() {
-    return localStorage.getItem('quizListSearch') !== null;
+    return localStorage.getItem('requestQuizSearch') !== null;
   }
 
   getResearch() {
@@ -61,6 +81,11 @@ export class SearchComponent implements OnInit {
   deleteSearch() {
     localStorage.removeItem('requestQuizSearch');
     localStorage.removeItem('quizListSearch');
+    if (localStorage.getItem('requestThemeSort')) {
+      localStorage.setItem('newQuizList', JSON.stringify(this.quizListThemeSort.reverse()));
+    } else {
+      localStorage.removeItem('newQuizList');
+    }
     document.location.reload();
   }
 }

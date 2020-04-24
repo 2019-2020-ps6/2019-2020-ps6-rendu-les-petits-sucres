@@ -25,6 +25,7 @@ export class EditQuizListComponent implements OnInit {
     } else {
       this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
         this.quizList = quizzes;
+        this.quizList.reverse();
         this.quizLength = quizzes.length;
         this.nbPageTotal = (this.quizLength / this.pageSize) - (( this.quizLength % this.pageSize ) / this.pageSize ) + 1 ;
       });

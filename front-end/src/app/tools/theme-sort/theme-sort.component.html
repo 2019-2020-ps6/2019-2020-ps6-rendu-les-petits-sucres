@@ -1,0 +1,17 @@
+<div class="d-flex flex-column">
+  <div><form class="form-inline my-2 my-lg-0 justify-content-center" [formGroup]="themeSortForm">
+      <select class="form-control mr-sm-2" [formControlName]="'theme'">
+        <option value="" disabled selected>Sélectionner un thème</option>
+        <option value="" *ngFor="let currentTheme of themes" [value]="currentTheme.name">
+          {{currentTheme.name}}
+        </option>
+      </select>
+    <button class="btn btn-outline-info my-2 my-sm-0" type="submit" (click)="applySearch()">Rechercher</button>
+  </form></div>
+  <div class="p-2"><div *ngIf="localStorage()" class="alert alert-warning alert-dismissible fade show" role="alert">
+    Vous avez demandé les quiz sur le thème : <span class="font-weight-bold">{{getResearch()}}</span>
+    <button (click)="deleteSearch()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div></div>
+</div>

@@ -15,13 +15,15 @@ export class QuizListComponent implements OnInit {
   public quizList: Quiz[] = [];
   public page: number;
   public pageSize = 6;
+  private showFilters = false;
 
   constructor(private router: Router, public quizService: QuizService) {
-    if (localStorage.getItem('quizListSearch') !== null) {
-      this.quizList = localStorage.getItem('quizListSearch') && JSON.parse(localStorage.getItem('quizListSearch'));
+    if (localStorage.getItem('newQuizList') !== null) {
+      this.quizList = localStorage.getItem('newQuizList') && JSON.parse(localStorage.getItem('newQuizList'));
     } else {
       this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
         this.quizList = quizzes;
+        this.quizList.reverse();
       });
     }
     this.page = 1;
@@ -60,6 +62,14 @@ export class QuizListComponent implements OnInit {
   backPageOk() {
     if (this.page !== 1) {
       return true;
+    }
+  }
+
+  filters() {
+    if (this.showFilters === true) {
+      this.showFilters = false;
+    } else {
+      this.showFilters = true;
     }
   }
 }

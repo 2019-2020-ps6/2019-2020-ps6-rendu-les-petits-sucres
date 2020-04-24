@@ -19,11 +19,13 @@ export class EditThemeListComponent implements OnInit {
   constructor(private router: Router, public quizService: QuizService) {
     if (localStorage.getItem('themeListSearch') !== null) {
       this.themeList = localStorage.getItem('themeListSearch') && JSON.parse(localStorage.getItem('themeListSearch'));
+      this.themeList.reverse();
       this.themeLength = this.themeList.length;
       this.nbPageTotal = (this.themeLength / this.pageSize) - (( this.themeLength % this.pageSize ) / this.pageSize ) + 1;
     } else {
       this.quizService.themes$.subscribe((themes: Theme[]) => {
         this.themeList = themes;
+        this.themeList.reverse();
         this.themeLength = themes.length;
         this.nbPageTotal = (this.themeLength / this.pageSize) - (( this.themeLength % this.pageSize ) / this.pageSize ) + 1 ;
       });
