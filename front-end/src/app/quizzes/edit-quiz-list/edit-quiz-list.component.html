@@ -3,6 +3,8 @@
 </button>
 
 <app-search class="d-flex justify-content-center mt-2"></app-search>
+<app-theme-sort class="d-flex justify-content-center mt-2"></app-theme-sort>
+
 <div class="text-right mr-5">
   <div class="btn btn-info mb-2 mr-5" routerLink="/create-quiz"><i class="fas fa-plus"></i> Créer un nouveau quiz</div>
 </div>
@@ -20,6 +22,7 @@
           <div><span class="font-weight-bold">{{quiz.name}}</span></div>
           <div class="infoQuiz">Thème : {{quiz.theme}}</div>
           <div class="infoQuiz">{{quiz.questions.length > 1 ? 'Nombre de questions : ' + quiz.questions.length : 'Nombre de question : ' + quiz.questions.length}}</div>
+          <div *ngIf="quiz.user" class="infoQuiz">Déstiné à : {{quiz.user}}</div>
         </div>
         <div class="p-2 ml-auto">
           <div class="btn btn-outline-info mr-2" (click)="editQuiz(quiz)"><i class="fas fa-pen"></i></div>

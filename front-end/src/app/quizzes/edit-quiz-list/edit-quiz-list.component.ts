@@ -18,8 +18,8 @@ export class EditQuizListComponent implements OnInit {
   public quizLength: number;
 
   constructor(private router: Router, public quizService: QuizService) {
-    if (localStorage.getItem('quizListSearch') !== null) {
-      this.quizList = localStorage.getItem('quizListSearch') && JSON.parse(localStorage.getItem('quizListSearch'));
+    if (localStorage.getItem('newQuizListEdit') !== null) {
+      this.quizList = localStorage.getItem('newQuizListEdit') && JSON.parse(localStorage.getItem('newQuizListEdit'));
       this.quizLength = this.quizList.length;
       this.nbPageTotal = (this.quizLength / this.pageSize) - (( this.quizLength % this.pageSize ) / this.pageSize ) + 1;
     } else {
@@ -41,10 +41,10 @@ export class EditQuizListComponent implements OnInit {
   }
 
   deleteQuiz(quiz: Quiz) {
-    if (localStorage.getItem('quizListSearch') !== null) {
-      localStorage.setItem('quizListSearch', JSON.stringify(JSON.parse(localStorage.getItem('quizListSearch'))
+    if (localStorage.getItem('newQuizListEdit') !== null) {
+      localStorage.setItem('newQuizListEdit', JSON.stringify(JSON.parse(localStorage.getItem('newQuizListEdit'))
         .filter((storedQuiz) => storedQuiz.id !== quiz.id)));
-      this.quizList = localStorage.getItem('quizListSearch') && JSON.parse(localStorage.getItem('quizListSearch'));
+      this.quizList = localStorage.getItem('newQuizListEdit') && JSON.parse(localStorage.getItem('newQuizListEdit'));
     }
     this.quizService.deleteQuiz(quiz);
   }

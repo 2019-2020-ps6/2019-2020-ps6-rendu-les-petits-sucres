@@ -37,6 +37,7 @@ import {SearchUserComponent} from './tools/search-user/search-user.component';
 import {EditThemeListComponent} from './themes/edit-theme-list/edit-theme-list.component';
 import {SearchThemeComponent} from './tools/search-theme/search-theme.component';
 import {ThemeSortComponent} from './tools/theme-sort/theme-sort.component';
+import {QuizFiltersComponent} from './tools/quiz-filters/quiz-filters.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import {ThemeSortComponent} from './tools/theme-sort/theme-sort.component';
     EditThemeListComponent,
     SearchThemeComponent,
     ThemeSortComponent,
+    QuizFiltersComponent
   ],
   imports: [
     BrowserModule,

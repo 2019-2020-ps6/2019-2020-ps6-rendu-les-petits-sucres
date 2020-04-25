@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit {
   private quizList: Quiz[] = [];
   private quizListSearch: Quiz[] = [];
   private quizListThemeSort: Quiz[] = [];
+  private quizListUserSort: Quiz[] = [];
   private newQuizList: Quiz[] = [];
   private searchForm: FormGroup;
 
@@ -43,7 +44,7 @@ export class SearchComponent implements OnInit {
 
   applySearch() {
     localStorage.removeItem('requestQuizSearch');
-    localStorage.removeItem('newQuizList');
+    localStorage.removeItem('newQuizListEdit');
     localStorage.removeItem('quizListSearch');
     if (this.searchForm.valid) {
       for (const quiz of this.quizList) {
@@ -65,7 +66,7 @@ export class SearchComponent implements OnInit {
       } else {
           this.newQuizList = this.quizListSearch;
         }
-      localStorage.setItem('newQuizList', JSON.stringify(this.newQuizList));
+      localStorage.setItem('newQuizListEdit', JSON.stringify(this.newQuizList));
       }
     document.location.reload();
   }
@@ -82,9 +83,9 @@ export class SearchComponent implements OnInit {
     localStorage.removeItem('requestQuizSearch');
     localStorage.removeItem('quizListSearch');
     if (localStorage.getItem('requestThemeSort')) {
-      localStorage.setItem('newQuizList', JSON.stringify(this.quizListThemeSort.reverse()));
+      localStorage.setItem('newQuizListEdit', JSON.stringify(this.quizListThemeSort.reverse()));
     } else {
-      localStorage.removeItem('newQuizList');
+      localStorage.removeItem('newQuizListEdit');
     }
     document.location.reload();
   }
