@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-quiz-list',
@@ -17,7 +18,14 @@ export class EditQuizListComponent implements OnInit {
   public nbPageTotal: number;
   public quizLength: number;
 
-  constructor(private router: Router, public quizService: QuizService) {
+  constructor(private router: Router, public quizService: QuizService, private authenticationService: AuthenticationService) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
     if (localStorage.getItem('newQuizListEdit') !== null) {
       this.quizList = localStorage.getItem('newQuizListEdit') && JSON.parse(localStorage.getItem('newQuizListEdit'));
       this.quizLength = this.quizList.length;
@@ -56,7 +64,7 @@ export class EditQuizListComponent implements OnInit {
   nextPage() {
     if (this.page * this.pageSize < this.quizList.length) {
       this.page = this.page + 1;
-      if  (this.page * this.pageSize < this.quizList.length) {
+      if (this.page * this.pageSize < this.quizList.length) {
         return true;
       }
       return true;

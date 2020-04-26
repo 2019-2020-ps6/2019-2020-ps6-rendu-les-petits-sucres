@@ -5,7 +5,7 @@
     <div class="carousel-item active mt-1">
       <div class="quiz-list d-flex flex-wrap justify-content-center">
         <div class="quiz" *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-          <app-quiz [quiz]="quiz"(quizPlayed)="playQuiz($event)"></app-quiz>
+          <app-quiz *ngIf="quiz.questions.length != 0" [quiz]="quiz" (quizPlayed)="playQuiz($event)"></app-quiz>
         </div>
       </div>
 </div>

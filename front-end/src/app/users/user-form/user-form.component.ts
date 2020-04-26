@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../models/user.model';
 import {Location} from '@angular/common';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -17,8 +19,16 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   hide = true;
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService, private location: Location) {
-    this.initializeUserForm(null);
+  constructor(public formBuilder: FormBuilder, public userService: UserService, private location: Location,
+              private authenticationService: AuthenticationService, private router: Router) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
+    this.initializeUserForm(this.user ? this.user : null);
   }
 
   private initializeUserForm(user: User) {

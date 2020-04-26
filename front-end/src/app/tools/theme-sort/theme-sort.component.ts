@@ -6,7 +6,6 @@ import {Theme} from '../../../models/theme.model';
 import {Router} from '@angular/router';
 
 
-
 @Component({
   selector: 'app-theme-sort',
   templateUrl: './theme-sort.component.html',
@@ -22,7 +21,7 @@ export class ThemeSortComponent implements OnInit {
   private themeSortForm: FormGroup;
   public themes: Theme[];
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.quizService.themes$.subscribe((themes) => this.themes = themes);
     this.initializeThemeSortForm();
     if (localStorage.getItem('quizListSearch') !== null) {
@@ -70,7 +69,6 @@ export class ThemeSortComponent implements OnInit {
     } else {
       this.newQuizList = this.quizListThemeSort;
       }
-      console.log(this.newQuizList)
       localStorage.setItem('newQuizListEdit', JSON.stringify(this.newQuizList));
     }
     document.location.reload();

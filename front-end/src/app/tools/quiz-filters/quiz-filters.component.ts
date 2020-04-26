@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Theme} from '../../../models/theme.model';
 import {User} from '../../../models/user.model';
 
@@ -17,7 +17,7 @@ export class QuizFiltersComponent implements OnInit {
   private newQuizList: Quiz[] = [];
   private themes: Theme[] = [];
   private searchForm: FormGroup;
-  private user: User = null;
+  user: User = null;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.initializeSearchForm();
@@ -119,5 +119,4 @@ export class QuizFiltersComponent implements OnInit {
     localStorage.removeItem('theme');
     document.location.reload();
   }
-
 }

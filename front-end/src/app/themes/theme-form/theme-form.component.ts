@@ -5,6 +5,8 @@ import {Location} from '@angular/common';
 
 import {QuizService} from '../../../services/quiz.service';
 import {Theme} from '../../../models/theme.model';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-theme-form',
@@ -18,13 +20,21 @@ export class ThemeFormComponent implements OnInit {
 
   public themeForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location) {
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location,
+              private authenticationService: AuthenticationService, private router: Router) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
     this.initializeThemeForm(null);
   }
 
   private initializeThemeForm(theme: Theme) {
     this.themeForm = this.formBuilder.group({
-      name: ['', Validators.required]
+      name: theme ? theme.name : ['', Validators.required]
     });
   }
 

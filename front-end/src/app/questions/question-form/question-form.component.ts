@@ -4,6 +4,8 @@ import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
 import {Question} from 'src/models/question.model';
 import {Location} from '@angular/common';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-question-form',
@@ -21,7 +23,15 @@ export class QuestionFormComponent implements OnInit {
   public questionForm: FormGroup;
   public trueOrFalse: boolean[] = [true, false]; // Vrai ou faux
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location) {
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location,
+              private authenticationService: AuthenticationService, private router: Router) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
     this.initializeQuestionForm(this.question ? this.question : null);
   }
 

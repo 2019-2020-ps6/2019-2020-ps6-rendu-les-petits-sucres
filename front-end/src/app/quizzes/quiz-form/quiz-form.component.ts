@@ -4,9 +4,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
 import {Theme} from '../../../models/theme.model';
-import {Router} from "@angular/router";
-import {UserService} from "../../../services/user.service";
-import {User} from "../../../models/user.model";
+import {Router} from '@angular/router';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../models/user.model';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-quiz-form',
@@ -20,7 +21,15 @@ export class QuizFormComponent implements OnInit {
   public themes: Theme[];
   public patients: User[];
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, public userService: UserService) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router,
+              public userService: UserService, private authenticationService: AuthenticationService) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
     this.userService.patients$.subscribe((patients) => this.patients = patients);
     this.quizService.themes$.subscribe((themes) => this.themes = themes);
     this.initializeQuizForm();
@@ -41,7 +50,6 @@ export class QuizFormComponent implements OnInit {
 
   addQuiz() {
     if (this.quizForm.valid) {
-      console.log( this.quizForm.value);
       const quizToCreate = this.quizForm.value as Quiz;
       this.quizService.addQuiz(quizToCreate);
       this.initializeQuizForm();

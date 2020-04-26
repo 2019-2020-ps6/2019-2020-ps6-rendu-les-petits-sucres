@@ -111,7 +111,8 @@ export class PlayQuizComponent implements OnInit {
       quizId: +this.quiz.id,
       score: this.score,
       userId: JSON.parse(localStorage.getItem('currentUser')).id,
-      id: Date.now()
+      id: Date.now(),
+      date: new Date()
     };
     this.playedQuizService.addPlayedQuiz(this.playedQuiz);
   }

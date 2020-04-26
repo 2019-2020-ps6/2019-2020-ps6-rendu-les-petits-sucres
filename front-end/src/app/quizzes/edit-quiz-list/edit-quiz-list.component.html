@@ -22,7 +22,7 @@
           <div><span class="font-weight-bold">{{quiz.name}}</span></div>
           <div class="infoQuiz">Thème : {{quiz.theme}}</div>
           <div class="infoQuiz">{{quiz.questions.length > 1 ? 'Nombre de questions : ' + quiz.questions.length : 'Nombre de question : ' + quiz.questions.length}}</div>
-          <div *ngIf="quiz.user" class="infoQuiz">Déstiné à : {{quiz.user}}</div>
+          <div *ngIf="quiz.user" class="infoQuiz">Destiné à : {{quiz.user}}</div>
         </div>
         <div class="p-2 ml-auto">
           <div class="btn btn-outline-info mr-2" (click)="editQuiz(quiz)"><i class="fas fa-pen"></i></div>

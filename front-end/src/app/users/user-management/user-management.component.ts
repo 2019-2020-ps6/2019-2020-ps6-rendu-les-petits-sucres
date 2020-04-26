@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../models/user.model';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-user-management',
@@ -16,7 +17,14 @@ export class UserManagementComponent implements OnInit {
   public nbPageTotal: number;
   public userLength: number;
 
-  constructor(private router: Router, public userService: UserService) {
+  constructor(private router: Router, public userService: UserService, private authenticationService: AuthenticationService) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
     if (localStorage.getItem('userListSearch') !== null) {
       this.userList = localStorage.getItem('userListSearch') && JSON.parse(localStorage.getItem('userListSearch'));
       this.userLength = this.userList.length;
