@@ -3,7 +3,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav mr-auto">
       <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
-        <a class="nav-link" routerLink="edit-user">Gérer les utilisateurs</a>
+        <a class="nav-link" routerLink="edit-user">Scores/Gérer les utilisateurs</a>
       </li>
       <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
         <a class="nav-link" routerLink="edit-quiz-list">Gérer les quiz</a>
@@ -20,7 +20,7 @@
         <div class="navbar-text"><i class="fas fa-user"></i>
           Vous êtes connecté  en tant que <strong>{{currentUser.firstName}} {{currentUser.lastName}}</strong>
   </div>
-      <li class="nav-item" *ngIf="currentUser">
+      <li class="nav-item" *ngIf="currentUser && !currentPathPlayQuiz()">
         <a class="nav-link" (click)="logout()">Se déconnecter <i class="fas fa-sign-out-alt"></i> </a>
       </li>
     </ul>

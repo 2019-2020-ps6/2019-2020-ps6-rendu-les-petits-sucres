@@ -27,4 +27,10 @@ export class HeaderComponent implements OnInit {
   currentPathConnexion() {
     return !(window.location.pathname === '/admin/login' || window.location.pathname === '/login');
   }
+
+  currentPathPlayQuiz() {
+    if (window.location.pathname.includes('/play-quiz')) {
+      return true;
+    }
+  }
 }

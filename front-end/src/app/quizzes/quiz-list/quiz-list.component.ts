@@ -15,7 +15,6 @@ export class QuizListComponent implements OnInit {
   public quizList: Quiz[] = [];
   public page: number;
   public pageSize = 6;
-  private showFilters = false;
 
   constructor(private router: Router, public quizService: QuizService) {
     if (localStorage.getItem('newQuizList') !== null) {
@@ -62,14 +61,6 @@ export class QuizListComponent implements OnInit {
   backPageOk() {
     if (this.page !== 1) {
       return true;
-    }
-  }
-
-  filters() {
-    if (this.showFilters === true) {
-      this.showFilters = false;
-    } else {
-      this.showFilters = true;
     }
   }
 }

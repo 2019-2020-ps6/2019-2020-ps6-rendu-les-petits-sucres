@@ -23,9 +23,12 @@ export class PlayQuizComponent implements OnInit {
   public timerEndSummary: any;
   public timer2: any;
   public timer3: any;
+  public timerHelp: any;
   public timerEndQuiz: any;
   public displayTimer = 10;
   public displayTimerEnd = 20;
+  private helpWrongAnswer = false;
+  private helpInactif = false;
 
   public playedQuiz: PlayedQuiz;
 
@@ -49,6 +52,11 @@ export class PlayQuizComponent implements OnInit {
     if (localStorage.getItem('quizEnd')) {
       this.toggleEndQuiz();
     }
+    this.timerHelp = setTimeout(() => {
+      if (this.helpWrongAnswer !== true) {
+        this.helpInactif = true;
+      }
+    }, 10000);
   }
 
   resetQuizLocalStorage() {
@@ -66,6 +74,9 @@ export class PlayQuizComponent implements OnInit {
   }
 
   toggleQuestionSummary() {
+    this.helpWrongAnswer = false;
+    this.helpInactif = false;
+    clearTimeout(this.timerHelp);
     this.deactivatesAnswers = [];
     this.showSummaryQuestion = true;
     localStorage.setItem('currentQuiz', this.quiz.id + '');
@@ -76,6 +87,9 @@ export class PlayQuizComponent implements OnInit {
   }
 
   toggleWrongAnswer(answer: Answer) {
+    this.helpWrongAnswer = true;
+    this.helpInactif = false;
+    clearTimeout(this.timerHelp);
     const answers = this.quiz.questions[this.currentQuestion].answers;
     this.deactivatesAnswers.push(answer);
     this.score -= (20 / this.quiz.questions.length) / (answers.length - 1); // Score calculation
@@ -93,6 +107,8 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private toggleNextQuestion() {
+    this.helpInactif = false;
+    clearTimeout(this.timerHelp);
     this.setTimer();
     if (this.skipSummaryOn) {
       clearTimeout(this.timerEndSummary);
@@ -118,11 +134,14 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private toggleEndQuiz() {
+    this.helpInactif = false;
+    clearTimeout(this.timerHelp);
     if (localStorage.getItem('currentUser')) {
       this.uploadResults();
     }
     this.setTimeEnd();
     this.timerEndQuiz = setTimeout(() => {
+      this.helpInactif = false;
       this.score = 20;
       this.currentQuestion = 0;
       this.showSummaryQuestion = false;
@@ -131,10 +150,18 @@ export class PlayQuizComponent implements OnInit {
       localStorage.setItem('score', this.score + '');
       this.quizEnd = false;
       localStorage.removeItem('quizEnd');
+      clearTimeout(this.timerHelp);
+      this.timerHelp = setTimeout(() => {
+        if (this.helpWrongAnswer !== true) {
+          this.helpInactif = true;
+        }
+      }, 10000);
       }, 20000);
   }
 
   private nextQuestion() {
+    this.helpInactif = false;
+    clearTimeout(this.timerHelp);
     this.showSummaryQuestion = false;
     this.currentQuestion ++;
     if (this.currentQuestion === this.quiz.questions.length) {
@@ -144,6 +171,11 @@ export class PlayQuizComponent implements OnInit {
     }
     localStorage.setItem('currentQuestion', this.currentQuestion + '');
     localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
+    if (this.helpWrongAnswer !== true) {
+      this.timerHelp = setTimeout(() => {
+        this.helpInactif = true;
+      }, 10000);
+    }
   }
 
   private skipSummary() {
@@ -185,6 +217,10 @@ export class PlayQuizComponent implements OnInit {
 
   private showEnd() {
     return this.currentQuestion === this.quiz.questions.length;
+  }
+
+  private showButtonEnd() {
+    return this.currentQuestion + 1 === this.quiz.questions.length;
   }
 
   goBack() {

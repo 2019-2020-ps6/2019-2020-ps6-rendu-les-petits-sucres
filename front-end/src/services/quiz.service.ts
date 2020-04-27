@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Quiz} from '../models/quiz.model';
 import {Question} from '../models/question.model';
 import {httpOptions, serverUrl} from '../configs/server.config';
@@ -50,6 +50,7 @@ export class QuizService {
       this.quizSelected$.next(quiz);
     });
   }
+
 
   setSelectedQuestion(quizId: string, questionId: string) {
     const urlWithId = this.quizUrl + '/' + quizId + '/' + this.questionsPath + '/' + questionId;
