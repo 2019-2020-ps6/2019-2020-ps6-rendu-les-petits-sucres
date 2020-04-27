@@ -162,7 +162,7 @@ export class PlayQuizComponent implements OnInit {
       localStorage.removeItem('quiz');
       localStorage.removeItem('quizEnd');
       localStorage.setItem('score', '20');
-      this.router.navigate(['/play-quiz/quiz-start/' + this.quiz.id]);
+      this.router.navigate(['/play-quiz/quiz-start/' + this.quiz.id]).then();
       }, 20000);
   }
 
@@ -238,7 +238,7 @@ export class PlayQuizComponent implements OnInit {
     localStorage.removeItem('quizEnd');
     localStorage.setItem('score', '20');
     clearTimeout(this.timerEndQuiz);
-    this.router.navigate(['/quiz-list/']);
+    this.router.navigate(['/quiz-list/']).then();
   }
 
   returnToQuizList() {

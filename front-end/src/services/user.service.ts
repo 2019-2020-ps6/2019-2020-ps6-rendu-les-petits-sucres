@@ -20,7 +20,6 @@ export class UserService {
   private userUrl = serverUrl + 'users/';
 
   constructor(private http: HttpClient) {
-    this.setPatientsFromUrl();
     this.setUsersFromUrl();
   }
 
@@ -37,13 +36,8 @@ export class UserService {
   setUsersFromUrl() {
     this.http.get<User[]>(this.userUrl).subscribe((users) => {
       this.users = users;
-      this.users$.next(this.users);
-    });
-  }
-
-  setPatientsFromUrl() {
-    this.http.get<User[]>(this.userUrl).subscribe((users) => {
       this.patients = users.filter(user => !user.isAdmin);
+      this.users$.next(this.users);
       this.patients$.next(this.patients);
     });
   }

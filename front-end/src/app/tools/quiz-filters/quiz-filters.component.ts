@@ -27,7 +27,7 @@ export class QuizFiltersComponent implements OnInit {
     }
     this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
-      // this.quizList.reverse();
+      this.quizList.reverse();
       this.quizService.themes$.subscribe((themes) => this.themes = themes);
     });
   }
@@ -44,27 +44,19 @@ export class QuizFiltersComponent implements OnInit {
   }
 
   okValueSearch() {
-    if (localStorage.getItem('search') !== '') {
-      return true;
-    }
+    return localStorage.getItem('search') !== '';
   }
 
   okValueTheme() {
-    if (localStorage.getItem('theme') !== '') {
-      return true;
-    }
+    return localStorage.getItem('theme') !== '';
   }
 
   okValueUser() {
-    if (localStorage.getItem('user') !== 'false') {
-      return true;
-    }
+    return localStorage.getItem('user') !== 'false';
   }
 
-  okCurrentUser() {
-    if (localStorage.getItem('currentUser')) {
-      return true;
-    }
+  okCurrentUserIsNotAdmin() {
+    return localStorage.getItem('currentUser') && !JSON.parse(localStorage.getItem('currentUser')).isAdmin;
   }
 
   getValueSearch() {
@@ -102,7 +94,6 @@ export class QuizFiltersComponent implements OnInit {
     }
     const noFilters = this.searchForm.get('theme').value === '' && !this.searchForm.get('user').value
       && this.searchForm.get('search').value === '';
-    console.log(noFilters);
     localStorage.setItem('newQuizList', JSON.stringify(this.newQuizList));
     localStorage.setItem('filters', noFilters ? 'false' : 'true');
     localStorage.setItem('search', this.searchForm.get('search').value);

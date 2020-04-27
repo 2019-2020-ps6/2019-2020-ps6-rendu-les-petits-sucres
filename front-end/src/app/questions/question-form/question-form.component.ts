@@ -89,6 +89,7 @@ export class QuestionFormComponent implements OnInit {
         this.quizService.addQuestion(this.quiz, question);
         this.initializeQuestionForm(null);
         alert('La question a bien été créé !');
+        this.location.back();
       }
     }
   }
@@ -103,6 +104,7 @@ export class QuestionFormComponent implements OnInit {
     if (this.questionForm.valid) {
       if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
         this.quizService.editQuestion(String(quizId), question, this.question);
+        alert('La question a bien été modifié !');
         this.location.back();
       }
     }

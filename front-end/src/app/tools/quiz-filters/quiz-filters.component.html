@@ -21,7 +21,7 @@
       <button class="btn btn-outline-info my-2 my-sm-0" type="submit" (click)="applySearch()">Rechercher</button>
       </div>
     </div>
-    <div *ngIf="okCurrentUser()" class="custom-control custom-switch mr-sm-2">
+    <div *ngIf="okCurrentUserIsNotAdmin()" class="custom-control custom-switch mr-sm-2">
       <input type="checkbox" class="custom-control-input" id="user" [formControlName]="'user'">
       <label class="custom-control-label" for="user">Afficher seulement les quiz de {{getCurrentUser()}}</label>
     </div>

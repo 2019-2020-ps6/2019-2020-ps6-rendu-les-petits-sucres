@@ -53,6 +53,7 @@ export class UserFormComponent implements OnInit {
       this.userService.addUser(userToCreate);
       this.initializeUserForm(null);
       alert('L\'utilisateur a bien été créé !');
+      this.location.back();
     }
   }
 
@@ -60,6 +61,7 @@ export class UserFormComponent implements OnInit {
     if (this.userForm.valid) {
       const userToEdit = this.constructUserFromForm();
       this.userService.editUser(String(id), userToEdit);
+      alert('L\'utilisateur a bien été modifié !');
       this.location.back();
     }
   }

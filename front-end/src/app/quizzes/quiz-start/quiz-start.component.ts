@@ -24,9 +24,9 @@ export class QuizStartComponent implements OnInit {
 
   constructor(private quizService: QuizService, private activatedRoute: ActivatedRoute, private router: Router) {
       if (localStorage.getItem('currentQuiz') === this.activatedRoute.snapshot.paramMap.get('quizId')) {
-        this.router.navigate(['/play-quiz/' + this.activatedRoute.snapshot.paramMap.get('quizId')]);
+        this.router.navigate(['/play-quiz/' + this.activatedRoute.snapshot.paramMap.get('quizId')]).then();
     } else {
-        localStorage.setItem('currentQuiz', this.activatedRoute.snapshot.paramMap.get('quizId'))
+        localStorage.setItem('currentQuiz', this.activatedRoute.snapshot.paramMap.get('quizId'));
         this.quizService.setSelectedQuiz(this.activatedRoute.snapshot.paramMap.get('quizId'));
         this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
         this.setTimerWithTime(10000);
@@ -42,7 +42,7 @@ export class QuizStartComponent implements OnInit {
   playQuiz() {
     localStorage.setItem('score', '20');
     clearTimeout(this.timer);
-    this.router.navigate(['/play-quiz/' + this.quiz.id]);
+    this.router.navigate(['/play-quiz/' + this.quiz.id]).then();
   }
 
   getUrl(): string {
@@ -61,6 +61,6 @@ export class QuizStartComponent implements OnInit {
   backListQuiz() {
     localStorage.removeItem('currentQuiz');
     clearTimeout(this.timer);
-    this.router.navigate(['/list-quiz/']);
+    this.router.navigate(['/quiz-list']).then();
   }
 }

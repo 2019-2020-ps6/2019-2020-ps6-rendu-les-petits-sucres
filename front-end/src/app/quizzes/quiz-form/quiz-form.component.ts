@@ -53,6 +53,7 @@ export class QuizFormComponent implements OnInit {
       const quizToCreate = this.quizForm.value as Quiz;
       this.quizService.addQuiz(quizToCreate);
       this.initializeQuizForm();
+      alert('Le quiz a bien été créé !');
       this.router.navigate(['/edit-quiz-list/']).then();
     }
   }
