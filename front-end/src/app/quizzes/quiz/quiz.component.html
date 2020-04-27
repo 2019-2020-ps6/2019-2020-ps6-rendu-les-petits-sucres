@@ -5,7 +5,7 @@
     <div class="textQuiz">Thème : {{quiz.theme}}</div>
     <div class="textQuiz">{{quiz.questions.length > 1 ? 'Nombre de questions : ' + quiz.questions.length : 'Nombre de question : ' + quiz.questions.length}}</div>
     <div *ngIf="!pageEditQuiz" class="text-center">
-      <button class="btn btn-outline-info center mt-2" (click)="playQuiz()"><span class="font-weight-bold">Jouer au quiz</span></button>
+      <button class="btn btn-outline-info center mt-2" routerLink="/play-quiz/quiz-start/{{quiz.id}}"><span class="font-weight-bold">Lancer le quiz</span></button>
     </div>
     <div *ngIf="pageEditQuiz" class="text-center">
       <button class="btn btn-outline-info center" (click)="editQuiz()">Éditer</button>

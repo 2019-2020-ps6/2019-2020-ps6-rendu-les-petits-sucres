@@ -1,0 +1,28 @@
+@import '../../../styles/card.scss';
+
+.button-card {
+  margin-right: 10px;
+}
+
+.image {
+  background-size: cover;
+  width: 12rem;
+  height: 100px;
+}
+
+
+.textQuiz{
+  font-size: 13px;
+}
+
+.answer {
+  cursor: pointer;
+  background-color: $white;
+  font-weight: bold;
+  padding: 0.5em 1em;
+}
+
+.answer:hover
+{
+  background-color: #e0a800;
+}

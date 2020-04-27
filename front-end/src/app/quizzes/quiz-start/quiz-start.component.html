@@ -1,0 +1,16 @@
+<button type="button" class="btn btn-outline-info mt-2" (click)="backListQuiz()"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
+
+<div class="text-center">
+  <div *ngIf="quiz.image" class="image mt-1 mx-auto d-block" [ngStyle]="{ 'background-image': 'url(' + getUrl() + ')'}"></div>
+   <div *ngIf="!quiz.image" class="image mt-1 mx-auto d-block" style="background-image:url('https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg')"></div>
+  <span class="font-weight-bold">{{quiz.name}}</span>
+    <div class="textQuiz">Thème : {{quiz.theme}}</div>
+    <div class="textQuiz">{{quiz.questions.length > 1 ? 'Nombre de questions : ' + quiz.questions.length : 'Nombre de question : ' + quiz.questions.length}}</div>
+  <div class="h6 mt-4 text-info">Sélectionnez la bonne réponse pour répondre aux questions posées.</div>
+  <div class="h6 text-info"> Les réponses possibles se surlignent en jaune.</div>
+  <div class="text-center">
+      <button class="btn btn-outline-info center mt-2 answer" (click)="playQuiz()"><span class="font-weight-bold">Jouer au quiz</span></button>
+    <div class="text-center mb-5">Le quiz commence dans {{displayTimer}} secondes </div>
+    </div>
+  </div>
+

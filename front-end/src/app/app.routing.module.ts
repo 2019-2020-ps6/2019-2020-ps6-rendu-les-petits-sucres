@@ -18,6 +18,7 @@ import {UserManagementComponent} from './users/user-management/user-management.c
 import {CreateQuestionComponent} from './questions/create-question/create-question.component';
 import {UserQuizListComponent} from './users/user-quiz-list/user-quiz-list.component';
 import {UserQuizStatComponent} from './users/user-quiz-stat/user-quiz-stat.component';
+import {QuizStartComponent} from './quizzes/quiz-start/quiz-start.component';
 
 const routes: Routes = [
   {path: 'quiz-list', component: QuizListComponent},
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'edit-user', component: UserManagementComponent},
   {path: 'edit-theme', component: EditThemeListComponent},
   {path: 'create-question/:quizId', component: CreateQuestionComponent},
+  {path: 'play-quiz/quiz-start/:quizId', component: QuizStartComponent},
   { path: '**', redirectTo: '/quiz-list'}
 ];
 

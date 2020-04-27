@@ -156,6 +156,13 @@ export class PlayQuizComponent implements OnInit {
           this.helpInactif = true;
         }
       }, 10000);
+      localStorage.removeItem('currentQuiz');
+      localStorage.removeItem('currentQuestion');
+      localStorage.removeItem('summaryQuestion');
+      localStorage.removeItem('quiz');
+      localStorage.removeItem('quizEnd');
+      localStorage.setItem('score', '20');
+      this.router.navigate(['/play-quiz/quiz-start/' + this.quiz.id]);
       }, 20000);
   }
 
@@ -229,8 +236,9 @@ export class PlayQuizComponent implements OnInit {
     localStorage.removeItem('summaryQuestion');
     localStorage.removeItem('quiz');
     localStorage.removeItem('quizEnd');
-    localStorage.removeItem('score');
-    this.router.navigate(['/quiz-list/']).then();
+    localStorage.setItem('score', '20');
+    clearTimeout(this.timerEndQuiz);
+    this.router.navigate(['/quiz-list/']);
   }
 
   returnToQuizList() {
