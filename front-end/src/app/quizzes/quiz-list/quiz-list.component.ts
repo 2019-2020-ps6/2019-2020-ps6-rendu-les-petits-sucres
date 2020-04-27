@@ -20,9 +20,9 @@ export class QuizListComponent implements OnInit {
     if (localStorage.getItem('newQuizList') !== null) {
       this.quizList = localStorage.getItem('newQuizList') && JSON.parse(localStorage.getItem('newQuizList'));
     } else {
-      this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
+      this.quizService.quizzes$.subscribe((quizzes) => {
         this.quizList = quizzes;
-        this.quizList.reverse();
+        // this.quizList.reverse();
       });
     }
     this.page = 1;
@@ -32,7 +32,7 @@ export class QuizListComponent implements OnInit {
   }
 
   playQuiz(quiz: Quiz) {
-    this.router.navigate(['/play-quiz/' + quiz.id]);
+    this.router.navigate(['/play-quiz/' + quiz.id]).then();
   }
 
   nextPage() {

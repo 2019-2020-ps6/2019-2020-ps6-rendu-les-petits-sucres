@@ -1,7 +1,7 @@
 <div class="d-flex flex-column">
   <div><form class="form-inline my-2 my-lg-0 justify-content-center" [formGroup]="themeSortForm">
       <select class="form-control mr-sm-2" [formControlName]="'theme'">
-        <option value="" disabled selected>Sélectionner un thème</option>
+        <option value="" disabled selected>Recherche un thème</option>
         <option value="" *ngFor="let currentTheme of themes" [value]="currentTheme.name">
           {{currentTheme.name}}
         </option>

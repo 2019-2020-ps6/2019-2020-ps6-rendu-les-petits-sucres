@@ -20,10 +20,10 @@ export class UserManagementComponent implements OnInit {
   constructor(private router: Router, public userService: UserService, private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue != null) {
       if (!this.authenticationService.currentUserValue.isAdmin) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then();
       }
     } else {
-      this.router.navigate(['/admin/login/']);
+      this.router.navigate(['/admin/login/']).then();
     }
     if (localStorage.getItem('userListSearch') !== null) {
       this.userList = localStorage.getItem('userListSearch') && JSON.parse(localStorage.getItem('userListSearch'));
@@ -32,7 +32,7 @@ export class UserManagementComponent implements OnInit {
     } else {
       this.userService.users$.subscribe((users: User[]) => {
         this.userList = users;
-        this.userList.reverse();
+        // this.userList.reverse();
         this.userLength = users.length;
         this.nbPageTotal = (this.userLength / this.pageSize) - ((this.userLength % this.pageSize) / this.pageSize) + 1;
       });
@@ -44,7 +44,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   editUser(user: User) {
-    this.router.navigate(['/edit-user/' + user.id]);
+    this.router.navigate(['/edit-user/' + user.id]).then();
   }
 
   deleteUser(user: User) {
@@ -82,6 +82,6 @@ export class UserManagementComponent implements OnInit {
   }
 
   seeUserStats(user: User) {
-    this.router.navigate(['/user-account/' + user.id]);
+    this.router.navigate(['/user-account/' + user.id]).then();
   }
 }

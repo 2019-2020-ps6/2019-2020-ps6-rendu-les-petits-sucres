@@ -13,8 +13,7 @@ export class SearchComponent implements OnInit {
 
   private quizList: Quiz[] = [];
   private quizListSearch: Quiz[] = [];
-  private quizListThemeSort: Quiz[] = [];
-  private quizListUserSort: Quiz[] = [];
+  public quizListThemeSort: Quiz[] = [];
   private newQuizList: Quiz[] = [];
   private searchForm: FormGroup;
 

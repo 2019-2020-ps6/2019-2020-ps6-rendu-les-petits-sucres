@@ -25,10 +25,10 @@ export class QuizFormComponent implements OnInit {
               public userService: UserService, private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue != null) {
       if (!this.authenticationService.currentUserValue.isAdmin) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then();
       }
     } else {
-      this.router.navigate(['/admin/login/']);
+      this.router.navigate(['/admin/login/']).then();
     }
     this.userService.patients$.subscribe((patients) => this.patients = patients);
     this.quizService.themes$.subscribe((themes) => this.themes = themes);
@@ -53,7 +53,7 @@ export class QuizFormComponent implements OnInit {
       const quizToCreate = this.quizForm.value as Quiz;
       this.quizService.addQuiz(quizToCreate);
       this.initializeQuizForm();
-      this.router.navigate(['/edit-quiz-list/']);
+      this.router.navigate(['/edit-quiz-list/']).then();
     }
   }
 }

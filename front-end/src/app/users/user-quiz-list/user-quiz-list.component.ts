@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../models/user.model';
 import {PlayedQuiz} from '../../../models/playedQuiz.model';
 import {PlayedQuizService} from '../../../services/playedQuiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Quiz} from "../../../models/quiz.model";
-import {QuizService} from "../../../services/quiz.service";
+import {Quiz} from '../../../models/quiz.model';
+import {QuizService} from '../../../services/quiz.service';
 
 @Component({
   selector: 'app-user-quiz-list',
@@ -17,8 +16,6 @@ export class UserQuizListComponent implements OnInit {
   playedQuizzes: PlayedQuiz[];
   listQuiz: Quiz[] = [];
   listQuizId: string[] = [];
-
-  averageScore: string;
   public page: number;
   public pageSize = 10;
   public nbPageTotal: number;
@@ -75,6 +72,6 @@ export class UserQuizListComponent implements OnInit {
   }
 
   seeUserStats() {
-    this.router.navigate(['/user-account/' + this.idUser]);
+    this.router.navigate(['/user-account/' + this.idUser]).then();
   }
 }

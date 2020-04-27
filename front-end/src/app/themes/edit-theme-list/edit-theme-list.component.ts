@@ -25,7 +25,7 @@ export class EditThemeListComponent implements OnInit {
     } else {
       this.quizService.themes$.subscribe((themes: Theme[]) => {
         this.themeList = themes;
-        this.themeList.reverse();
+        // this.themeList.reverse();
         this.themeLength = themes.length;
         this.nbPageTotal = (this.themeLength / this.pageSize) - (( this.themeLength % this.pageSize ) / this.pageSize ) + 1 ;
       });
@@ -37,7 +37,7 @@ export class EditThemeListComponent implements OnInit {
   }
 
   editTheme(theme: Theme) {
-    this.router.navigate(['/edit-theme/' + theme.id]);
+    this.router.navigate(['/edit-theme/' + theme.id]).then();
   }
 
   deleteTheme(theme: Theme) {
@@ -52,7 +52,7 @@ export class EditThemeListComponent implements OnInit {
   nextPage() {
     if (this.page * this.pageSize < this.themeList.length) {
       this.page = this.page + 1;
-      if  (this.page * this.pageSize < this.themeList.length) {
+      if (this.page * this.pageSize < this.themeList.length) {
         return true;
       }
       return true;

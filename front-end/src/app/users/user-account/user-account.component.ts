@@ -15,7 +15,7 @@ export class UserAccountComponent implements OnInit {
   idUser: string;
   playedQuizzes: PlayedQuiz[];
 
-  averageScore: string;
+  averageScore: number;
   public page: number;
   public pageSize = 10;
   public nbPageTotal: number;
@@ -66,10 +66,10 @@ export class UserAccountComponent implements OnInit {
       this.playedQuizzes.forEach((playedQuiz) => (score += playedQuiz.score));
       score /= this.playedQuizzes.length;
     }
-    return score.toFixed(2);
+    return score;
   }
 
   seeUserStats() {
-    this.router.navigate(['/user-quiz-list/' + this.idUser]);
+    this.router.navigate(['/user-quiz-list/' + this.idUser]).then();
   }
 }

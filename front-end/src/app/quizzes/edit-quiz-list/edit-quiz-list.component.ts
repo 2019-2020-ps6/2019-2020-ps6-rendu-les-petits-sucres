@@ -21,19 +21,19 @@ export class EditQuizListComponent implements OnInit {
   constructor(private router: Router, public quizService: QuizService, private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue != null) {
       if (!this.authenticationService.currentUserValue.isAdmin) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then();
       }
     } else {
-      this.router.navigate(['/admin/login/']);
+      this.router.navigate(['/admin/login/']).then();
     }
     if (localStorage.getItem('newQuizListEdit') !== null) {
       this.quizList = localStorage.getItem('newQuizListEdit') && JSON.parse(localStorage.getItem('newQuizListEdit'));
       this.quizLength = this.quizList.length;
       this.nbPageTotal = (this.quizLength / this.pageSize) - (( this.quizLength % this.pageSize ) / this.pageSize ) + 1;
     } else {
-      this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
+      this.quizService.quizzes$.subscribe((quizzes) => {
         this.quizList = quizzes;
-        this.quizList.reverse();
+        // this.quizList.reverse();
         this.quizLength = quizzes.length;
         this.nbPageTotal = (this.quizLength / this.pageSize) - (( this.quizLength % this.pageSize ) / this.pageSize ) + 1 ;
       });
@@ -45,7 +45,7 @@ export class EditQuizListComponent implements OnInit {
   }
 
   editQuiz(quiz: Quiz) {
-    this.router.navigate(['/question-list/' + quiz.id]);
+    this.router.navigate(['/question-list/' + quiz.id]).then();
   }
 
   deleteQuiz(quiz: Quiz) {

@@ -26,7 +26,7 @@ export class LoginPatientsComponent implements OnInit {
               private authenticationService: AuthenticationService) {
     this.userService.patients$.subscribe((patients) => this.patients = patients);
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then();
     }
   }
 
@@ -53,8 +53,8 @@ export class LoginPatientsComponent implements OnInit {
     this.authenticationService.loginPatient(this.formFields.username.value)
       .pipe(first())
       .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
+        () => {
+          this.router.navigate([this.returnUrl]).then();
         });
   }
 }

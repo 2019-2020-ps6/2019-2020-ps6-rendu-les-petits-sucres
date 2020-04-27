@@ -39,7 +39,7 @@ import {SearchThemeComponent} from './tools/search-theme/search-theme.component'
 import {ThemeSortComponent} from './tools/theme-sort/theme-sort.component';
 import {QuizFiltersComponent} from './tools/quiz-filters/quiz-filters.component';
 import {UserQuizListComponent} from './users/user-quiz-list/user-quiz-list.component';
-import {UserQuizStatComponent} from "./users/user-quiz-stat/user-quiz-stat.component";
+import {UserQuizStatComponent} from './users/user-quiz-stat/user-quiz-stat.component';
 
 
 @NgModule({

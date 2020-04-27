@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../models/user.model';
 import {PlayedQuiz} from '../../../models/playedQuiz.model';
 import {PlayedQuizService} from '../../../services/playedQuiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
 
 @Component({
@@ -20,7 +18,7 @@ export class UserQuizStatComponent implements OnInit {
   listQuiz: PlayedQuiz[] = [];
   listQuizId: string[] = [];
 
-  averageScore: string;
+  averageScore: number;
   public page: number;
   public pageSize = 10;
   public nbPageTotal: number;
@@ -38,13 +36,12 @@ export class UserQuizStatComponent implements OnInit {
           if (quiz.quizId.toString() === quizId && !this.listQuizId.includes(quiz.id.toString())) {
             this.listQuizId.push(quiz.id.toString());
             this.listQuiz.push(quiz);
-            console.log(quiz)
           }
         }
         this.titleQuiz = this.listQuiz[0].name;
         this.averageScore = this.calculateAverageScore();
       }
-    );
+      );
       this.page = 1;
   }
 
@@ -82,10 +79,10 @@ export class UserQuizStatComponent implements OnInit {
       this.listQuiz.forEach((listQuiz) => (score += listQuiz.score));
       score /= this.listQuiz.length;
     }
-    return score.toFixed(2);
+    return score;
   }
 
   seeUserStats() {
-    this.router.navigate(['/user-quiz-list/' + this.idUser]);
+    this.router.navigate(['/user-quiz-list/' + this.idUser]).then();
   }
 }

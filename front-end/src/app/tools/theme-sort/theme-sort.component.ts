@@ -3,7 +3,6 @@ import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Theme} from '../../../models/theme.model';
-import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,9 +13,8 @@ import {Router} from '@angular/router';
 export class ThemeSortComponent implements OnInit {
 
   private quizList: Quiz[] = [];
-  private quizListSearch: Quiz[] = [];
+  public quizListSearch: Quiz[] = [];
   private quizListThemeSort: Quiz[] = [];
-  private quizListUserSort: Quiz[] = [];
   private newQuizList: Quiz[] = [];
   private themeSortForm: FormGroup;
   public themes: Theme[];
@@ -71,7 +69,7 @@ export class ThemeSortComponent implements OnInit {
       }
       localStorage.setItem('newQuizListEdit', JSON.stringify(this.newQuizList));
     }
-    document.location.reload();
+    // document.location.reload();
   }
 
   localStorage() {

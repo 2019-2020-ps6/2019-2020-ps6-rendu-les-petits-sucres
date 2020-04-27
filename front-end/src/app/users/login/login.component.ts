@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
               private router: Router, private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then();
     }
   }
 
@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.formFields.username.value, this.formFields.password.value)
       .pipe(first())
       .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
+        () => {
+          this.router.navigate([this.returnUrl]).then();
         },
         error => {
           this.error = error;

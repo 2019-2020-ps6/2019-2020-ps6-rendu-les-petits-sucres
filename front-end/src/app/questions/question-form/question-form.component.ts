@@ -27,10 +27,10 @@ export class QuestionFormComponent implements OnInit {
               private authenticationService: AuthenticationService, private router: Router) {
     if (this.authenticationService.currentUserValue != null) {
       if (!this.authenticationService.currentUserValue.isAdmin) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then();
       }
     } else {
-      this.router.navigate(['/admin/login/']);
+      this.router.navigate(['/admin/login/']).then();
     }
     this.initializeQuestionForm(this.question ? this.question : null);
   }

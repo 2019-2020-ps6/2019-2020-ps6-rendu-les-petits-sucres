@@ -230,7 +230,7 @@ export class PlayQuizComponent implements OnInit {
     localStorage.removeItem('quiz');
     localStorage.removeItem('quizEnd');
     localStorage.removeItem('score');
-    this.router.navigate(['/quiz-list/']);
+    this.router.navigate(['/quiz-list/']).then();
   }
 
   returnToQuizList() {
@@ -239,7 +239,7 @@ export class PlayQuizComponent implements OnInit {
       this.goBack();
     } else {
       localStorage.removeItem('quizEnd');
-      this.router.navigate(['/quiz-list/']);
+      this.router.navigate(['/quiz-list/']).then();
     }
   }
 }
