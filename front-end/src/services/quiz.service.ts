@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Quiz} from '../models/quiz.model';
 import {Question} from '../models/question.model';
 import {httpOptions, serverUrl} from '../configs/server.config';
@@ -12,13 +12,7 @@ import {Theme} from '../models/theme.model';
 export class QuizService {
 
   private quizzes: Quiz[] = [];
-
   private themes: Theme[] = [];
-
-  /**
-   * Observable which contains the list of the quiz.
-   * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
-   */
 
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   public themes$: BehaviorSubject<Theme[]> = new BehaviorSubject(this.themes);
@@ -47,6 +41,7 @@ export class QuizService {
 
   addQuiz(quiz: Quiz) {
     this.http.post<Quiz>(this.quizUrl, quiz, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.setQuizzesFromUrl();
   }
 
   setSelectedQuiz(quizId: string) {
@@ -55,6 +50,7 @@ export class QuizService {
       this.quizSelected$.next(quiz);
     });
   }
+
 
   setSelectedQuestion(quizId: string, questionId: string) {
     const urlWithId = this.quizUrl + '/' + quizId + '/' + this.questionsPath + '/' + questionId;
@@ -66,6 +62,7 @@ export class QuizService {
   deleteQuiz(quiz: Quiz) {
     const urlWithId = this.quizUrl + '/' + quiz.id;
     this.http.delete<Quiz>(urlWithId, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.setQuizzesFromUrl();
   }
 
   addQuestion(quiz: Quiz, question: Question) {
@@ -76,6 +73,7 @@ export class QuizService {
   deleteQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
     this.http.delete<Question>(questionUrl, httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+    this.setQuizzesFromUrl();
   }
 
   editQuestion(quizId: string, questionToAdd: Question, questionToDelete: Question) {
@@ -90,7 +88,8 @@ export class QuizService {
   }
 
   addTheme(theme: Theme) {
-    this.http.post<Theme>(this.themeUrl, theme, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.http.post<Theme>(this.themeUrl, theme, httpOptions).subscribe(() => this.setThemesFromUrl());
+    this.setThemesFromUrl();
   }
 
   setThemesFromUrl() {
@@ -109,13 +108,13 @@ export class QuizService {
 
   deleteTheme(theme: Theme) {
     const urlWithId = this.themeUrl + '/' + theme.id;
-    this.http.delete<Theme>(urlWithId, httpOptions).subscribe(() => this.setThemesFromUrl());
+    this.http.delete(urlWithId, httpOptions).subscribe(() => this.setThemesFromUrl());
+    this.setThemesFromUrl();
   }
 
   editTheme(themeId: string, theme: Theme) {
-    console.log(themeId);
     const themeUrl = this.themeUrl + '/' + themeId;
-    this.http.put<Theme>(themeUrl, theme, httpOptions).subscribe(() => this.setSelectedQuiz(themeId));
+    this.http.put(themeUrl, theme, httpOptions).subscribe(() => this.setSelectedTheme(themeId));
+    this.setThemesFromUrl();
   }
-
 }

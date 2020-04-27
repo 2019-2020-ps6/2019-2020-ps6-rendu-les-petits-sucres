@@ -1,4 +1,4 @@
-<button type="button" class="back btn btn-outline-info mt-2" routerLink="/quiz-list"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
+<button *ngIf="!showEnd()" type="button" class="back btn btn-outline-info mt-2" (click)="returnToQuizList()"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
 
 <ng-container *ngIf="quiz">
   <ng-container *ngIf="currentQuestion != quiz.questions.length">
@@ -47,16 +47,18 @@
         </div>
       </div>
       </div>
+      <div *ngIf="helpWrongAnswer" class="text-center text-info"><i class="far fa-question-circle"></i> Sélectionnez une autre réponse qui n'est pas grisée</div>
+      <div *ngIf="helpInactif" class="text-center text-info"><i class="far fa-question-circle"></i> Sélectionnez une réponse qui se surligne en jaune pour répondre à la question</div>
     </ng-container>
     <ng-container class="justify-content-center" *ngIf="showSummaryQuestion">
-      <div class="text-info text-center mb-3 mt-3">
-        <h3>Bravo vous avez sélectionné la bonne réponse ! </h3>
+      <div class="text-info text-center mb-5 mt-3">
+        <h3>Bravo vous avez sélectionné la bonne réponse !</h3>
       </div>
-      <h2 class="text-center mt-4">{{quiz.questions[currentQuestion].label}}</h2>
+      <h5 class="text-center mt-5">{{quiz.questions[currentQuestion].label}}</h5>
       <ng-container *ngFor="let answer of quiz.questions[currentQuestion].answers">
         <div *ngIf="answer.image;else elseBlock">
           <div *ngIf="answer.isCorrect === 'true'">
-            <div class="text-center mt-4">La bonne réponse était :</div>
+            <div class="text-center mt-4">La bonne réponse est :</div>
               <figure class="answerDesactivateImage">
                 <img class=" p-2" src="{{answer.image}}" alt="{{answer.image}}">
                 <figcaption>{{answer.value}}</figcaption>
@@ -64,10 +66,14 @@
             </div>
           </div>
         <ng-template #elseBlock>
-          <div class="text-center mt-4" *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div></ng-template>
+          <div class="text-center mt-4 mb-4" *ngIf="answer.isCorrect === 'true'">La bonne réponse est : <span class="font-weight-bold">{{answer.value}}</span></div></ng-template>
       </ng-container>
-      <button type="button" class="btn btn-outline-info center mt-2 back" (click)="skipSummary();">Passer à la question suivante</button>
-      <div class="text-center">Vous passerez à la question suivante dans {{displayTimer}} secondes </div>
+      <div class="fixed-bottom mb-5">
+      <button *ngIf="!showButtonEnd()" type="button" class="btn btn-outline-info center back mb-2" (click)="skipSummary();">Passer à la question suivante</button>
+      <button *ngIf="showButtonEnd()" type="button" class="btn btn-outline-info center back mb-2" (click)="skipSummary();">Finir le quiz</button>
+      <div *ngIf="!showButtonEnd()" class="text-center mb-5">Vous passerez à la question suivante dans {{displayTimer}} secondes </div>
+      <div *ngIf="showButtonEnd()" class="text-center mb-5">Vous finirez le quiz dans {{displayTimer}} secondes </div>
+      </div>
     </ng-container>
   </ng-container>
 
@@ -81,7 +87,7 @@
         <div *ngFor="let answer of question.answers">
           <div *ngIf="answer.image;else elseBlock2">
             <div *ngIf="answer.isCorrect === 'true'">
-              <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span>
+              <div *ngIf="answer.isCorrect === 'true'">La bonne réponse est : <span>
               <figure class="answerDesactivateImage">
                 <img src="{{answer.image}}" alt="{{answer.image}}">
                 <figcaption>{{answer.value}}</figcaption>
@@ -91,7 +97,7 @@
           </div>
           </div>
           <ng-template #elseBlock2>
-            <div *ngIf="answer.isCorrect === 'true'">La bonne réponse était : <span class="font-weight-bold">{{answer.value}}</span></div></ng-template>
+            <div *ngIf="answer.isCorrect === 'true'">La bonne réponse est : <span class="font-weight-bold">{{answer.value}}</span></div></ng-template>
         </div>
       </li>
     </ul>

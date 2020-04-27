@@ -3,7 +3,7 @@
    <div *ngIf="!quiz.image" class="image mt-1" style="background-image:url('https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg')"></div>
   <p class="card-text"><span class="font-weight-bold">{{quiz.name}}</span></p>
     <div class="textQuiz">Thème : {{quiz.theme}}</div>
-    <div class="textQuiz">Nombre de questions : {{quiz.questions.length}}</div>
+    <div class="textQuiz">{{quiz.questions.length > 1 ? 'Nombre de questions : ' + quiz.questions.length : 'Nombre de question : ' + quiz.questions.length}}</div>
     <div *ngIf="!pageEditQuiz" class="text-center">
       <button class="btn btn-outline-info center mt-2" (click)="playQuiz()"><span class="font-weight-bold">Jouer au quiz</span></button>
     </div>

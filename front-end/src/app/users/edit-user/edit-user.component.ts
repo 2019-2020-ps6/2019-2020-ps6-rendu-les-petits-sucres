@@ -20,5 +20,4 @@ export class EditUserComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('userId');
     this.userService.setSelectedUser(userId);
   }
-
 }

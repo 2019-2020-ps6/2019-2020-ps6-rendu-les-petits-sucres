@@ -1,14 +1,15 @@
-<app-search class="d-flex justify-content-center mt-2"></app-search>
+<app-quiz-filters class="d-flex justify-content-center"></app-quiz-filters>
+
 <div id="carouselExampleControls" class="carousel slide d-flex justify-content-center" data-ride="carousel">
   <div class="carousel-inner mr-5 ml-5 pr-5 pl-5 w-75 ">
     <div class="carousel-item active mt-1">
       <div class="quiz-list d-flex flex-wrap justify-content-center">
-        <div class="quiz" *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-          <app-quiz [quiz]="quiz"(quizPlayed)="playQuiz($event)"></app-quiz>
-        </div>
+        <ng-container class="quiz" *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+          <app-quiz [quiz]="quiz" (quizPlayed)="playQuiz($event)"></app-quiz>
+        </ng-container>
       </div>
-</div>
-</div>
+    </div>
+  </div>
 </div>
 <div class="bg-info clearfix">
 <a *ngIf="backPageOk()" class="carousel-control-prev mt-5 h1 " (click)="backPage()" role="button" data-slide="prev">

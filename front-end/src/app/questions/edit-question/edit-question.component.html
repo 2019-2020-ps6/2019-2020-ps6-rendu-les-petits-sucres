@@ -1,5 +1,5 @@
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/question-list/{{quizId}}"><i class="fas fa-arrow-left"></i> Retour</button>
+
 <ng-container *ngIf="question">
-  <button class="button-card" routerLink="/edit-quiz/{{question.quizId}}">Retour</button>
-  <br>
   <app-question-form [question]="question"></app-question-form>
 </ng-container>

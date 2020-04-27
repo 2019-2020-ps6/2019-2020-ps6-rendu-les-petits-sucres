@@ -4,6 +4,8 @@ import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
 import {Question} from 'src/models/question.model';
 import {Location} from '@angular/common';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-question-form',
@@ -21,8 +23,16 @@ export class QuestionFormComponent implements OnInit {
   public questionForm: FormGroup;
   public trueOrFalse: boolean[] = [true, false]; // Vrai ou faux
 
-  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location) {
-    this.initializeQuestionForm(null);
+  constructor(public formBuilder: FormBuilder, private quizService: QuizService, private location: Location,
+              private authenticationService: AuthenticationService, private router: Router) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
+    this.initializeQuestionForm(this.question ? this.question : null);
   }
 
   private initializeQuestionForm(question: Question) {
@@ -63,6 +73,7 @@ export class QuestionFormComponent implements OnInit {
   }
 
   addQuestion() {
+    this.correctValuesForImageAnswer();
     for (const answer of this.questionForm.value.answers) {
       if (answer.image !== '' && answer.value === '') {
         answer.value = ' ';
@@ -77,20 +88,23 @@ export class QuestionFormComponent implements OnInit {
       if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
         this.quizService.addQuestion(this.quiz, question);
         this.initializeQuestionForm(null);
+        alert('La question a bien été créé !');
       }
     }
   }
 
   editQuestion(quizId: number) {
-    for (const answer of this.questionForm.value.answers) {
-      if (answer.image !== '' && answer.value === '') {
-        answer.value = ' ';
-      }
-    }
+    this.correctValuesForImageAnswer();
+    const question = this.questionForm.value as Question;
+    const isCorrectAnswers = [];
+    question.answers.forEach(answer => {
+      isCorrectAnswers.push(answer.isCorrect);
+    });
     if (this.questionForm.valid) {
-      const question = this.questionForm.value as Question;
-      this.quizService.editQuestion(String(quizId), question, this.question);
-      this.location.back();
+      if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
+        this.quizService.editQuestion(String(quizId), question, this.question);
+        this.location.back();
+      }
     }
   }
 
@@ -109,5 +123,13 @@ export class QuestionFormComponent implements OnInit {
       label: question.label,
       answers: question.answers,
     });
+  }
+
+  private correctValuesForImageAnswer() {
+    for (const answer of this.questionForm.value.answers) {
+      if (answer.image !== '' && answer.value === '') {
+        answer.value = ' ';
+      }
+    }
   }
 }

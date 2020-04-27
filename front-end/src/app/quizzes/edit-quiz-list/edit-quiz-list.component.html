@@ -1,34 +1,44 @@
-<button type="button" class="back btn btn-outline-info mt-2" routerLink="/quiz-list"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/quiz-list"><i class="fas fa-arrow-left"></i>
+  Retourner à la liste des quiz
+</button>
 
 <app-search class="d-flex justify-content-center mt-2"></app-search>
+<app-theme-sort class="d-flex justify-content-center mt-2"></app-theme-sort>
+
 <div class="text-right mr-5">
-<div class="btn btn-info mb-2 mr-5" routerLink="/create-quiz"><i class="fas fa-plus"></i> Créer un nouveau quiz</div>
+  <div class="btn btn-info mb-2 mr-5" routerLink="/create-quiz"><i class="fas fa-plus"></i> Créer un nouveau quiz</div>
 </div>
 <ul class="list-group ml-5 mr-5 mb-3">
-    <div *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-      <li class="list-group-item ml-5 mr-5">
-        <div class="d-flex flex-row">
-          <div class="p-2">
-            <div *ngIf="quiz.image" class="image mt-1" [ngStyle]="{ 'background-image': 'url(' + getUrl(quiz) + ')'}"></div>
-            <div *ngIf="!quiz.image" class="image mt-1" style="background-image:url('https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg')"></div></div>
-          <div class="p-2">
-            <div><span class="font-weight-bold">{{quiz.name}}</span></div>
-            <div class="infoQuiz">Thème: {{quiz.theme}}</div>
-            <div class="infoQuiz">Nombre de question: {{quiz.questions.length}}</div></div>
-          <div class="p-2 ml-auto">
-            <div class="btn btn-outline-info mr-2" (click)="editQuiz(quiz)"><i class="fas fa-pen"></i></div>
-            <div class="btn btn-outline-danger" (click)="deleteQuiz(quiz)"><i class="fas fa-trash-alt"></i></div>
-          </div>
+  <ng-container *ngFor="let quiz of quizList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <li class="list-group-item ml-5 mr-5">
+      <div class="d-flex flex-row">
+        <div class="p-2">
+          <div *ngIf="quiz.image" class="image mt-1"
+               [ngStyle]="{ 'background-image': 'url(' + getUrl(quiz) + ')'}"></div>
+          <div *ngIf="!quiz.image" class="image mt-1"
+               style="background-image:url('https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg')"></div>
         </div>
-      </li>
-    </div>
+        <div class="p-2">
+          <div><span class="font-weight-bold">{{quiz.name}}</span></div>
+          <div class="infoQuiz">Thème : {{quiz.theme}}</div>
+          <div class="infoQuiz">{{quiz.questions.length > 1 ? 'Nombre de questions : ' + quiz.questions.length : 'Nombre de question : ' + quiz.questions.length}}</div>
+          <div *ngIf="quiz.user" class="infoQuiz">Destiné à : {{quiz.user}}</div>
+        </div>
+        <div class="p-2 ml-auto">
+          <div class="btn btn-outline-info mr-2" (click)="editQuiz(quiz)"><i class="fas fa-pen"></i></div>
+          <div class="btn btn-outline-danger" (click)="deleteQuiz(quiz)"><i class="fas fa-trash-alt"></i></div>
+        </div>
+      </div>
+    </li>
+  </ng-container>
 </ul>
-<nav aria-label="Page navigation example">
+
+<nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
-    <li class="page-item"><a class="page-link" (click)="backPage()">Previous</a></li>
-    <div *ngFor="let in of counter(nbPageTotal) ;let i = index">
-    <li class="page-item"><a class="page-link" (click)="afficherPage(i)">{{i+1}}</a></li>
-    </div>
-    <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
+    <li class="page-item"><a class="page-link" (click)="backPage()">Précédent</a></li>
+    <ng-container *ngFor="let currentPage of counter(nbPageTotal); let i = index">
+      <li class="page-item"><a class="page-link" (click)="showPage(i)">{{i + 1}}</a></li>
+    </ng-container>
+    <li class="page-item"><a class="page-link" (click)="nextPage()">Suivant</a></li>
   </ul>
 </nav>

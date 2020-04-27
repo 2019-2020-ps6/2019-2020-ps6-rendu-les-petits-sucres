@@ -1,0 +1,5 @@
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/question-list/{{quizId}}"><i class="fas fa-arrow-left"></i> Retour</button>
+
+<ng-container *ngIf="quiz">
+  <app-question-form [quiz]="quiz"></app-question-form>
+</ng-container>

@@ -4,4 +4,5 @@ export interface PlayedQuiz {
   score: number;
   userId: number;
   id: number;
+  date: Date;
 }

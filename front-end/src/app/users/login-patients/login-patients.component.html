@@ -2,18 +2,16 @@
 
 <div class="col-md-6 offset-md-3 mt-5">
   <div class="card">
-    <h4 class="card-header">Connecter un joueur</h4>
+    <h4 class="card-header text-center">Connecter un patient</h4>
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label>
-            Choisir un joueur dans la liste :
-            <select formControlName="username" class="custom-select">
+          <label for="patientList">Choisir un patient dans la liste :</label>
+            <select id="patientList" formControlName="username" class="form-control">
               <option *ngFor="let patient of patients" [value]=patient.username>
                 {{patient.firstName}} {{patient.lastName}}
               </option>
             </select>
-          </label>
         </div>
         <div class="text-center">
         <button [disabled]="loading" class="btn btn-info">
@@ -26,3 +24,4 @@
     </div>
   </div>
 </div>
+<div class="text-center mt-2" ><a routerLink="/admin/login">Se connecter avec un compte administrateur</a></div>

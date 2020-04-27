@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../models/user.model';
 import {Location} from '@angular/common';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -17,8 +19,16 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   hide = true;
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService, private location: Location) {
-    this.initializeUserForm(null);
+  constructor(public formBuilder: FormBuilder, public userService: UserService, private location: Location,
+              private authenticationService: AuthenticationService, private router: Router) {
+    if (this.authenticationService.currentUserValue != null) {
+      if (!this.authenticationService.currentUserValue.isAdmin) {
+        this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/admin/login/']);
+    }
+    this.initializeUserForm(this.user ? this.user : null);
   }
 
   private initializeUserForm(user: User) {
@@ -26,7 +36,7 @@ export class UserFormComponent implements OnInit {
       firstName: user ? user.firstName : ['', Validators.required],
       lastName: user ? user.lastName : ['', Validators.required],
       username: user ? user.username : [''],
-      password: user ? user.password : ['', Validators.required],
+      password: user ? user.password : [''],
       isAdmin: user ? user.isAdmin : false,
     });
   }
@@ -39,17 +49,16 @@ export class UserFormComponent implements OnInit {
 
   addUser() {
     if (this.userForm.valid) {
-      const userToCreate: User = this.userForm.getRawValue() as User;
-      userToCreate.username = (this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase();
+      const userToCreate = this.constructUserFromForm();
       this.userService.addUser(userToCreate);
       this.initializeUserForm(null);
+      alert('L\'utilisateur a bien été créé !');
     }
   }
 
   editUser(id: number) {
     if (this.userForm.valid) {
-      const userToEdit: User = this.userForm.getRawValue() as User;
-      userToEdit.username = (this.userForm.get('firstName').value + '.' + this.userForm.get('lastName').value).toLowerCase();
+      const userToEdit = this.constructUserFromForm();
       this.userService.editUser(String(id), userToEdit);
       this.location.back();
     }
@@ -63,5 +72,18 @@ export class UserFormComponent implements OnInit {
       password: user.password,
       isAdmin: user.isAdmin
     });
+  }
+
+  get formFields() {
+    return this.userForm.controls;
+  }
+
+  private constructUserFromForm(): User {
+    const user: User = this.userForm.getRawValue() as User;
+    user.username = (this.userForm.get('firstName').value.split(' ').join('_') + '.'
+      + this.userForm.get('lastName').value.split('\'').join('-').split(' ').join('_'))
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    user.password = user.isAdmin ? user.password : '';
+    return user;
   }
 }

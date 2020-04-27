@@ -1,15 +1,5 @@
-<ng-container *ngIf="theme">
-  <button class="button-card" routerLink="/edit-theme">Retour</button>
-  <br>
-  <div class="card">
-    <form class="quiz-form" [formGroup]="themeForm">
-  <h2>Edition du thème : {{theme.name}}</h2>
-  <br>
-  <input class="input-custom" type="text" [formControlName]="'name'">
-    <br>
-    <br>
-  <button class="button-card" (click)="editTheme(theme.id.toString())">Editer le thème</button>
-    </form>
-  </div>
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/edit-theme"><i class="fas fa-arrow-left"></i> Retour</button>
 
+<ng-container *ngIf="theme">
+  <app-theme-form [theme]="theme"></app-theme-form>
 </ng-container>

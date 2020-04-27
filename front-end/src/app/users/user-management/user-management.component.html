@@ -1,0 +1,35 @@
+<button type="button" class="back btn btn-outline-info mt-2" routerLink="/quiz-list"><i class="fas fa-arrow-left"></i>
+  Retourner à la liste des quiz
+</button>
+
+<app-search-user class="d-flex justify-content-center mt-2"></app-search-user>
+<div class="text-right mr-5">
+  <div class="btn btn-info mb-2 mr-5" routerLink="/create-user"><i class="fas fa-plus"></i> Créer un nouvel utilisateur</div>
+</div>
+<ul class="list-group ml-5 mr-5 mb-3">
+  <ng-container *ngFor="let user of userList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <li class="list-group-item ml-5 mr-5">
+      <div class="d-flex flex-row">
+        <div class="p-2">
+          <div><span class="font-weight-bold">{{user.firstName + ' ' + user.lastName}}</span></div>
+          <div class="infoUser" *ngIf="user.isAdmin">Identifiant : {{user.username}}</div>
+          <div class="infoUser">Droits d'administrateur : {{user.isAdmin ? 'Oui' : 'Non'}}</div>
+        </div>
+        <div class="p-2 ml-auto">
+          <div class="btn btn-outline-info mr-2" (click)="seeUserStats(user)"><i class="fas fa-eye"></i></div>
+          <div class="btn btn-outline-info mr-2" (click)="editUser(user)"><i class="fas fa-pen"></i></div>
+          <div class="btn btn-outline-danger" (click)="deleteUser(user)"><i class="fas fa-trash-alt"></i></div>
+        </div>
+      </div>
+    </li>
+  </ng-container>
+</ul>
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" (click)="backPage()">Précédent</a></li>
+    <ng-container *ngFor="let currentPage of counter(nbPageTotal); let i = index">
+      <li class="page-item"><a class="page-link" (click)="showPage(i)">{{i + 1}}</a></li>
+    </ng-container>
+    <li class="page-item"><a class="page-link" (click)="nextPage()">Suivant</a></li>
+  </ul>
+</nav>
