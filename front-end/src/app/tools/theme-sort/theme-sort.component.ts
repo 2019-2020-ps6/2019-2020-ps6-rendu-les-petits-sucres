@@ -27,7 +27,6 @@ export class ThemeSortComponent implements OnInit {
     }
     this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
-      this.quizList.reverse();
       });
   }
 
@@ -69,7 +68,7 @@ export class ThemeSortComponent implements OnInit {
       }
       localStorage.setItem('newQuizListEdit', JSON.stringify(this.newQuizList));
     }
-    // document.location.reload();
+    document.location.reload();
   }
 
   localStorage() {

@@ -27,7 +27,6 @@ export class QuizFiltersComponent implements OnInit {
     }
     this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
-      this.quizList.reverse();
       this.quizService.themes$.subscribe((themes) => this.themes = themes);
     });
   }

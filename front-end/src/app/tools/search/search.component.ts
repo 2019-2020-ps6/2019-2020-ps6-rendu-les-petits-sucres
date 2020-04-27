@@ -24,7 +24,6 @@ export class SearchComponent implements OnInit {
     }
     this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
-      this.quizList.reverse();
     });
   }
 

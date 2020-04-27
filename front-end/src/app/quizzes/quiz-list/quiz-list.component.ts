@@ -22,7 +22,6 @@ export class QuizListComponent implements OnInit {
     } else {
       this.quizService.quizzes$.subscribe((quizzes) => {
         this.quizList = quizzes;
-        // this.quizList.reverse();
       });
     }
     this.page = 1;

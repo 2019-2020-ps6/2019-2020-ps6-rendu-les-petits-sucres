@@ -25,8 +25,8 @@ export class PlayQuizComponent implements OnInit {
   public timer3: any;
   public timerHelp: any;
   public timerEndQuiz: any;
-  public displayTimer = 10;
-  public displayTimerEnd = 20;
+  public displayTimer = 30;
+  public displayTimerEnd = 30;
   private helpWrongAnswer = false;
   private helpInactif = false;
 
@@ -117,7 +117,7 @@ export class PlayQuizComponent implements OnInit {
     } else {
       this.timerEndSummary = setTimeout(() => {
         this.nextQuestion();
-      }, 10000);
+      }, 30000);
     }
   }
 
@@ -163,7 +163,7 @@ export class PlayQuizComponent implements OnInit {
       localStorage.removeItem('quizEnd');
       localStorage.setItem('score', '20');
       this.router.navigate(['/play-quiz/quiz-start/' + this.quiz.id]).then();
-      }, 20000);
+      }, 30000);
   }
 
   private nextQuestion() {
@@ -191,12 +191,12 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private setTimer() {
-    this.displayTimer = 10;
+    this.displayTimer = 30;
     this.setTimerWithTime(this.displayTimer);
   }
 
   private setTimeEnd() {
-    this.displayTimerEnd = 20;
+    this.displayTimerEnd = 30;
     this.setTimerWithTimeEnd(this.displayTimerEnd);
   }
 
