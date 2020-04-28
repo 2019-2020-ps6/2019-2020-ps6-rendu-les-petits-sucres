@@ -1,5 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
   <div class="navbar-brand">PolyQuiz</div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav mr-auto">
       <li class="nav-item" *ngIf="currentUser && currentUser.isAdmin">
@@ -13,14 +17,14 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item" *ngIf="!currentUser && currentPathConnexion()">
+      <li class="nav-item active" *ngIf="!currentUser && currentPathConnexion()">
         <a class="nav-link" routerLink="login"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
       </li>
       <li class="nav-item mr-2" *ngIf="currentUser">
         <div class="navbar-text"><i class="fas fa-user"></i>
-          Vous êtes connecté  en tant que <strong>{{currentUser.firstName}} {{currentUser.lastName}}</strong>
-  </div>
-      <li class="nav-item" *ngIf="currentUser && !currentPathPlayQuiz()">
+          Vous êtes connecté en tant que <strong>{{currentUser.firstName}} {{currentUser.lastName}}</strong>
+        </div>
+      <li class="nav-item active" *ngIf="currentUser && !currentPathPlayQuiz()">
         <a class="nav-link" (click)="logout()">Se déconnecter <i class="fas fa-sign-out-alt"></i> </a>
       </li>
     </ul>

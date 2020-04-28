@@ -3,6 +3,8 @@ const { Router } = require('express')
 const { Quiz } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
 const QuestionsRouter = require('./questions')
+const {Answer} = require("../../models");
+const {Question} = require("../../models");
 const { buildQuiz, buildQuizzes } = require('./manager')
 
 const router = new Router({ mergeParams: true })
@@ -46,6 +48,10 @@ router.put('/:quizId', (req, res) => {
 
 router.delete('/:quizId', (req, res) => {
   try {
+    const questions = Question.get().filter((question) => question.quizId === +req.params.quizId) // Récupère toutes les questions du quiz
+    const answers = Answer.get().filter((answer) => answer.quizId === +req.params.quizId) // Récupère toutes les réponses du quiz
+    // console.log(answers)
+    // console.log(questions)
     Quiz.delete(req.params.quizId)
     res.status(204).end()
   } catch (err) {
