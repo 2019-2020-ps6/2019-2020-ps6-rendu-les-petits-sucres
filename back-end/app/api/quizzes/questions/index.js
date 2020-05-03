@@ -3,6 +3,7 @@ const { Router } = require('express')
 const { Answer, Quiz, Question } = require('../../../models')
 const manageAllErrors = require('../../../utils/routes/error-management')
 const AnswersRouter = require('./answers')
+const {deleteAnswerFromSpecificQuestion} = require("./answers/manager");
 const { filterQuestionsFromQuiz, getQuestionFromQuiz } = require('./manager')
 
 const router = new Router({ mergeParams: true })
@@ -59,6 +60,7 @@ router.delete('/:questionId', (req, res) => {
   try {
     // Check if the question id exists & if the question has the same quizId as the one provided in the url.
     getQuestionFromQuiz(req.params.quizId, req.params.questionId)
+    deleteAnswerFromSpecificQuestion(req.params.questionId)
     Question.delete(req.params.questionId)
     res.status(204).end()
   } catch (err) {

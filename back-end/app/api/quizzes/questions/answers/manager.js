@@ -25,7 +25,18 @@ const getAnswerFromQuestion = (quizId, questionId, answerId) => {
     return answer
 }
 
+/**
+ * deleteAnswerFromSpecificQuestion.
+ * This function delete all answers from a specific question.
+ * @param questionId
+ */
+const deleteAnswerFromSpecificQuestion = (questionId) => {
+    const answers = filterAnswersFromQuestion(questionId)
+    answers.forEach(answer => Answer.delete(answer.id))
+}
+
 module.exports = {
     getAnswerFromQuestion,
-    filterAnswersFromQuestion
+    filterAnswersFromQuestion,
+    deleteAnswerFromSpecificQuestion
 }

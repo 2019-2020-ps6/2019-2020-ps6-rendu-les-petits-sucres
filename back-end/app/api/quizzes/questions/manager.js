@@ -1,3 +1,4 @@
+const {deleteAnswerFromSpecificQuestion} = require("./answers/manager");
 const { Quiz, Question } = require('../../../models')
 
 /**
@@ -6,7 +7,7 @@ const { Quiz, Question } = require('../../../models')
  */
 
 /**
- * filterQuestionsFromQuizz.
+ * filterQuestionsFromQuiz.
  * This function filters among the questions to return only the question linked with the given quizId.
  * @param quizId
  */
@@ -32,7 +33,21 @@ const getQuestionFromQuiz = (quizId, questionId) => {
     return question
 }
 
+/**
+ * deleteQuestionFromSpecificQuiz.
+ * This function delete all questions from a specific quiz.
+ * @param quizId
+ */
+const deleteQuestionFromSpecificQuiz = (quizId) => {
+    const questions = filterQuestionsFromQuiz(quizId)
+    questions.forEach(question => {
+        deleteAnswerFromSpecificQuestion(question.id)
+        Question.delete(question.id)
+    });
+}
+
 module.exports = {
     filterQuestionsFromQuiz,
-    getQuestionFromQuiz
+    getQuestionFromQuiz,
+    deleteQuestionFromSpecificQuiz
 }
