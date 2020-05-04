@@ -2,9 +2,9 @@ const Joi = require('joi')
 const BaseModel = require('../utils/base-model.js')
 
 module.exports = new BaseModel('User', {
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-  username: Joi.string().required(),
-  password: Joi.string().allow(''),
-  isAdmin: Joi.boolean().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    username: Joi.string().required(),
+    password: Joi.string().allow(''),
+    isAdmin: Joi.boolean().required(),
 })
