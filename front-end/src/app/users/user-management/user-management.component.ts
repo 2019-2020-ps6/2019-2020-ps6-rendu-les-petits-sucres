@@ -11,6 +11,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
 })
 export class UserManagementComponent implements OnInit {
 
+  public currentUser: User;
   public userList: User[] = [];
   public page: number;
   public pageSize = 10;
@@ -21,6 +22,8 @@ export class UserManagementComponent implements OnInit {
     if (this.authenticationService.currentUserValue != null) {
       if (!this.authenticationService.currentUserValue.isAdmin) {
         this.router.navigate(['/']).then();
+      } else {
+        this.currentUser = this.authenticationService.currentUserValue;
       }
     } else {
       this.router.navigate(['/admin/login/']).then();
@@ -48,12 +51,14 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    if (localStorage.getItem('userListSearch') !== null) {
-      localStorage.setItem('userListSearch', JSON.stringify(JSON.parse(localStorage.getItem('userListSearch'))
-        .filter((storedUser) => storedUser.id !== user.id)));
-      this.userList = localStorage.getItem('userListSearch') && JSON.parse(localStorage.getItem('userListSearch'));
+    if (confirm('Êtes-vous sûr de vouloir supprimer le compte de ' + user.firstName + ' ' + user.lastName + ' ?')) {
+      if (localStorage.getItem('userListSearch') !== null) {
+        localStorage.setItem('userListSearch', JSON.stringify(JSON.parse(localStorage.getItem('userListSearch'))
+          .filter((storedUser) => storedUser.id !== user.id)));
+        this.userList = localStorage.getItem('userListSearch') && JSON.parse(localStorage.getItem('userListSearch'));
+      }
+      this.userService.deleteUser(user);
     }
-    this.userService.deleteUser(user);
   }
 
   nextPage() {
@@ -83,5 +88,9 @@ export class UserManagementComponent implements OnInit {
 
   seeUserStats(user: User) {
     this.router.navigate(['/user-account/' + user.id]).then();
+  }
+
+  deleteOwnAccount() {
+    alert('Vous ne pouvez pas supprimer votre propre compte !');
   }
 }

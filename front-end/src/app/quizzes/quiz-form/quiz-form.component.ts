@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {QuizService} from '../../../services/quiz.service';
@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../models/user.model';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-quiz-form',
@@ -17,12 +18,15 @@ import {AuthenticationService} from '../../../services/authentication.service';
 
 export class QuizFormComponent implements OnInit {
 
+  @Input()
+  quiz: Quiz;
   public quizForm: FormGroup;
   public themes: Theme[];
   public patients: User[];
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router,
-              public userService: UserService, private authenticationService: AuthenticationService) {
+              public userService: UserService, private authenticationService: AuthenticationService,
+              private location: Location) {
     if (this.authenticationService.currentUserValue != null) {
       if (!this.authenticationService.currentUserValue.isAdmin) {
         this.router.navigate(['/']).then();
@@ -32,29 +36,40 @@ export class QuizFormComponent implements OnInit {
     }
     this.userService.patients$.subscribe((patients) => this.patients = patients);
     this.quizService.themes$.subscribe((themes) => this.themes = themes);
-    this.initializeQuizForm();
+    this.initializeQuizForm(null);
   }
 
-  private initializeQuizForm() {
+  private initializeQuizForm(quiz: Quiz) {
     this.quizForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      theme: ['', Validators.required],
-      image: '',
-      user: '',
+      name: quiz ? quiz.name : ['', Validators.required],
+      theme: quiz ? quiz.theme : ['', Validators.required],
+      image: quiz ? quiz.image : '',
+      user: quiz ? quiz.user : '',
       questions: this.formBuilder.array([])
     });
   }
 
   ngOnInit() {
+    if (this.quiz) {
+      this.initializeQuizForm(this.quiz);
+    }
   }
 
   addQuiz() {
     if (this.quizForm.valid) {
       const quizToCreate = this.quizForm.value as Quiz;
       this.quizService.addQuiz(quizToCreate);
-      this.initializeQuizForm();
+      this.initializeQuizForm(null);
       alert('Le quiz a bien été créé !');
-      this.router.navigate(['/edit-quiz-list/']).then();
+      this.location.back();
+    }
+  }
+
+  editQuiz(id: string) {
+    if (this.quizForm.valid) {
+      const quizToEdit = this.quizForm.getRawValue() as Quiz;
+      this.quizService.editQuiz(id, quizToEdit);
+      this.location.back();
     }
   }
 }

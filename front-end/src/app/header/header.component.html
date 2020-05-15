@@ -17,14 +17,14 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item active" *ngIf="!currentUser && currentPathConnexion()">
+      <li class="nav-item" *ngIf="!currentUser && currentPathConnexion()">
         <a class="nav-link" routerLink="login"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
       </li>
       <li class="nav-item mr-2" *ngIf="currentUser">
         <div class="navbar-text"><i class="fas fa-user"></i>
           Vous êtes connecté en tant que <strong>{{currentUser.firstName}} {{currentUser.lastName}}</strong>
         </div>
-      <li class="nav-item active" *ngIf="currentUser && !currentPathPlayQuiz()">
+      <li class="nav-item" *ngIf="currentUser && !currentPathPlayQuiz()">
         <a class="nav-link" (click)="logout()">Se déconnecter <i class="fas fa-sign-out-alt"></i> </a>
       </li>
     </ul>

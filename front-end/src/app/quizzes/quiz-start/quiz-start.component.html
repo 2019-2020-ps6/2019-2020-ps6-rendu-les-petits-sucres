@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-outline-info mt-2" (click)="backListQuiz()"><i class="fas fa-arrow-left"></i> Retourner à la liste des quiz</button>
 
-<div class="text-center">
+<div *ngIf="quiz" class="text-center">
   <div *ngIf="quiz.image" class="image mt-1 mx-auto d-block" [ngStyle]="{ 'background-image': 'url(' + getUrl() + ')'}"></div>
    <div *ngIf="!quiz.image" class="image mt-1 mx-auto d-block" style="background-image:url('https://www.mon-guide-protection-sociale.fr/wp-content/uploads/2015/04/quiz-mgps.jpg')"></div>
   <span class="font-weight-bold">{{quiz.name}}</span>

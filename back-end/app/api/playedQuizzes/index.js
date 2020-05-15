@@ -25,6 +25,14 @@ router.get('/:playedQuizId', (req, res) => {
     }
 })
 
+router.put('/:playedQuizId', (req, res) => {
+    try {
+        res.status(200).json(PlayedQuiz.update(req.params.playedQuizId, req.body))
+    } catch (err) {
+        manageAllErrors(res, err)
+    }
+})
+
 router.get('/user/:userId', (req, res) => {
     try {
         const playedQuizzes = buildPlayedQuizzesFromUser(req.params.userId)

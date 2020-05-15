@@ -5,6 +5,7 @@ import {Quiz} from '../models/quiz.model';
 import {Question} from '../models/question.model';
 import {httpOptions, serverUrl} from '../configs/server.config';
 import {Theme} from '../models/theme.model';
+import {PlayedQuizService} from './playedQuiz.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class QuizService {
   private themeUrl = serverUrl + 'themes';
   private questionsPath = 'questions';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private playedQuizService: PlayedQuizService) {
     this.setQuizzesFromUrl();
     this.setThemesFromUrl();
   }
@@ -41,6 +42,16 @@ export class QuizService {
 
   addQuiz(quiz: Quiz) {
     this.http.post<Quiz>(this.quizUrl, quiz, httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.setQuizzesFromUrl();
+  }
+
+  editQuiz(quizId: string, quiz: Quiz) {
+    const urlWithId = this.quizUrl + '/' + quizId;
+    this.http.put(urlWithId, quiz, httpOptions).subscribe(() => {
+      this.setSelectedQuiz(quizId);
+      this.setQuizzesFromUrl();
+    });
+    this.playedQuizService.editPlayedQuizzes(quizId, quiz.name);
     this.setQuizzesFromUrl();
   }
 

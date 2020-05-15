@@ -41,12 +41,14 @@ export class EditThemeListComponent implements OnInit {
   }
 
   deleteTheme(theme: Theme) {
-    if (localStorage.getItem('themeListSearch') !== null) {
-      localStorage.setItem('themeListSearch', JSON.stringify(JSON.parse(localStorage.getItem('themeListSearch'))
-        .filter((storedTheme) => storedTheme.id !== theme.id)));
-      this.themeList = localStorage.getItem('themeListSearch') && JSON.parse(localStorage.getItem('themeListSearch'));
+    if (confirm('Êtes-vous sûr de vouloir supprimer le thème \"' + theme.name + '\" ?')) {
+      if (localStorage.getItem('themeListSearch') !== null) {
+        localStorage.setItem('themeListSearch', JSON.stringify(JSON.parse(localStorage.getItem('themeListSearch'))
+          .filter((storedTheme) => storedTheme.id !== theme.id)));
+        this.themeList = localStorage.getItem('themeListSearch') && JSON.parse(localStorage.getItem('themeListSearch'));
+      }
+      this.quizService.deleteTheme(theme);
     }
-    this.quizService.deleteTheme(theme);
   }
 
   nextPage() {
