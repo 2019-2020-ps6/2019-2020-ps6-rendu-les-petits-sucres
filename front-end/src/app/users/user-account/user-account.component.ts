@@ -77,4 +77,5 @@ export class UserAccountComponent implements OnInit {
   seeUserStats() {
     this.router.navigate(['/user-quiz-list/' + this.idUser]).then();
   }
+
 }
