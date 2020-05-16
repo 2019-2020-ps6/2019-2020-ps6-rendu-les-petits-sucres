@@ -9,6 +9,7 @@
 </div>
 <ul class="list-group ml-5 mr-5 mb-3">
   <ng-container *ngFor="let user of userList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <div *ngIf="user.id !== currentUser.id">
     <li class="list-group-item ml-5 mr-5">
       <div class="d-flex flex-row">
         <div class="p-2">
@@ -24,6 +25,7 @@
         </div>
       </div>
     </li>
+    </div>
   </ng-container>
 </ul>
 <nav aria-label="Page navigation">
