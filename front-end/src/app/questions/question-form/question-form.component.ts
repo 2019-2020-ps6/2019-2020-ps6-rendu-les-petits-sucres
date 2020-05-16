@@ -74,22 +74,20 @@ export class QuestionFormComponent implements OnInit {
 
   addQuestion() {
     this.correctValuesForImageAnswer();
-    for (const answer of this.questionForm.value.answers) {
-      if (answer.image !== '' && answer.value === '') {
-        answer.value = ' ';
-      }
-    }
     const question = this.questionForm.value as Question;
     const isCorrectAnswers = [];
     question.answers.forEach(answer => {
       isCorrectAnswers.push(answer.isCorrect);
     });
     if (this.questionForm.valid ) {
-      if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
+      if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1 && this.correctValuesForAnswer()) {
         this.quizService.addQuestion(this.quiz, question);
         this.initializeQuestionForm(null);
         alert('La question a bien été créé !');
         this.location.back();
+      }
+      else {
+        alert('La question n\'a pas été créée, une question doit contenir au moins : \n - Deux réponses\n - Une réponse vraie');
       }
     }
   }
@@ -102,10 +100,13 @@ export class QuestionFormComponent implements OnInit {
       isCorrectAnswers.push(answer.isCorrect);
     });
     if (this.questionForm.valid) {
-      if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1) {
+      if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1 && this.correctValuesForAnswer()) {
         this.quizService.editQuestion(String(quizId), question, this.question);
-        alert('La question a bien été modifié !');
+        alert('La question a bien été modifiée !');
         this.location.back();
+      }
+      else {
+        alert('La question n\'a pas été modifiée, une question doit contenir au moins : \n - Deux réponses\n - Une réponse vraie');
       }
     }
   }
@@ -133,5 +134,17 @@ export class QuestionFormComponent implements OnInit {
         answer.value = ' ';
       }
     }
+  }
+
+  private correctValuesForAnswer() {
+    for (const answer of this.questionForm.value.answers) {
+      if (answer.isCorrect === null) {
+        return false;
+      }
+      if (answer.image === '' && answer.value === '') {
+        return false;
+      }
+    }
+    return true;
   }
 }

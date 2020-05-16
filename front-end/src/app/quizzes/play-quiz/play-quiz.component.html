@@ -7,14 +7,14 @@
       <div class="answer-list" *ngFor="let answer of quiz.questions[currentQuestion].answers">
         <div *ngIf="!answer.image">
           <div *ngIf="answer.isCorrect  === 'true'">
-            <div class="answer btn btn-outline-info p-2" (click)="toggleQuestionSummary();">{{answer.value}}</div>
+            <div class="answer btn btn-lg btn-outline-info p-2" (click)="toggleQuestionSummary();">{{answer.value}}</div>
           </div>
           <div *ngIf="answer.isCorrect  === 'false'">
             <div *ngIf="isDeactivate(answer)">
-              <div class="answerDesactivate btn btn-outline-secondary disabled p-2">{{answer.value}}</div>
+              <div class="answerDesactivate btn btn-lg btn-outline-secondary disabled p-2">{{answer.value}}</div>
             </div>
             <div *ngIf="!isDeactivate(answer)">
-              <div class="answer btn btn-outline-info p-2" (click)="toggleWrongAnswer(answer)" >{{answer.value}}</div>
+              <div class="answer btn btn-lg btn-outline-info p-2" (click)="toggleWrongAnswer(answer)" >{{answer.value}}</div>
             </div>
           </div>
         </div>
@@ -49,11 +49,11 @@
       <div *ngIf="helpWrongAnswer" class="text-center text-info h5"><i class="far fa-question-circle"></i> Sélectionnez une autre réponse qui n'est pas grisée</div>
       <div *ngIf="helpEnabled" class="text-center text-info h5"><i class="far fa-question-circle"></i> Sélectionnez une réponse qui se surligne en jaune pour répondre à la question</div>
     </ng-container>
-    <ng-container class="justify-content-center" *ngIf="showSummaryQuestion">
+    <ng-container class="justify-content-center mb-5" *ngIf="showSummaryQuestion">
       <div class="text-info text-center mb-5 mt-3">
         <h3>Bravo vous avez sélectionné la bonne réponse !</h3>
       </div>
-      <h5 class="text-center mt-5">{{quiz.questions[currentQuestion].label}}</h5>
+      <h5 class="text-center ">{{quiz.questions[currentQuestion].label}}</h5>
       <ng-container *ngFor="let answer of quiz.questions[currentQuestion].answers">
         <div *ngIf="answer.image; else elseBlock">
           <div *ngIf="answer.isCorrect === 'true'">
@@ -67,7 +67,7 @@
         <ng-template #elseBlock>
           <div class="text-center mt-4 mb-4" *ngIf="answer.isCorrect === 'true'">La bonne réponse est : <span class="font-weight-bold">{{answer.value}}</span></div></ng-template>
       </ng-container>
-      <div class="mb-5 mt-1">
+      <div class="mb-5 mt-5">
       <button *ngIf="!showButtonEnd()" type="button" class="btn btn-outline-info center back mb-2" (click)="skipSummary();">Passer à la question suivante</button>
       <button *ngIf="showButtonEnd()" type="button" class="btn btn-outline-info center back mb-2" (click)="skipSummary();">Finir le quiz</button>
       <div *ngIf="!showButtonEnd()" class="text-center mt-1 mb-5">Vous passerez à la question suivante dans {{displayTimer}} secondes </div>
