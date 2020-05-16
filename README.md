@@ -15,7 +15,7 @@
 ### Les commandes à exécuter :
 Tout d'abord, on clone le projet et on se rend dans le répertoire nouvellement crée :
 ```bash
-git clone https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-polysson.git LesPetitsSucres
+git clone https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres.git LesPetitsSucres
 cd LesPetitsSucres
 ```
 
