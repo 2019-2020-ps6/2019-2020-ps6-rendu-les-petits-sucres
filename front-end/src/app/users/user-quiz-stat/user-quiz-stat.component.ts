@@ -14,7 +14,7 @@ import {Quiz} from '../../../models/quiz.model';
 })
 export class UserQuizStatComponent implements OnInit {
 
-  public quizTest: Quiz;
+  quizSelected: Quiz;
   user: User;
   idUser: string;
   idQuiz: string;
@@ -29,7 +29,7 @@ export class UserQuizStatComponent implements OnInit {
 
   constructor(private quizService: QuizService, private playedQuizService: PlayedQuizService, private router: Router,
               private activatedRoute: ActivatedRoute, public userService: UserService) {
-      this.quizService.quizSelected$.subscribe((quiz) => this.quizTest = quiz);
+      this.quizService.quizSelected$.subscribe((quiz) => this.quizSelected = quiz);
       const userId = this.activatedRoute.snapshot.paramMap.get('userId');
       this.idUser = userId;
       const quizId = this.activatedRoute.snapshot.paramMap.get('quizId');

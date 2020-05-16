@@ -6,7 +6,7 @@
 </ng-container>
 <div class="d-flex justify-content-center mt-2">Score moyen : {{averageScore.toFixed(2) + '/20'}}</div>
 <div class="d-flex justify-content-center mt-2 mb-2"><div class="btn btn-info" (click)="seeUserStats()">Afficher les scores par quiz</div></div>
-<div class="d-flex justify-content-center mt-2">Historique des derniers quiz faits :</div> <br>
+<div class="d-flex justify-content-center mt-2">Historique des derniers quiz réalisés :</div> <br>
 <ul class="list-group ml-5 mr-5 mb-3">
   <ng-container *ngFor="let playedQuiz of playedQuizzes | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
     <li class="list-group-item ml-5 mr-5">

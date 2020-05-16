@@ -79,16 +79,17 @@ export class QuestionFormComponent implements OnInit {
     question.answers.forEach(answer => {
       isCorrectAnswers.push(answer.isCorrect);
     });
-    if (this.questionForm.valid ) {
+    if (this.questionForm.valid) {
       if (isCorrectAnswers.some((element) => element === 'true') && isCorrectAnswers.length > 1 && this.correctValuesForAnswer()) {
         this.quizService.addQuestion(this.quiz, question);
         this.initializeQuestionForm(null);
         alert('La question a bien été créé !');
         this.location.back();
+      } else {
+        alert('La question n\'a pas été créée !\nUne question doit contenir au moins :\n- Une réponse vraie\n- Deux réponses au total');
       }
-      else {
-        alert('La question n\'a pas été créée, une question doit contenir au moins : \n - Deux réponses\n - Une réponse vraie');
-      }
+    } else {
+      alert('La question n\'a pas été créée !\nUne question doit contenir au moins :\n- Une réponse vraie\n- Deux réponses au total');
     }
   }
 
@@ -104,10 +105,11 @@ export class QuestionFormComponent implements OnInit {
         this.quizService.editQuestion(String(quizId), question, this.question);
         alert('La question a bien été modifiée !');
         this.location.back();
+      } else {
+        alert('La question n\'a pas été modifée !\nUne question doit contenir au moins :\n- Une réponse vraie\n- Deux réponses au total');
       }
-      else {
-        alert('La question n\'a pas été modifiée, une question doit contenir au moins : \n - Deux réponses\n - Une réponse vraie');
-      }
+    } else {
+      alert('La question n\'a pas été modifiée !\nUne question doit contenir au moins :\n- Une réponse vraie\n- Deux réponses au total');
     }
   }
 

@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    if (confirm('Êtes-vous sûr de vouloir vous déconnecter?')) {
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
       this.authenticationService.logout();
       this.router.navigate(['/']).then();
     }

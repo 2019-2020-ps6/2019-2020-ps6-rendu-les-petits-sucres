@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
 import {User} from '../../../models/user.model';
-import {UserService} from "../../../services/user.service";
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-quiz-list',

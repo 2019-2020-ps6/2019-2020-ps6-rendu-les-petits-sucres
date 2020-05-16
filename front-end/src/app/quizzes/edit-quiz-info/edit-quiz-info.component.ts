@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
 import {ActivatedRoute} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
@@ -10,7 +10,7 @@ import {QuizService} from '../../../services/quiz.service';
 })
 export class EditQuizInfoComponent implements OnInit {
 
-  public quiz: Quiz;
+  quiz: Quiz;
   quizId: number;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {

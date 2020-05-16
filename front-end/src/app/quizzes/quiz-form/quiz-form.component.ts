@@ -20,6 +20,7 @@ export class QuizFormComponent implements OnInit {
 
   @Input()
   quiz: Quiz;
+
   public quizForm: FormGroup;
   public themes: Theme[];
   public patients: User[];
@@ -62,6 +63,8 @@ export class QuizFormComponent implements OnInit {
       this.initializeQuizForm(null);
       alert('Le quiz a bien été créé !');
       this.location.back();
+    } else {
+      alert('Le quiz n\'a pas été créé !\nUn quiz doit contenir au moins :\n- Une titre\n- Un thème');
     }
   }
 
@@ -69,7 +72,10 @@ export class QuizFormComponent implements OnInit {
     if (this.quizForm.valid) {
       const quizToEdit = this.quizForm.getRawValue() as Quiz;
       this.quizService.editQuiz(id, quizToEdit);
+      alert('Le quiz a bien été modifié !');
       this.location.back();
+    } else {
+      alert('Le quiz n\'a pas été modifié !\nUn quiz doit contenir au moins :\n- Une titre\n- Un thème');
     }
   }
 }
