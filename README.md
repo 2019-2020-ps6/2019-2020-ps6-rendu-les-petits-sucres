@@ -7,6 +7,7 @@
 * [Les différents répertoires](#les-différents-répertoires)
 * [Les commandes à exécuter](#les-commandes-à-exécuter)
 * [Auteurs](#auteurs)
+* [Documentations](#documentations)
 
 -----------------
 
@@ -59,3 +60,8 @@ cd LesPetitsSucres
 - [Élise Chamberlin](https://github.com/Elise-Chamberlin)
 - [Loïc Rizzo](https://github.com/Loic-Rizzo)
 - [Lucas Rakotomalala](https://github.com/LucasRakotomalala)
+
+-----------------
+
+## Documentations
+[Wiki du projet](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/wiki)
