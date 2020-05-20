@@ -4,6 +4,8 @@ import {PlayedQuizService} from '../../../services/playedQuiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
+import {User} from '../../../models/user.model';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-quiz-list',
@@ -12,6 +14,7 @@ import {QuizService} from '../../../services/quiz.service';
 })
 export class UserQuizListComponent implements OnInit {
 
+  user: User;
   idUser: string;
   playedQuizzes: PlayedQuiz[];
   listQuiz: Quiz[] = [];
@@ -22,7 +25,7 @@ export class UserQuizListComponent implements OnInit {
   private quizCurrent: Quiz;
 
   constructor(private quizService: QuizService, private playedQuizService: PlayedQuizService, private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, public userService: UserService) {
       const userId = this.activatedRoute.snapshot.paramMap.get('userId');
       this.idUser = userId;
       this.playedQuizService.getPlayedQuizzesFromUser(userId);
@@ -41,6 +44,8 @@ export class UserQuizListComponent implements OnInit {
       }
     );
       this.page = 1;
+      this.userService.userSelected$.subscribe((user) => this.user = user);
+      this.userService.setSelectedUser(userId);
   }
 
   ngOnInit() {

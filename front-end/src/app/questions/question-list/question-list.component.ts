@@ -21,7 +21,9 @@ export class QuestionListComponent implements OnInit {
   }
 
   deleteQuestion(question: Question) {
-    this.quizService.deleteQuestion(this.quiz, question);
+    if (confirm('Êtes-vous sûr de vouloir supprimer la question \"' + question.label + '\" ?')) {
+      this.quizService.deleteQuestion(this.quiz, question);
+    }
   }
 
   editQuestion(question: Question) {

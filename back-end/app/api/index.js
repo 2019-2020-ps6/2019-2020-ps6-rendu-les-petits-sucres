@@ -1,4 +1,4 @@
-const { Router } = require('express')
+const {Router} = require('express')
 const QuizzesRouter = require('./quizzes')
 const UserRouter = require('./users')
 const PlayedQuizzesRouter = require('./playedQuizzes')

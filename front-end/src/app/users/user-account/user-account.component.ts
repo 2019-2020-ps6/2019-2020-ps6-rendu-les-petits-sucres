@@ -3,6 +3,7 @@ import {User} from '../../../models/user.model';
 import {PlayedQuiz} from '../../../models/playedQuiz.model';
 import {PlayedQuizService} from '../../../services/playedQuiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-account',
@@ -11,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class UserAccountComponent implements OnInit {
 
+  user: User;
   currentUser: User;
   idUser: string;
   playedQuizzes: PlayedQuiz[];
@@ -20,7 +22,8 @@ export class UserAccountComponent implements OnInit {
   public pageSize = 10;
   public nbPageTotal: number;
 
-  constructor(private playedQuizService: PlayedQuizService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private playedQuizService: PlayedQuizService, private router: Router,
+              private activatedRoute: ActivatedRoute, public userService: UserService) {
       const userId = this.activatedRoute.snapshot.paramMap.get('userId');
       this.idUser = userId;
       this.playedQuizService.getPlayedQuizzesFromUser(userId);
@@ -30,6 +33,8 @@ export class UserAccountComponent implements OnInit {
       }
     );
       this.page = 1;
+      this.userService.userSelected$.subscribe((user) => this.user = user);
+      this.userService.setSelectedUser(userId);
   }
 
   ngOnInit() {
@@ -72,4 +77,5 @@ export class UserAccountComponent implements OnInit {
   seeUserStats() {
     this.router.navigate(['/user-quiz-list/' + this.idUser]).then();
   }
+
 }

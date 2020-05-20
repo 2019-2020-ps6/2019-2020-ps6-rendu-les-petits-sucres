@@ -1,18 +1,28 @@
 # Projet Semestre 6
-## Quiz (by _Les petits sucres_)
+## PolyQuiz (by _Les petits sucres_)
 
-### État du projet :
-* [Ajout de filtres et amélioration du design](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/milestone/7)
+### Sommaire
+
+* [État du projet](#état-du-projet)
+* [Les différents répertoires](#les-différents-répertoires)
+* [Les commandes à exécuter](#les-commandes-à-exécuter)
+* [Auteurs](#auteurs)
+* [Documentations](#documentations)
 
 -----------------
 
-### Les différents répertoires :
+### État du projet
+[Final](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/milestone/8)
+
+-----------------
+
+### Les différents répertoires
 * La partie __front-end__ : [_front-end_](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/tree/develop/front-end)
 * La partie __back-end__ : [_back-end_](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/tree/develop/back-end)
 
 -----------------
 
-### Les commandes à exécuter :
+### Les commandes à exécuter
 Tout d'abord, on clone le projet et on se rend dans le répertoire nouvellement crée :
 ```bash
 git clone https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres.git LesPetitsSucres
@@ -50,3 +60,8 @@ cd LesPetitsSucres
 - [Élise Chamberlin](https://github.com/Elise-Chamberlin)
 - [Loïc Rizzo](https://github.com/Loic-Rizzo)
 - [Lucas Rakotomalala](https://github.com/LucasRakotomalala)
+
+-----------------
+
+## Documentations
+[Wiki du projet](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/wiki)

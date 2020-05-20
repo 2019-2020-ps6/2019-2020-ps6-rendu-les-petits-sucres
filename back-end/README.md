@@ -1,13 +1,13 @@
 # Projet Semestre 6 - Back-End
 ## Quiz (by _Les petits sucres_)
 
-### Les différents répertoires :
+### Les différents répertoires
 * La partie __front-end__ : [_front-end_](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/tree/develop/front-end)
 * La partie __back-end__ : [_back-end_](https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-les-petits-sucres/tree/develop/back-end)
 
 -----------------
 
-### Les commandes à exécuter pour lancer la partie back-end :
+### Les commandes à exécuter pour lancer la partie back-end
 * Tout d'abord, on clone le projet et on se rend dans le répertoire nouvellement crée :
 ```bash
 git clone https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-polysson.git LesPetitsSucres

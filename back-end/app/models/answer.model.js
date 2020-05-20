@@ -2,10 +2,10 @@ const Joi = require('joi')
 const BaseModel = require('../utils/base-model.js')
 
 module.exports = new BaseModel('Answer', {
-  type: Joi.string(),
-  value: Joi.string().required(),
-  isCorrect: Joi.boolean().required(),
-  questionId: Joi.number(),
-  quizId: Joi.number(),
-  image: Joi.string().allow(''),
+    type: Joi.string(),
+    value: Joi.string().required(),
+    isCorrect: Joi.boolean().required(),
+    questionId: Joi.number(),
+    quizId: Joi.number(),
+    image: Joi.string().allow(''),
 })

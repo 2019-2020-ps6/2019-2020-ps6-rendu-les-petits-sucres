@@ -6,10 +6,10 @@ const User = require('./user.model.js')
 const Theme = require('./theme.model.js')
 
 module.exports = {
-  Answer,
-  Question,
-  Quiz,
-  User,
-  Theme,
-  PlayedQuiz,
+    Answer,
+    Question,
+    Quiz,
+    User,
+    Theme,
+    PlayedQuiz,
 }

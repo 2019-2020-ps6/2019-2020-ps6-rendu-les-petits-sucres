@@ -49,12 +49,14 @@ export class EditQuizListComponent implements OnInit {
   }
 
   deleteQuiz(quiz: Quiz) {
-    if (localStorage.getItem('newQuizListEdit') !== null) {
-      localStorage.setItem('newQuizListEdit', JSON.stringify(JSON.parse(localStorage.getItem('newQuizListEdit'))
-        .filter((storedQuiz) => storedQuiz.id !== quiz.id)));
-      this.quizList = localStorage.getItem('newQuizListEdit') && JSON.parse(localStorage.getItem('newQuizListEdit'));
+    if (confirm('Êtes-vous sûr de vouloir supprimer le quiz \"' + quiz.name + '\" ?')) {
+      if (localStorage.getItem('newQuizListEdit') !== null) {
+        localStorage.setItem('newQuizListEdit', JSON.stringify(JSON.parse(localStorage.getItem('newQuizListEdit'))
+          .filter((storedQuiz) => storedQuiz.id !== quiz.id)));
+        this.quizList = localStorage.getItem('newQuizListEdit') && JSON.parse(localStorage.getItem('newQuizListEdit'));
+      }
+      this.quizService.deleteQuiz(quiz);
     }
-    this.quizService.deleteQuiz(quiz);
   }
 
   getUrl(quiz: Quiz): string {

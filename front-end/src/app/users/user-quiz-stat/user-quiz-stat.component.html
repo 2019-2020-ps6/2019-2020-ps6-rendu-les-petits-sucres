@@ -1,8 +1,13 @@
 <button type="button" class="back btn btn-outline-info mt-2" (click)="seeUserStats()"><i class="fas fa-arrow-left"></i>
   Retourner à la liste des utilisateurs
 </button>
-<div class="h5 text-center">Résultat pour le quiz <span class="font-weight-bold">{{titleQuiz}}</span></div>
-<div class="d-flex justify-content-center mt-2 mb-2">Score moyen pour ce quiz : {{averageScore.toFixed(2) + '/20'}}</div>
+  <div class="h5 text-center" *ngIf="user">Utilisateur : <span class="font-weight-bold">{{user.firstName}} {{user.lastName}}</span></div>
+
+  <div class="h5 text-center" *ngIf="quizSelected">Résultats pour le quiz : <span class="font-weight-bold">{{quizSelected.name}}</span></div>
+  <div class="d-flex justify-content-center mt-2 mb-2">Score moyen pour ce quiz : {{averageScore.toFixed(2) + '/20'}}</div>
+  <div class="d-flex justify-content-center mt-2">Nombre de fois que ce quiz a été réalisé : {{listQuiz.length}}</div>
+  <div class="d-flex justify-content-center mt-2" *ngIf="quizSelected">Historique des dernières tentatives de ce quiz :</div> <br>
+
 <ul class="list-group ml-5 mr-5 mb-3">
   <ng-container *ngFor="let quiz of listQuiz | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
     <li class="list-group-item ml-5 mr-5">

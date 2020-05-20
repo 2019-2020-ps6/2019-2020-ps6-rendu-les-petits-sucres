@@ -2,10 +2,13 @@
 
 <ng-container *ngIf="quiz">
   <h3 class="text-center">Liste des questions pour le quiz : <span class="font-weight-bold">{{quiz.name}}</span></h3>
+  <div class="text-right mr-5">
+    <div class="btn btn-info mb-2 mr-5" routerLink="/edit-quiz-info/{{quiz.id}}"><i class="fas fa-pen"></i> Modifier le quiz</div>
+  </div>
   <div *ngIf="quiz.questions.length === 0">
     <h5 class="text-center mt-5">Il n'y a pas de questions pour ce quiz !</h5>
     <div class="text-center">
-    <div class="btn btn-info mb-2" routerLink="/create-question/{{quiz.id}}"><i class="fas fa-plus"></i> Créer une nouvelle question</div>
+      <div class="btn btn-info mb-2" routerLink="/create-question/{{quiz.id}}"><i class="fas fa-plus"></i> Créer une nouvelle question</div>
     </div>
     </div>
   <div *ngIf="quiz.questions.length !== 0">

@@ -41,7 +41,7 @@ import {QuizFiltersComponent} from './tools/quiz-filters/quiz-filters.component'
 import {UserQuizListComponent} from './users/user-quiz-list/user-quiz-list.component';
 import {UserQuizStatComponent} from './users/user-quiz-stat/user-quiz-stat.component';
 import {QuizStartComponent} from './quizzes/quiz-start/quiz-start.component';
-
+import {EditQuizInfoComponent} from './quizzes/edit-quiz-info/edit-quiz-info.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +79,8 @@ import {QuizStartComponent} from './quizzes/quiz-start/quiz-start.component';
     QuizFiltersComponent,
     UserQuizListComponent,
     UserQuizStatComponent,
-    QuizStartComponent
+    QuizStartComponent,
+    EditQuizInfoComponent
   ],
   imports: [
     BrowserModule,

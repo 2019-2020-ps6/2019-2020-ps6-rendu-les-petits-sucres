@@ -32,6 +32,18 @@ export class PlayedQuizService {
     this.http.post<PlayedQuiz>(this.playedQuizUrl, playedQuiz, httpOptions).subscribe(() => this.setPlayedQuizzesFromUrl());
   }
 
+  editPlayedQuizzes(quizId: string, quizName: string) {
+    const newPlayedQuizName = JSON.parse('{"name":"' + quizName + '"}');
+    const playedQuizzesSpecific: PlayedQuiz[] = [];
+    this.http.get<PlayedQuiz[]>(this.playedQuizUrl).subscribe((playedQuizList) => {
+      playedQuizList.forEach((playedQuiz) => playedQuiz.quizId === +quizId ? playedQuizzesSpecific.push(playedQuiz) : '');
+      playedQuizzesSpecific.forEach((playedQuiz) =>
+        this.http.put(this.playedQuizUrl + '/' + String(playedQuiz.id), newPlayedQuizName, httpOptions).subscribe(() =>
+          this.setPlayedQuizzesFromUrl()));
+    });
+    this.setPlayedQuizzesFromUrl();
+  }
+
   getPlayedQuizzesFromUser(userId: string) {
     const url = this.playedQuizUrl + '/user/' + userId;
     this.http.get<PlayedQuiz[]>(url).subscribe((playedQuizList) => {

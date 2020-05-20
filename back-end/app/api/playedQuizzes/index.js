@@ -1,9 +1,9 @@
-const { Router } = require('express')
+const {Router} = require('express')
 
 const manageAllErrors = require('../../utils/routes/error-management')
 const {PlayedQuiz} = require('../../models')
 
-const { buildPlayedQuizzes, buildPlayedQuiz, buildPlayedQuizzesFromUserId } = require("./manager");
+const {buildPlayedQuizzes, buildPlayedQuiz, buildPlayedQuizzesFromUser} = require("./manager");
 
 const router = new Router()
 
@@ -18,8 +18,16 @@ router.get('/', (req, res) => {
 
 router.get('/:playedQuizId', (req, res) => {
     try {
-        const quiz = buildPlayedQuiz(req.params.playedQuizId)
-        res.status(200).json(quiz)
+        const playedQuiz = buildPlayedQuiz(req.params.playedQuizId)
+        res.status(200).json(playedQuiz)
+    } catch (err) {
+        manageAllErrors(res, err)
+    }
+})
+
+router.put('/:playedQuizId', (req, res) => {
+    try {
+        res.status(200).json(PlayedQuiz.update(req.params.playedQuizId, req.body))
     } catch (err) {
         manageAllErrors(res, err)
     }
@@ -27,8 +35,8 @@ router.get('/:playedQuizId', (req, res) => {
 
 router.get('/user/:userId', (req, res) => {
     try {
-        const quiz = buildPlayedQuizzesFromUserId(req.params.userId)
-        res.status(200).json(quiz)
+        const playedQuizzes = buildPlayedQuizzesFromUser(req.params.userId)
+        res.status(200).json(playedQuizzes)
     } catch (err) {
         manageAllErrors(res, err)
     }
@@ -36,7 +44,7 @@ router.get('/user/:userId', (req, res) => {
 
 router.post('/', (req, res) => {
     try {
-        const playedQuiz = PlayedQuiz.create({ ...req.body })
+        const playedQuiz = PlayedQuiz.create({...req.body})
         res.status(201).json(playedQuiz)
     } catch (err) {
         manageAllErrors(res, err)

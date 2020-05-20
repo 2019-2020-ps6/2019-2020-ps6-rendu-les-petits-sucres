@@ -3,6 +3,9 @@ import {PlayedQuiz} from '../../../models/playedQuiz.model';
 import {PlayedQuizService} from '../../../services/playedQuiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
+import {User} from '../../../models/user.model';
+import {UserService} from '../../../services/user.service';
+import {Quiz} from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-user-quiz-stat',
@@ -11,9 +14,10 @@ import {QuizService} from '../../../services/quiz.service';
 })
 export class UserQuizStatComponent implements OnInit {
 
+  quizSelected: Quiz;
+  user: User;
   idUser: string;
   idQuiz: string;
-  titleQuiz: string;
   playedQuizzes: PlayedQuiz[];
   listQuiz: PlayedQuiz[] = [];
   listQuizId: string[] = [];
@@ -24,7 +28,8 @@ export class UserQuizStatComponent implements OnInit {
   public nbPageTotal: number;
 
   constructor(private quizService: QuizService, private playedQuizService: PlayedQuizService, private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, public userService: UserService) {
+      this.quizService.quizSelected$.subscribe((quiz) => this.quizSelected = quiz);
       const userId = this.activatedRoute.snapshot.paramMap.get('userId');
       this.idUser = userId;
       const quizId = this.activatedRoute.snapshot.paramMap.get('quizId');
@@ -38,14 +43,17 @@ export class UserQuizStatComponent implements OnInit {
             this.listQuiz.push(quiz);
           }
         }
-        this.titleQuiz = this.listQuiz[0].name;
         this.averageScore = this.calculateAverageScore();
       }
       );
       this.page = 1;
+      this.userService.userSelected$.subscribe((user) => this.user = user);
+      this.userService.setSelectedUser(userId);
   }
 
   ngOnInit() {
+    const id = this.activatedRoute.snapshot.paramMap.get('quizId');
+    this.quizService.setSelectedQuiz(id);
   }
 
   nextPage() {
@@ -85,4 +93,5 @@ export class UserQuizStatComponent implements OnInit {
   seeUserStats() {
     this.router.navigate(['/user-quiz-list/' + this.idUser]).then();
   }
+
 }

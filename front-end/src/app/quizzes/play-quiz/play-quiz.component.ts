@@ -27,8 +27,8 @@ export class PlayQuizComponent implements OnInit {
   public timerEndQuiz: any;
   public displayTimer = 30;
   public displayTimerEnd = 30;
-  private helpWrongAnswer = false;
-  private helpInactif = false;
+  helpWrongAnswer = false;
+  helpEnabled = false;
 
   public playedQuiz: PlayedQuiz;
 
@@ -54,7 +54,7 @@ export class PlayQuizComponent implements OnInit {
     }
     this.timerHelp = setTimeout(() => {
       if (this.helpWrongAnswer !== true) {
-        this.helpInactif = true;
+        this.helpEnabled = true;
       }
     }, 10000);
   }
@@ -75,7 +75,7 @@ export class PlayQuizComponent implements OnInit {
 
   toggleQuestionSummary() {
     this.helpWrongAnswer = false;
-    this.helpInactif = false;
+    this.helpEnabled = false;
     clearTimeout(this.timerHelp);
     this.deactivatesAnswers = [];
     this.showSummaryQuestion = true;
@@ -88,7 +88,7 @@ export class PlayQuizComponent implements OnInit {
 
   toggleWrongAnswer(answer: Answer) {
     this.helpWrongAnswer = true;
-    this.helpInactif = false;
+    this.helpEnabled = false;
     clearTimeout(this.timerHelp);
     const answers = this.quiz.questions[this.currentQuestion].answers;
     this.deactivatesAnswers.push(answer);
@@ -107,7 +107,7 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private toggleNextQuestion() {
-    this.helpInactif = false;
+    this.helpEnabled = false;
     clearTimeout(this.timerHelp);
     this.setTimer();
     if (this.skipSummaryOn) {
@@ -134,14 +134,14 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private toggleEndQuiz() {
-    this.helpInactif = false;
+    this.helpEnabled = false;
     clearTimeout(this.timerHelp);
     if (localStorage.getItem('currentUser')) {
       this.uploadResults();
     }
     this.setTimeEnd();
     this.timerEndQuiz = setTimeout(() => {
-      this.helpInactif = false;
+      this.helpEnabled = false;
       this.score = 20;
       this.currentQuestion = 0;
       this.showSummaryQuestion = false;
@@ -153,7 +153,7 @@ export class PlayQuizComponent implements OnInit {
       clearTimeout(this.timerHelp);
       this.timerHelp = setTimeout(() => {
         if (this.helpWrongAnswer !== true) {
-          this.helpInactif = true;
+          this.helpEnabled = true;
         }
       }, 10000);
       localStorage.removeItem('currentQuiz');
@@ -167,7 +167,7 @@ export class PlayQuizComponent implements OnInit {
   }
 
   private nextQuestion() {
-    this.helpInactif = false;
+    this.helpEnabled = false;
     clearTimeout(this.timerHelp);
     this.showSummaryQuestion = false;
     this.currentQuestion ++;
@@ -180,12 +180,12 @@ export class PlayQuizComponent implements OnInit {
     localStorage.setItem('summaryQuestion', this.showSummaryQuestion + '');
     if (this.helpWrongAnswer !== true) {
       this.timerHelp = setTimeout(() => {
-        this.helpInactif = true;
+        this.helpEnabled = true;
       }, 10000);
     }
   }
 
-  private skipSummary() {
+  skipSummary() {
     this.skipSummaryOn = true;
     this.toggleNextQuestion();
   }
@@ -222,11 +222,11 @@ export class PlayQuizComponent implements OnInit {
     }
   }
 
-  private showEnd() {
+  showEnd() {
     return this.currentQuestion === this.quiz.questions.length;
   }
 
-  private showButtonEnd() {
+  showButtonEnd() {
     return this.currentQuestion + 1 === this.quiz.questions.length;
   }
 
