@@ -35,7 +35,7 @@
                   <input id="image" type="url" class="form-control" placeholder="https://exemple.com/" [formControlName]="'image'"/>
                 </div>
                 <div class="col- align-text-bottom">
-                  <button type="button" class="btn btn-outline-danger" (click)="deleteAnswer(i)">Supprimer la réponse <i class="fas fa-times"></i></button>
+                  <button type="button" class="btn btn-outline-danger" (click)="deleteAnswer(i)">Supprimer <i class="fas fa-times"></i></button>
                 </div>
               </div>
             </div>
@@ -54,5 +54,5 @@
       <div class="btn btn-info mb-2 mt-3" (click)="editQuestion(question.quizId)">Enregistrer la modification</div>
     </div>
   </form>
-  <div class="text-center">Vous devez renseigner au moins <b>2</b> réponses dont une <b>Vrai</b>. Il ne peut y avoir au maximum que <b>6</b> réponses.</div>
+  <div class="text-center">Vous devez renseigner au moins <b>2</b> réponses dont une <b>Vraie</b>. Il ne peut y avoir au maximum <b>6</b> réponses.</div>
 </ng-container>
