@@ -18,8 +18,8 @@
         <div class="p-2 ml-auto">
           <div class="btn btn-outline-info mr-2" (click)="seeUserStats(user)">Voir le profil <i class="fas fa-eye"></i></div>
           <div class="btn btn-outline-info mr-2" (click)="editUser(user)">Modifier <i class="fas fa-pen"></i></div>
-          <div *ngIf="user.id !== currentUser.id" class="btn btn-outline-danger" (click)="deleteUser(user)">Supprimer le compte<i class="fas fa-trash-alt"></i></div>
-          <div *ngIf="user.id === currentUser.id" class="btn btn-outline-danger disabled" (click)="deleteOwnAccount()">Supprimer le compte<i class="fas fa-trash-alt"></i></div>
+          <div *ngIf="user.id !== currentUser.id" class="btn btn-outline-danger" (click)="deleteUser(user)">Supprimer le compte <i class="fas fa-trash-alt"></i></div>
+          <div *ngIf="user.id === currentUser.id" class="btn btn-outline-danger disabled" (click)="deleteOwnAccount()">Supprimer le compte <i class="fas fa-trash-alt"></i></div>
         </div>
       </div>
     </li>
